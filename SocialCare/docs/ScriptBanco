@@ -1,0 +1,524 @@
+Create Database Social_Care
+GO
+use Social_Care
+GO
+
+-- Gerado por Oracle SQL Developer Data Modeler 4.0.3.853
+--   em:        2016-05-28 20:00:19 BRT
+--   site:      SQL Server 2008
+--   tipo:      SQL Server 2008
+
+
+
+
+CREATE
+  TABLE TAB_CID
+  (
+    cod_cid   INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    cod_cid10 VARCHAR (10) NOT NULL ,
+    des_cid   VARCHAR (300) NOT NULL ,
+    CONSTRAINT TAB_CID_PK PRIMARY KEY CLUSTERED (cod_cid)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+
+CREATE
+  TABLE TAB_DIAGNOSTICO
+  (
+    cod_diagnostico INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    cod_form        INTEGER NOT NULL ,
+    cod_cid         INTEGER NOT NULL ,
+    CONSTRAINT TAB_DIAGNOSTICO_PK PRIMARY KEY CLUSTERED (cod_diagnostico)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+
+CREATE
+  TABLE TAB_FORM
+  (
+    cod_form     INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    cod_paciente INTEGER NOT NULL ,
+    CONSTRAINT TAB_FORM_PK PRIMARY KEY CLUSTERED (cod_form)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+CREATE UNIQUE NONCLUSTERED INDEX
+TAB_FORM__IDX ON TAB_FORM
+(
+  cod_paciente
+)
+ON "default"
+GO
+
+CREATE
+  TABLE TAB_FORM_MAT
+  (
+    cod_form_mat INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    cod_material INTEGER NOT NULL ,
+    cod_form     INTEGER NOT NULL ,
+    CONSTRAINT TAB_FORM_MAT_PK PRIMARY KEY CLUSTERED (cod_form_mat)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+
+CREATE
+  TABLE TAB_FORM_PROC_ENF
+  (
+    cod_form_proc INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    cod_form      INTEGER NOT NULL ,
+    cod_proc_enf  INTEGER NOT NULL ,
+    CONSTRAINT TAB_FORM_PROC_ENF_PK PRIMARY KEY CLUSTERED (cod_form_proc)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+
+CREATE
+  TABLE TAB_PACIENTE
+  (
+    cod_paciente       INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    nom_paciente       VARCHAR (70) NOT NULL ,
+    dat_nasc           DATE NOT NULL ,
+    tel_paciente       VARCHAR (12) NOT NULL ,
+    des_sexo           CHAR (1) NOT NULL ,
+    des_end            VARCHAR (100) NOT NULL ,
+    num_end            INTEGER NOT NULL ,
+    des_referencia_end VARCHAR (100) ,
+    Nom_cuidador       VARCHAR (75) NOT NULL ,
+    des_parentesco     VARCHAR (75) NOT NULL ,
+    num_grau_ce        INTEGER ,
+    CONSTRAINT TAB_PACIENTE_PK PRIMARY KEY CLUSTERED (cod_paciente)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+ALTER TABLE TAB_PACIENTE
+ADD
+CHECK ( cod_paciente = 0 )
+GO
+
+CREATE
+  TABLE TAB_PROCEDIMENTO
+  (
+    cod_procedimento INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    nom_procedimento VARCHAR (100) NOT NULL ,
+    obs_procedimento VARCHAR (300) ,
+    des_categoria    VARCHAR (50) ,
+    CONSTRAINT TAB_PROCEDIMENTO_PK PRIMARY KEY CLUSTERED (cod_procedimento)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+
+CREATE
+  TABLE TAB_PROC_ENF
+  (
+    cod_proc_enf INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    nom_proc_enf VARCHAR (40) NOT NULL ,
+    CONSTRAINT TAB_PROC_ENF_PK PRIMARY KEY CLUSTERED (cod_proc_enf)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+
+CREATE
+  TABLE TAB_PROFISSIONAL
+  (
+    cod_profissional    INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    nom_profissional    VARCHAR (70) NOT NULL ,
+    des_login           VARCHAR (30) NOT NULL ,
+    des_senha           VARCHAR (30) NOT NULL ,
+    des_cargo           VARCHAR (50) NOT NULL ,
+    num_rg              VARCHAR (10) ,
+    dat_nascimento      DATE ,
+    des_email           VARCHAR (40) ,
+    dat_admissao        DATE ,
+    dat_demissao        DATE ,
+    des_sexo            CHAR (1) ,
+    num_end             INTEGER ,
+    des_complemento_end VARCHAR (70) ,
+    des_referencia_end  VARCHAR (70) ,
+    img_foto            VARCHAR (300) ,
+    CONSTRAINT TAB_PROFISSIONAL_PK PRIMARY KEY CLUSTERED (cod_profissional)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+
+CREATE
+  TABLE TAB_SAIDA
+  (
+    cod_saida                 INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    dat_saida                 DATE NOT NULL ,
+    des_razao                 CHAR (1) NOT NULL ,
+    des_obs                   VARCHAR (50) NOT NULL ,
+    TAB_PACIENTE_cod_paciente INTEGER NOT NULL ,
+    CONSTRAINT TAB_SAIDA_PK PRIMARY KEY CLUSTERED (cod_saida)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+CREATE UNIQUE NONCLUSTERED INDEX
+TAB_SAIDA__IDX ON TAB_SAIDA
+(
+  TAB_PACIENTE_cod_paciente
+)
+ON "default"
+GO
+
+CREATE
+  TABLE TAB_UP
+  (
+    cod_up                    INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    des_momento               CHAR (3) NOT NULL ,
+    des_estagio               VARCHAR (20) ,
+    dat_up                    DATE ,
+    TAB_PACIENTE_cod_paciente INTEGER NOT NULL ,
+    CONSTRAINT TAB_UP_PK PRIMARY KEY CLUSTERED (cod_up)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+CREATE UNIQUE NONCLUSTERED INDEX
+TAB_UP__IDX ON TAB_UP
+(
+  TAB_PACIENTE_cod_paciente
+)
+ON "default"
+GO
+
+CREATE
+  TABLE TAB_VISITA
+  (
+    cod_visita        INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    cod_paciente      INTEGER NOT NULL ,
+    dat_visita        DATE NOT NULL ,
+    des_status        CHAR (1) NOT NULL ,
+    cod_profissional  INTEGER NOT NULL ,
+    des_periodicidade VARCHAR (40) NOT NULL ,
+    des_obs           VARCHAR (1024) ,
+    CONSTRAINT TAB_VISITA_PK PRIMARY KEY CLUSTERED (cod_visita)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+
+CREATE
+  TABLE TAB_VISITA_PROC
+  (
+    cod_vis_proc     INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    cod_visita       INTEGER NOT NULL ,
+    cod_procedimento INTEGER NOT NULL ,
+    CONSTRAINT TAB_VISITA_PROC_PK PRIMARY KEY CLUSTERED (cod_vis_proc)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+
+CREATE
+  TABLE TAB__MATERIAL
+  (
+    cod_material INTEGER NOT NULL IDENTITY NOT FOR REPLICATION ,
+    nom_material VARCHAR (100) NOT NULL ,
+    des_material VARCHAR (200) ,
+    CONSTRAINT TAB__MATERIAL_PK PRIMARY KEY CLUSTERED (cod_material)
+WITH
+  (
+    ALLOW_PAGE_LOCKS = ON ,
+    ALLOW_ROW_LOCKS  = ON
+  )
+  ON "default"
+  )
+  ON "default"
+GO
+
+ALTER TABLE TAB_DIAGNOSTICO
+ADD CONSTRAINT TAB_DIAGNOSTICO_TAB_CID_FK FOREIGN KEY
+(
+cod_cid
+)
+REFERENCES TAB_CID
+(
+cod_cid
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_DIAGNOSTICO
+ADD CONSTRAINT TAB_DIAGNOSTICO_TAB_FORM_FK FOREIGN KEY
+(
+cod_form
+)
+REFERENCES TAB_FORM
+(
+cod_form
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_FORM_MAT
+ADD CONSTRAINT TAB_FORM_MAT_TAB_FORM_FK FOREIGN KEY
+(
+cod_form
+)
+REFERENCES TAB_FORM
+(
+cod_form
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_FORM_MAT
+ADD CONSTRAINT TAB_FORM_MAT_TAB__MATERIAL_FK FOREIGN KEY
+(
+cod_material
+)
+REFERENCES TAB__MATERIAL
+(
+cod_material
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_FORM_PROC_ENF
+ADD CONSTRAINT TAB_FORM_PROC_ENF_TAB_FORM_FK FOREIGN KEY
+(
+cod_form
+)
+REFERENCES TAB_FORM
+(
+cod_form
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_FORM_PROC_ENF
+ADD CONSTRAINT TAB_FORM_PROC_ENF_TAB_PROC_ENF_FK FOREIGN KEY
+(
+cod_proc_enf
+)
+REFERENCES TAB_PROC_ENF
+(
+cod_proc_enf
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_FORM
+ADD CONSTRAINT TAB_FORM_TAB_PACIENTE_FK FOREIGN KEY
+(
+cod_paciente
+)
+REFERENCES TAB_PACIENTE
+(
+cod_paciente
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_SAIDA
+ADD CONSTRAINT TAB_SAIDA_TAB_PACIENTE_FK FOREIGN KEY
+(
+TAB_PACIENTE_cod_paciente
+)
+REFERENCES TAB_PACIENTE
+(
+cod_paciente
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_UP
+ADD CONSTRAINT TAB_UP_TAB_PACIENTE_FK FOREIGN KEY
+(
+TAB_PACIENTE_cod_paciente
+)
+REFERENCES TAB_PACIENTE
+(
+cod_paciente
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_VISITA_PROC
+ADD CONSTRAINT TAB_VISITA_PROC_TAB_PROCEDIMENTO_FK FOREIGN KEY
+(
+cod_procedimento
+)
+REFERENCES TAB_PROCEDIMENTO
+(
+cod_procedimento
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_VISITA_PROC
+ADD CONSTRAINT TAB_VISITA_PROC_TAB_VISITA_FK FOREIGN KEY
+(
+cod_visita
+)
+REFERENCES TAB_VISITA
+(
+cod_visita
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_VISITA
+ADD CONSTRAINT TAB_VISITA_TAB_PACIENTE_FK FOREIGN KEY
+(
+cod_paciente
+)
+REFERENCES TAB_PACIENTE
+(
+cod_paciente
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+ALTER TABLE TAB_VISITA
+ADD CONSTRAINT TAB_VISITA_TAB_PROFISSIONAL_FK FOREIGN KEY
+(
+cod_profissional
+)
+REFERENCES TAB_PROFISSIONAL
+(
+cod_profissional
+)
+ON
+DELETE
+  NO ACTION ON
+UPDATE NO ACTION
+GO
+
+
+-- Relatório do Resumo do Oracle SQL Developer Data Modeler: 
+-- 
+-- CREATE TABLE                            14
+-- CREATE INDEX                             3
+-- ALTER TABLE                             14
+-- CREATE VIEW                              0
+-- CREATE PACKAGE                           0
+-- CREATE PACKAGE BODY                      0
+-- CREATE PROCEDURE                         0
+-- CREATE FUNCTION                          0
+-- CREATE TRIGGER                           0
+-- ALTER TRIGGER                            0
+-- CREATE DATABASE                          0
+-- CREATE DEFAULT                           0
+-- CREATE INDEX ON VIEW                     0
+-- CREATE ROLLBACK SEGMENT                  0
+-- CREATE ROLE                              0
+-- CREATE RULE                              0
+-- CREATE PARTITION FUNCTION                0
+-- CREATE PARTITION SCHEME                  0
+-- 
+-- DROP DATABASE                            0
+-- 
+-- ERRORS                                   0
+-- WARNINGS                                 0

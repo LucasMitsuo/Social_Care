@@ -1,0 +1,947 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SocialCareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TAB__MATERIAL">
+          <Key>
+            <PropertyRef Name="cod_material" />
+          </Key>
+          <Property Name="cod_material" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_material" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="des_material" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="TAB_CID">
+          <Key>
+            <PropertyRef Name="cod_cid" />
+          </Key>
+          <Property Name="cod_cid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_cid10" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="des_cid" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAB_DIAGNOSTICO">
+          <Key>
+            <PropertyRef Name="cod_diagnostico" />
+          </Key>
+          <Property Name="cod_diagnostico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_form" Type="int" Nullable="false" />
+          <Property Name="cod_cid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAB_FORM">
+          <Key>
+            <PropertyRef Name="cod_form" />
+          </Key>
+          <Property Name="cod_form" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_paciente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAB_FORM_MAT">
+          <Key>
+            <PropertyRef Name="cod_form_mat" />
+          </Key>
+          <Property Name="cod_form_mat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_material" Type="int" Nullable="false" />
+          <Property Name="cod_form" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAB_FORM_PROC_ENF">
+          <Key>
+            <PropertyRef Name="cod_form_proc" />
+          </Key>
+          <Property Name="cod_form_proc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_form" Type="int" Nullable="false" />
+          <Property Name="cod_proc_enf" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAB_PACIENTE">
+          <Key>
+            <PropertyRef Name="cod_paciente" />
+          </Key>
+          <Property Name="cod_paciente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_paciente" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="dat_nasc" Type="date" Nullable="false" />
+          <Property Name="tel_paciente" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="des_sexo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="des_end" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="num_end" Type="int" Nullable="false" />
+          <Property Name="des_referencia_end" Type="varchar" MaxLength="100" />
+          <Property Name="Nom_cuidador" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="des_parentesco" Type="varchar" MaxLength="75" Nullable="false" />
+          <Property Name="num_grau_ce" Type="int" />
+        </EntityType>
+        <EntityType Name="TAB_PROC_ENF">
+          <Key>
+            <PropertyRef Name="cod_proc_enf" />
+          </Key>
+          <Property Name="cod_proc_enf" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_proc_enf" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAB_PROCEDIMENTO">
+          <Key>
+            <PropertyRef Name="cod_procedimento" />
+          </Key>
+          <Property Name="cod_procedimento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_procedimento" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="obs_procedimento" Type="varchar" MaxLength="300" />
+          <Property Name="des_categoria" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TAB_PROFISSIONAL">
+          <Key>
+            <PropertyRef Name="cod_profissional" />
+          </Key>
+          <Property Name="cod_profissional" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom_profissional" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="des_login" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="des_senha" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="des_cargo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="num_rg" Type="varchar" MaxLength="10" />
+          <Property Name="dat_nascimento" Type="date" />
+          <Property Name="des_email" Type="varchar" MaxLength="40" />
+          <Property Name="dat_admissao" Type="date" />
+          <Property Name="dat_demissao" Type="date" />
+          <Property Name="des_sexo" Type="char" MaxLength="1" />
+          <Property Name="num_end" Type="int" />
+          <Property Name="des_complemento_end" Type="varchar" MaxLength="70" />
+          <Property Name="des_referencia_end" Type="varchar" MaxLength="70" />
+          <Property Name="img_foto" Type="varchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="TAB_SAIDA">
+          <Key>
+            <PropertyRef Name="cod_saida" />
+          </Key>
+          <Property Name="cod_saida" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dat_saida" Type="date" Nullable="false" />
+          <Property Name="des_razao" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="des_obs" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TAB_PACIENTE_cod_paciente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAB_UP">
+          <Key>
+            <PropertyRef Name="cod_up" />
+          </Key>
+          <Property Name="cod_up" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="des_momento" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="des_estagio" Type="varchar" MaxLength="20" />
+          <Property Name="dat_up" Type="date" />
+          <Property Name="TAB_PACIENTE_cod_paciente" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TAB_VISITA">
+          <Key>
+            <PropertyRef Name="cod_visita" />
+          </Key>
+          <Property Name="cod_visita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_paciente" Type="int" Nullable="false" />
+          <Property Name="dat_visita" Type="date" Nullable="false" />
+          <Property Name="des_status" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="cod_profissional" Type="int" Nullable="false" />
+          <Property Name="des_periodicidade" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="des_obs" Type="varchar" MaxLength="1024" />
+        </EntityType>
+        <EntityType Name="TAB_VISITA_PROC">
+          <Key>
+            <PropertyRef Name="cod_vis_proc" />
+          </Key>
+          <Property Name="cod_vis_proc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cod_visita" Type="int" Nullable="false" />
+          <Property Name="cod_procedimento" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="TAB_DIAGNOSTICO_TAB_CID_FK">
+          <End Role="TAB_CID" Type="Self.TAB_CID" Multiplicity="1" />
+          <End Role="TAB_DIAGNOSTICO" Type="Self.TAB_DIAGNOSTICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_CID">
+              <PropertyRef Name="cod_cid" />
+            </Principal>
+            <Dependent Role="TAB_DIAGNOSTICO">
+              <PropertyRef Name="cod_cid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_DIAGNOSTICO_TAB_FORM_FK">
+          <End Role="TAB_FORM" Type="Self.TAB_FORM" Multiplicity="1" />
+          <End Role="TAB_DIAGNOSTICO" Type="Self.TAB_DIAGNOSTICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_FORM">
+              <PropertyRef Name="cod_form" />
+            </Principal>
+            <Dependent Role="TAB_DIAGNOSTICO">
+              <PropertyRef Name="cod_form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_FORM_MAT_TAB__MATERIAL_FK">
+          <End Role="TAB__MATERIAL" Type="Self.TAB__MATERIAL" Multiplicity="1" />
+          <End Role="TAB_FORM_MAT" Type="Self.TAB_FORM_MAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB__MATERIAL">
+              <PropertyRef Name="cod_material" />
+            </Principal>
+            <Dependent Role="TAB_FORM_MAT">
+              <PropertyRef Name="cod_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_FORM_MAT_TAB_FORM_FK">
+          <End Role="TAB_FORM" Type="Self.TAB_FORM" Multiplicity="1" />
+          <End Role="TAB_FORM_MAT" Type="Self.TAB_FORM_MAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_FORM">
+              <PropertyRef Name="cod_form" />
+            </Principal>
+            <Dependent Role="TAB_FORM_MAT">
+              <PropertyRef Name="cod_form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_FORM_PROC_ENF_TAB_FORM_FK">
+          <End Role="TAB_FORM" Type="Self.TAB_FORM" Multiplicity="1" />
+          <End Role="TAB_FORM_PROC_ENF" Type="Self.TAB_FORM_PROC_ENF" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_FORM">
+              <PropertyRef Name="cod_form" />
+            </Principal>
+            <Dependent Role="TAB_FORM_PROC_ENF">
+              <PropertyRef Name="cod_form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_FORM_PROC_ENF_TAB_PROC_ENF_FK">
+          <End Role="TAB_PROC_ENF" Type="Self.TAB_PROC_ENF" Multiplicity="1" />
+          <End Role="TAB_FORM_PROC_ENF" Type="Self.TAB_FORM_PROC_ENF" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PROC_ENF">
+              <PropertyRef Name="cod_proc_enf" />
+            </Principal>
+            <Dependent Role="TAB_FORM_PROC_ENF">
+              <PropertyRef Name="cod_proc_enf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_FORM_TAB_PACIENTE_FK">
+          <End Role="TAB_PACIENTE" Type="Self.TAB_PACIENTE" Multiplicity="1" />
+          <End Role="TAB_FORM" Type="Self.TAB_FORM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PACIENTE">
+              <PropertyRef Name="cod_paciente" />
+            </Principal>
+            <Dependent Role="TAB_FORM">
+              <PropertyRef Name="cod_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_SAIDA_TAB_PACIENTE_FK">
+          <End Role="TAB_PACIENTE" Type="Self.TAB_PACIENTE" Multiplicity="1" />
+          <End Role="TAB_SAIDA" Type="Self.TAB_SAIDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PACIENTE">
+              <PropertyRef Name="cod_paciente" />
+            </Principal>
+            <Dependent Role="TAB_SAIDA">
+              <PropertyRef Name="TAB_PACIENTE_cod_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_UP_TAB_PACIENTE_FK">
+          <End Role="TAB_PACIENTE" Type="Self.TAB_PACIENTE" Multiplicity="1" />
+          <End Role="TAB_UP" Type="Self.TAB_UP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PACIENTE">
+              <PropertyRef Name="cod_paciente" />
+            </Principal>
+            <Dependent Role="TAB_UP">
+              <PropertyRef Name="TAB_PACIENTE_cod_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_VISITA_PROC_TAB_PROCEDIMENTO_FK">
+          <End Role="TAB_PROCEDIMENTO" Type="Self.TAB_PROCEDIMENTO" Multiplicity="1" />
+          <End Role="TAB_VISITA_PROC" Type="Self.TAB_VISITA_PROC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PROCEDIMENTO">
+              <PropertyRef Name="cod_procedimento" />
+            </Principal>
+            <Dependent Role="TAB_VISITA_PROC">
+              <PropertyRef Name="cod_procedimento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_VISITA_PROC_TAB_VISITA_FK">
+          <End Role="TAB_VISITA" Type="Self.TAB_VISITA" Multiplicity="1" />
+          <End Role="TAB_VISITA_PROC" Type="Self.TAB_VISITA_PROC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_VISITA">
+              <PropertyRef Name="cod_visita" />
+            </Principal>
+            <Dependent Role="TAB_VISITA_PROC">
+              <PropertyRef Name="cod_visita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_VISITA_TAB_PACIENTE_FK">
+          <End Role="TAB_PACIENTE" Type="Self.TAB_PACIENTE" Multiplicity="1" />
+          <End Role="TAB_VISITA" Type="Self.TAB_VISITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PACIENTE">
+              <PropertyRef Name="cod_paciente" />
+            </Principal>
+            <Dependent Role="TAB_VISITA">
+              <PropertyRef Name="cod_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_VISITA_TAB_PROFISSIONAL_FK">
+          <End Role="TAB_PROFISSIONAL" Type="Self.TAB_PROFISSIONAL" Multiplicity="1" />
+          <End Role="TAB_VISITA" Type="Self.TAB_VISITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PROFISSIONAL">
+              <PropertyRef Name="cod_profissional" />
+            </Principal>
+            <Dependent Role="TAB_VISITA">
+              <PropertyRef Name="cod_profissional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SocialCareModelStoreContainer">
+          <EntitySet Name="TAB__MATERIAL" EntityType="Self.TAB__MATERIAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_CID" EntityType="Self.TAB_CID" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_DIAGNOSTICO" EntityType="Self.TAB_DIAGNOSTICO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_FORM" EntityType="Self.TAB_FORM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_FORM_MAT" EntityType="Self.TAB_FORM_MAT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_FORM_PROC_ENF" EntityType="Self.TAB_FORM_PROC_ENF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_PACIENTE" EntityType="Self.TAB_PACIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_PROC_ENF" EntityType="Self.TAB_PROC_ENF" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_PROCEDIMENTO" EntityType="Self.TAB_PROCEDIMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_PROFISSIONAL" EntityType="Self.TAB_PROFISSIONAL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_SAIDA" EntityType="Self.TAB_SAIDA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_UP" EntityType="Self.TAB_UP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_VISITA" EntityType="Self.TAB_VISITA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TAB_VISITA_PROC" EntityType="Self.TAB_VISITA_PROC" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="TAB_DIAGNOSTICO_TAB_CID_FK" Association="Self.TAB_DIAGNOSTICO_TAB_CID_FK">
+            <End Role="TAB_CID" EntitySet="TAB_CID" />
+            <End Role="TAB_DIAGNOSTICO" EntitySet="TAB_DIAGNOSTICO" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_DIAGNOSTICO_TAB_FORM_FK" Association="Self.TAB_DIAGNOSTICO_TAB_FORM_FK">
+            <End Role="TAB_FORM" EntitySet="TAB_FORM" />
+            <End Role="TAB_DIAGNOSTICO" EntitySet="TAB_DIAGNOSTICO" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_FORM_MAT_TAB__MATERIAL_FK" Association="Self.TAB_FORM_MAT_TAB__MATERIAL_FK">
+            <End Role="TAB__MATERIAL" EntitySet="TAB__MATERIAL" />
+            <End Role="TAB_FORM_MAT" EntitySet="TAB_FORM_MAT" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_FORM_MAT_TAB_FORM_FK" Association="Self.TAB_FORM_MAT_TAB_FORM_FK">
+            <End Role="TAB_FORM" EntitySet="TAB_FORM" />
+            <End Role="TAB_FORM_MAT" EntitySet="TAB_FORM_MAT" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_FORM_PROC_ENF_TAB_FORM_FK" Association="Self.TAB_FORM_PROC_ENF_TAB_FORM_FK">
+            <End Role="TAB_FORM" EntitySet="TAB_FORM" />
+            <End Role="TAB_FORM_PROC_ENF" EntitySet="TAB_FORM_PROC_ENF" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_FORM_PROC_ENF_TAB_PROC_ENF_FK" Association="Self.TAB_FORM_PROC_ENF_TAB_PROC_ENF_FK">
+            <End Role="TAB_PROC_ENF" EntitySet="TAB_PROC_ENF" />
+            <End Role="TAB_FORM_PROC_ENF" EntitySet="TAB_FORM_PROC_ENF" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_FORM_TAB_PACIENTE_FK" Association="Self.TAB_FORM_TAB_PACIENTE_FK">
+            <End Role="TAB_PACIENTE" EntitySet="TAB_PACIENTE" />
+            <End Role="TAB_FORM" EntitySet="TAB_FORM" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_SAIDA_TAB_PACIENTE_FK" Association="Self.TAB_SAIDA_TAB_PACIENTE_FK">
+            <End Role="TAB_PACIENTE" EntitySet="TAB_PACIENTE" />
+            <End Role="TAB_SAIDA" EntitySet="TAB_SAIDA" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_UP_TAB_PACIENTE_FK" Association="Self.TAB_UP_TAB_PACIENTE_FK">
+            <End Role="TAB_PACIENTE" EntitySet="TAB_PACIENTE" />
+            <End Role="TAB_UP" EntitySet="TAB_UP" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_VISITA_PROC_TAB_PROCEDIMENTO_FK" Association="Self.TAB_VISITA_PROC_TAB_PROCEDIMENTO_FK">
+            <End Role="TAB_PROCEDIMENTO" EntitySet="TAB_PROCEDIMENTO" />
+            <End Role="TAB_VISITA_PROC" EntitySet="TAB_VISITA_PROC" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_VISITA_PROC_TAB_VISITA_FK" Association="Self.TAB_VISITA_PROC_TAB_VISITA_FK">
+            <End Role="TAB_VISITA" EntitySet="TAB_VISITA" />
+            <End Role="TAB_VISITA_PROC" EntitySet="TAB_VISITA_PROC" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_VISITA_TAB_PACIENTE_FK" Association="Self.TAB_VISITA_TAB_PACIENTE_FK">
+            <End Role="TAB_PACIENTE" EntitySet="TAB_PACIENTE" />
+            <End Role="TAB_VISITA" EntitySet="TAB_VISITA" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_VISITA_TAB_PROFISSIONAL_FK" Association="Self.TAB_VISITA_TAB_PROFISSIONAL_FK">
+            <End Role="TAB_PROFISSIONAL" EntitySet="TAB_PROFISSIONAL" />
+            <End Role="TAB_VISITA" EntitySet="TAB_VISITA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SocialCareModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TAB__MATERIAL">
+          <Key>
+            <PropertyRef Name="cod_material" />
+          </Key>
+          <Property Name="cod_material" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_material" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="des_material" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TAB_FORM_MAT" Relationship="Self.TAB_FORM_MAT_TAB__MATERIAL_FK" FromRole="TAB__MATERIAL" ToRole="TAB_FORM_MAT" />
+        </EntityType>
+        <EntityType Name="TAB_CID">
+          <Key>
+            <PropertyRef Name="cod_cid" />
+          </Key>
+          <Property Name="cod_cid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_cid10" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="des_cid" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TAB_DIAGNOSTICO" Relationship="Self.TAB_DIAGNOSTICO_TAB_CID_FK" FromRole="TAB_CID" ToRole="TAB_DIAGNOSTICO" />
+        </EntityType>
+        <EntityType Name="TAB_DIAGNOSTICO">
+          <Key>
+            <PropertyRef Name="cod_diagnostico" />
+          </Key>
+          <Property Name="cod_diagnostico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_form" Type="Int32" Nullable="false" />
+          <Property Name="cod_cid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAB_CID" Relationship="Self.TAB_DIAGNOSTICO_TAB_CID_FK" FromRole="TAB_DIAGNOSTICO" ToRole="TAB_CID" />
+          <NavigationProperty Name="TAB_FORM" Relationship="Self.TAB_DIAGNOSTICO_TAB_FORM_FK" FromRole="TAB_DIAGNOSTICO" ToRole="TAB_FORM" />
+        </EntityType>
+        <EntityType Name="TAB_FORM">
+          <Key>
+            <PropertyRef Name="cod_form" />
+          </Key>
+          <Property Name="cod_form" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_paciente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAB_DIAGNOSTICO" Relationship="Self.TAB_DIAGNOSTICO_TAB_FORM_FK" FromRole="TAB_FORM" ToRole="TAB_DIAGNOSTICO" />
+          <NavigationProperty Name="TAB_FORM_MAT" Relationship="Self.TAB_FORM_MAT_TAB_FORM_FK" FromRole="TAB_FORM" ToRole="TAB_FORM_MAT" />
+          <NavigationProperty Name="TAB_FORM_PROC_ENF" Relationship="Self.TAB_FORM_PROC_ENF_TAB_FORM_FK" FromRole="TAB_FORM" ToRole="TAB_FORM_PROC_ENF" />
+          <NavigationProperty Name="TAB_PACIENTE" Relationship="Self.TAB_FORM_TAB_PACIENTE_FK" FromRole="TAB_FORM" ToRole="TAB_PACIENTE" />
+        </EntityType>
+        <EntityType Name="TAB_FORM_MAT">
+          <Key>
+            <PropertyRef Name="cod_form_mat" />
+          </Key>
+          <Property Name="cod_form_mat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_material" Type="Int32" Nullable="false" />
+          <Property Name="cod_form" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAB__MATERIAL" Relationship="Self.TAB_FORM_MAT_TAB__MATERIAL_FK" FromRole="TAB_FORM_MAT" ToRole="TAB__MATERIAL" />
+          <NavigationProperty Name="TAB_FORM" Relationship="Self.TAB_FORM_MAT_TAB_FORM_FK" FromRole="TAB_FORM_MAT" ToRole="TAB_FORM" />
+        </EntityType>
+        <EntityType Name="TAB_FORM_PROC_ENF">
+          <Key>
+            <PropertyRef Name="cod_form_proc" />
+          </Key>
+          <Property Name="cod_form_proc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_form" Type="Int32" Nullable="false" />
+          <Property Name="cod_proc_enf" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAB_FORM" Relationship="Self.TAB_FORM_PROC_ENF_TAB_FORM_FK" FromRole="TAB_FORM_PROC_ENF" ToRole="TAB_FORM" />
+          <NavigationProperty Name="TAB_PROC_ENF" Relationship="Self.TAB_FORM_PROC_ENF_TAB_PROC_ENF_FK" FromRole="TAB_FORM_PROC_ENF" ToRole="TAB_PROC_ENF" />
+        </EntityType>
+        <EntityType Name="TAB_PACIENTE">
+          <Key>
+            <PropertyRef Name="cod_paciente" />
+          </Key>
+          <Property Name="cod_paciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_paciente" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dat_nasc" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="tel_paciente" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="des_sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="des_end" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="num_end" Type="Int32" Nullable="false" />
+          <Property Name="des_referencia_end" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Nom_cuidador" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="des_parentesco" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="num_grau_ce" Type="Int32" />
+          <NavigationProperty Name="TAB_FORM" Relationship="Self.TAB_FORM_TAB_PACIENTE_FK" FromRole="TAB_PACIENTE" ToRole="TAB_FORM" />
+          <NavigationProperty Name="TAB_SAIDA" Relationship="Self.TAB_SAIDA_TAB_PACIENTE_FK" FromRole="TAB_PACIENTE" ToRole="TAB_SAIDA" />
+          <NavigationProperty Name="TAB_UP" Relationship="Self.TAB_UP_TAB_PACIENTE_FK" FromRole="TAB_PACIENTE" ToRole="TAB_UP" />
+          <NavigationProperty Name="TAB_VISITA" Relationship="Self.TAB_VISITA_TAB_PACIENTE_FK" FromRole="TAB_PACIENTE" ToRole="TAB_VISITA" />
+        </EntityType>
+        <EntityType Name="TAB_PROC_ENF">
+          <Key>
+            <PropertyRef Name="cod_proc_enf" />
+          </Key>
+          <Property Name="cod_proc_enf" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_proc_enf" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="TAB_FORM_PROC_ENF" Relationship="Self.TAB_FORM_PROC_ENF_TAB_PROC_ENF_FK" FromRole="TAB_PROC_ENF" ToRole="TAB_FORM_PROC_ENF" />
+        </EntityType>
+        <EntityType Name="TAB_PROCEDIMENTO">
+          <Key>
+            <PropertyRef Name="cod_procedimento" />
+          </Key>
+          <Property Name="cod_procedimento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_procedimento" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="obs_procedimento" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="des_categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TAB_VISITA_PROC" Relationship="Self.TAB_VISITA_PROC_TAB_PROCEDIMENTO_FK" FromRole="TAB_PROCEDIMENTO" ToRole="TAB_VISITA_PROC" />
+        </EntityType>
+        <EntityType Name="TAB_PROFISSIONAL">
+          <Key>
+            <PropertyRef Name="cod_profissional" />
+          </Key>
+          <Property Name="cod_profissional" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom_profissional" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="des_login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="des_senha" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="des_cargo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="num_rg" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="dat_nascimento" Type="DateTime" Precision="0" />
+          <Property Name="des_email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="dat_admissao" Type="DateTime" Precision="0" />
+          <Property Name="dat_demissao" Type="DateTime" Precision="0" />
+          <Property Name="des_sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="num_end" Type="Int32" />
+          <Property Name="des_complemento_end" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="des_referencia_end" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="img_foto" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TAB_VISITA" Relationship="Self.TAB_VISITA_TAB_PROFISSIONAL_FK" FromRole="TAB_PROFISSIONAL" ToRole="TAB_VISITA" />
+        </EntityType>
+        <EntityType Name="TAB_SAIDA">
+          <Key>
+            <PropertyRef Name="cod_saida" />
+          </Key>
+          <Property Name="cod_saida" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dat_saida" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="des_razao" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="des_obs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TAB_PACIENTE_cod_paciente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAB_PACIENTE" Relationship="Self.TAB_SAIDA_TAB_PACIENTE_FK" FromRole="TAB_SAIDA" ToRole="TAB_PACIENTE" />
+        </EntityType>
+        <EntityType Name="TAB_UP">
+          <Key>
+            <PropertyRef Name="cod_up" />
+          </Key>
+          <Property Name="cod_up" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="des_momento" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="des_estagio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="dat_up" Type="DateTime" Precision="0" />
+          <Property Name="TAB_PACIENTE_cod_paciente" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAB_PACIENTE" Relationship="Self.TAB_UP_TAB_PACIENTE_FK" FromRole="TAB_UP" ToRole="TAB_PACIENTE" />
+        </EntityType>
+        <EntityType Name="TAB_VISITA">
+          <Key>
+            <PropertyRef Name="cod_visita" />
+          </Key>
+          <Property Name="cod_visita" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_paciente" Type="Int32" Nullable="false" />
+          <Property Name="dat_visita" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="des_status" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="cod_profissional" Type="Int32" Nullable="false" />
+          <Property Name="des_periodicidade" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="des_obs" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TAB_PACIENTE" Relationship="Self.TAB_VISITA_TAB_PACIENTE_FK" FromRole="TAB_VISITA" ToRole="TAB_PACIENTE" />
+          <NavigationProperty Name="TAB_PROFISSIONAL" Relationship="Self.TAB_VISITA_TAB_PROFISSIONAL_FK" FromRole="TAB_VISITA" ToRole="TAB_PROFISSIONAL" />
+          <NavigationProperty Name="TAB_VISITA_PROC" Relationship="Self.TAB_VISITA_PROC_TAB_VISITA_FK" FromRole="TAB_VISITA" ToRole="TAB_VISITA_PROC" />
+        </EntityType>
+        <EntityType Name="TAB_VISITA_PROC">
+          <Key>
+            <PropertyRef Name="cod_vis_proc" />
+          </Key>
+          <Property Name="cod_vis_proc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cod_visita" Type="Int32" Nullable="false" />
+          <Property Name="cod_procedimento" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TAB_PROCEDIMENTO" Relationship="Self.TAB_VISITA_PROC_TAB_PROCEDIMENTO_FK" FromRole="TAB_VISITA_PROC" ToRole="TAB_PROCEDIMENTO" />
+          <NavigationProperty Name="TAB_VISITA" Relationship="Self.TAB_VISITA_PROC_TAB_VISITA_FK" FromRole="TAB_VISITA_PROC" ToRole="TAB_VISITA" />
+        </EntityType>
+        <Association Name="TAB_FORM_MAT_TAB__MATERIAL_FK">
+          <End Role="TAB__MATERIAL" Type="Self.TAB__MATERIAL" Multiplicity="1" />
+          <End Role="TAB_FORM_MAT" Type="Self.TAB_FORM_MAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB__MATERIAL">
+              <PropertyRef Name="cod_material" />
+            </Principal>
+            <Dependent Role="TAB_FORM_MAT">
+              <PropertyRef Name="cod_material" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_DIAGNOSTICO_TAB_CID_FK">
+          <End Role="TAB_CID" Type="Self.TAB_CID" Multiplicity="1" />
+          <End Role="TAB_DIAGNOSTICO" Type="Self.TAB_DIAGNOSTICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_CID">
+              <PropertyRef Name="cod_cid" />
+            </Principal>
+            <Dependent Role="TAB_DIAGNOSTICO">
+              <PropertyRef Name="cod_cid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_DIAGNOSTICO_TAB_FORM_FK">
+          <End Role="TAB_FORM" Type="Self.TAB_FORM" Multiplicity="1" />
+          <End Role="TAB_DIAGNOSTICO" Type="Self.TAB_DIAGNOSTICO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_FORM">
+              <PropertyRef Name="cod_form" />
+            </Principal>
+            <Dependent Role="TAB_DIAGNOSTICO">
+              <PropertyRef Name="cod_form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_FORM_MAT_TAB_FORM_FK">
+          <End Role="TAB_FORM" Type="Self.TAB_FORM" Multiplicity="1" />
+          <End Role="TAB_FORM_MAT" Type="Self.TAB_FORM_MAT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_FORM">
+              <PropertyRef Name="cod_form" />
+            </Principal>
+            <Dependent Role="TAB_FORM_MAT">
+              <PropertyRef Name="cod_form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_FORM_PROC_ENF_TAB_FORM_FK">
+          <End Role="TAB_FORM" Type="Self.TAB_FORM" Multiplicity="1" />
+          <End Role="TAB_FORM_PROC_ENF" Type="Self.TAB_FORM_PROC_ENF" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_FORM">
+              <PropertyRef Name="cod_form" />
+            </Principal>
+            <Dependent Role="TAB_FORM_PROC_ENF">
+              <PropertyRef Name="cod_form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_FORM_TAB_PACIENTE_FK">
+          <End Role="TAB_PACIENTE" Type="Self.TAB_PACIENTE" Multiplicity="1" />
+          <End Role="TAB_FORM" Type="Self.TAB_FORM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PACIENTE">
+              <PropertyRef Name="cod_paciente" />
+            </Principal>
+            <Dependent Role="TAB_FORM">
+              <PropertyRef Name="cod_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_FORM_PROC_ENF_TAB_PROC_ENF_FK">
+          <End Role="TAB_PROC_ENF" Type="Self.TAB_PROC_ENF" Multiplicity="1" />
+          <End Role="TAB_FORM_PROC_ENF" Type="Self.TAB_FORM_PROC_ENF" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PROC_ENF">
+              <PropertyRef Name="cod_proc_enf" />
+            </Principal>
+            <Dependent Role="TAB_FORM_PROC_ENF">
+              <PropertyRef Name="cod_proc_enf" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_SAIDA_TAB_PACIENTE_FK">
+          <End Role="TAB_PACIENTE" Type="Self.TAB_PACIENTE" Multiplicity="1" />
+          <End Role="TAB_SAIDA" Type="Self.TAB_SAIDA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PACIENTE">
+              <PropertyRef Name="cod_paciente" />
+            </Principal>
+            <Dependent Role="TAB_SAIDA">
+              <PropertyRef Name="TAB_PACIENTE_cod_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_UP_TAB_PACIENTE_FK">
+          <End Role="TAB_PACIENTE" Type="Self.TAB_PACIENTE" Multiplicity="1" />
+          <End Role="TAB_UP" Type="Self.TAB_UP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PACIENTE">
+              <PropertyRef Name="cod_paciente" />
+            </Principal>
+            <Dependent Role="TAB_UP">
+              <PropertyRef Name="TAB_PACIENTE_cod_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_VISITA_TAB_PACIENTE_FK">
+          <End Role="TAB_PACIENTE" Type="Self.TAB_PACIENTE" Multiplicity="1" />
+          <End Role="TAB_VISITA" Type="Self.TAB_VISITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PACIENTE">
+              <PropertyRef Name="cod_paciente" />
+            </Principal>
+            <Dependent Role="TAB_VISITA">
+              <PropertyRef Name="cod_paciente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_VISITA_PROC_TAB_PROCEDIMENTO_FK">
+          <End Role="TAB_PROCEDIMENTO" Type="Self.TAB_PROCEDIMENTO" Multiplicity="1" />
+          <End Role="TAB_VISITA_PROC" Type="Self.TAB_VISITA_PROC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PROCEDIMENTO">
+              <PropertyRef Name="cod_procedimento" />
+            </Principal>
+            <Dependent Role="TAB_VISITA_PROC">
+              <PropertyRef Name="cod_procedimento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_VISITA_TAB_PROFISSIONAL_FK">
+          <End Role="TAB_PROFISSIONAL" Type="Self.TAB_PROFISSIONAL" Multiplicity="1" />
+          <End Role="TAB_VISITA" Type="Self.TAB_VISITA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_PROFISSIONAL">
+              <PropertyRef Name="cod_profissional" />
+            </Principal>
+            <Dependent Role="TAB_VISITA">
+              <PropertyRef Name="cod_profissional" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TAB_VISITA_PROC_TAB_VISITA_FK">
+          <End Role="TAB_VISITA" Type="Self.TAB_VISITA" Multiplicity="1" />
+          <End Role="TAB_VISITA_PROC" Type="Self.TAB_VISITA_PROC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TAB_VISITA">
+              <PropertyRef Name="cod_visita" />
+            </Principal>
+            <Dependent Role="TAB_VISITA_PROC">
+              <PropertyRef Name="cod_visita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SocialCareEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TAB__MATERIAL" EntityType="Self.TAB__MATERIAL" />
+          <EntitySet Name="TAB_CID" EntityType="Self.TAB_CID" />
+          <EntitySet Name="TAB_DIAGNOSTICO" EntityType="Self.TAB_DIAGNOSTICO" />
+          <EntitySet Name="TAB_FORM" EntityType="Self.TAB_FORM" />
+          <EntitySet Name="TAB_FORM_MAT" EntityType="Self.TAB_FORM_MAT" />
+          <EntitySet Name="TAB_FORM_PROC_ENF" EntityType="Self.TAB_FORM_PROC_ENF" />
+          <EntitySet Name="TAB_PACIENTE" EntityType="Self.TAB_PACIENTE" />
+          <EntitySet Name="TAB_PROC_ENF" EntityType="Self.TAB_PROC_ENF" />
+          <EntitySet Name="TAB_PROCEDIMENTO" EntityType="Self.TAB_PROCEDIMENTO" />
+          <EntitySet Name="TAB_PROFISSIONAL" EntityType="Self.TAB_PROFISSIONAL" />
+          <EntitySet Name="TAB_SAIDA" EntityType="Self.TAB_SAIDA" />
+          <EntitySet Name="TAB_UP" EntityType="Self.TAB_UP" />
+          <EntitySet Name="TAB_VISITA" EntityType="Self.TAB_VISITA" />
+          <EntitySet Name="TAB_VISITA_PROC" EntityType="Self.TAB_VISITA_PROC" />
+          <AssociationSet Name="TAB_FORM_MAT_TAB__MATERIAL_FK" Association="Self.TAB_FORM_MAT_TAB__MATERIAL_FK">
+            <End Role="TAB__MATERIAL" EntitySet="TAB__MATERIAL" />
+            <End Role="TAB_FORM_MAT" EntitySet="TAB_FORM_MAT" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_DIAGNOSTICO_TAB_CID_FK" Association="Self.TAB_DIAGNOSTICO_TAB_CID_FK">
+            <End Role="TAB_CID" EntitySet="TAB_CID" />
+            <End Role="TAB_DIAGNOSTICO" EntitySet="TAB_DIAGNOSTICO" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_DIAGNOSTICO_TAB_FORM_FK" Association="Self.TAB_DIAGNOSTICO_TAB_FORM_FK">
+            <End Role="TAB_FORM" EntitySet="TAB_FORM" />
+            <End Role="TAB_DIAGNOSTICO" EntitySet="TAB_DIAGNOSTICO" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_FORM_MAT_TAB_FORM_FK" Association="Self.TAB_FORM_MAT_TAB_FORM_FK">
+            <End Role="TAB_FORM" EntitySet="TAB_FORM" />
+            <End Role="TAB_FORM_MAT" EntitySet="TAB_FORM_MAT" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_FORM_PROC_ENF_TAB_FORM_FK" Association="Self.TAB_FORM_PROC_ENF_TAB_FORM_FK">
+            <End Role="TAB_FORM" EntitySet="TAB_FORM" />
+            <End Role="TAB_FORM_PROC_ENF" EntitySet="TAB_FORM_PROC_ENF" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_FORM_TAB_PACIENTE_FK" Association="Self.TAB_FORM_TAB_PACIENTE_FK">
+            <End Role="TAB_PACIENTE" EntitySet="TAB_PACIENTE" />
+            <End Role="TAB_FORM" EntitySet="TAB_FORM" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_FORM_PROC_ENF_TAB_PROC_ENF_FK" Association="Self.TAB_FORM_PROC_ENF_TAB_PROC_ENF_FK">
+            <End Role="TAB_PROC_ENF" EntitySet="TAB_PROC_ENF" />
+            <End Role="TAB_FORM_PROC_ENF" EntitySet="TAB_FORM_PROC_ENF" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_SAIDA_TAB_PACIENTE_FK" Association="Self.TAB_SAIDA_TAB_PACIENTE_FK">
+            <End Role="TAB_PACIENTE" EntitySet="TAB_PACIENTE" />
+            <End Role="TAB_SAIDA" EntitySet="TAB_SAIDA" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_UP_TAB_PACIENTE_FK" Association="Self.TAB_UP_TAB_PACIENTE_FK">
+            <End Role="TAB_PACIENTE" EntitySet="TAB_PACIENTE" />
+            <End Role="TAB_UP" EntitySet="TAB_UP" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_VISITA_TAB_PACIENTE_FK" Association="Self.TAB_VISITA_TAB_PACIENTE_FK">
+            <End Role="TAB_PACIENTE" EntitySet="TAB_PACIENTE" />
+            <End Role="TAB_VISITA" EntitySet="TAB_VISITA" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_VISITA_PROC_TAB_PROCEDIMENTO_FK" Association="Self.TAB_VISITA_PROC_TAB_PROCEDIMENTO_FK">
+            <End Role="TAB_PROCEDIMENTO" EntitySet="TAB_PROCEDIMENTO" />
+            <End Role="TAB_VISITA_PROC" EntitySet="TAB_VISITA_PROC" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_VISITA_TAB_PROFISSIONAL_FK" Association="Self.TAB_VISITA_TAB_PROFISSIONAL_FK">
+            <End Role="TAB_PROFISSIONAL" EntitySet="TAB_PROFISSIONAL" />
+            <End Role="TAB_VISITA" EntitySet="TAB_VISITA" />
+          </AssociationSet>
+          <AssociationSet Name="TAB_VISITA_PROC_TAB_VISITA_FK" Association="Self.TAB_VISITA_PROC_TAB_VISITA_FK">
+            <End Role="TAB_VISITA" EntitySet="TAB_VISITA" />
+            <End Role="TAB_VISITA_PROC" EntitySet="TAB_VISITA_PROC" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SocialCareModelStoreContainer" CdmEntityContainer="SocialCareEntities">
+          <EntitySetMapping Name="TAB__MATERIAL">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB__MATERIAL">
+              <MappingFragment StoreEntitySet="TAB__MATERIAL">
+                <ScalarProperty Name="cod_material" ColumnName="cod_material" />
+                <ScalarProperty Name="nom_material" ColumnName="nom_material" />
+                <ScalarProperty Name="des_material" ColumnName="des_material" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_CID">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_CID">
+              <MappingFragment StoreEntitySet="TAB_CID">
+                <ScalarProperty Name="cod_cid" ColumnName="cod_cid" />
+                <ScalarProperty Name="cod_cid10" ColumnName="cod_cid10" />
+                <ScalarProperty Name="des_cid" ColumnName="des_cid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_DIAGNOSTICO">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_DIAGNOSTICO">
+              <MappingFragment StoreEntitySet="TAB_DIAGNOSTICO">
+                <ScalarProperty Name="cod_diagnostico" ColumnName="cod_diagnostico" />
+                <ScalarProperty Name="cod_form" ColumnName="cod_form" />
+                <ScalarProperty Name="cod_cid" ColumnName="cod_cid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_FORM">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_FORM">
+              <MappingFragment StoreEntitySet="TAB_FORM">
+                <ScalarProperty Name="cod_form" ColumnName="cod_form" />
+                <ScalarProperty Name="cod_paciente" ColumnName="cod_paciente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_FORM_MAT">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_FORM_MAT">
+              <MappingFragment StoreEntitySet="TAB_FORM_MAT">
+                <ScalarProperty Name="cod_form_mat" ColumnName="cod_form_mat" />
+                <ScalarProperty Name="cod_material" ColumnName="cod_material" />
+                <ScalarProperty Name="cod_form" ColumnName="cod_form" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_FORM_PROC_ENF">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_FORM_PROC_ENF">
+              <MappingFragment StoreEntitySet="TAB_FORM_PROC_ENF">
+                <ScalarProperty Name="cod_form_proc" ColumnName="cod_form_proc" />
+                <ScalarProperty Name="cod_form" ColumnName="cod_form" />
+                <ScalarProperty Name="cod_proc_enf" ColumnName="cod_proc_enf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_PACIENTE">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_PACIENTE">
+              <MappingFragment StoreEntitySet="TAB_PACIENTE">
+                <ScalarProperty Name="cod_paciente" ColumnName="cod_paciente" />
+                <ScalarProperty Name="nom_paciente" ColumnName="nom_paciente" />
+                <ScalarProperty Name="dat_nasc" ColumnName="dat_nasc" />
+                <ScalarProperty Name="tel_paciente" ColumnName="tel_paciente" />
+                <ScalarProperty Name="des_sexo" ColumnName="des_sexo" />
+                <ScalarProperty Name="des_end" ColumnName="des_end" />
+                <ScalarProperty Name="num_end" ColumnName="num_end" />
+                <ScalarProperty Name="des_referencia_end" ColumnName="des_referencia_end" />
+                <ScalarProperty Name="Nom_cuidador" ColumnName="Nom_cuidador" />
+                <ScalarProperty Name="des_parentesco" ColumnName="des_parentesco" />
+                <ScalarProperty Name="num_grau_ce" ColumnName="num_grau_ce" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_PROC_ENF">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_PROC_ENF">
+              <MappingFragment StoreEntitySet="TAB_PROC_ENF">
+                <ScalarProperty Name="cod_proc_enf" ColumnName="cod_proc_enf" />
+                <ScalarProperty Name="nom_proc_enf" ColumnName="nom_proc_enf" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_PROCEDIMENTO">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_PROCEDIMENTO">
+              <MappingFragment StoreEntitySet="TAB_PROCEDIMENTO">
+                <ScalarProperty Name="cod_procedimento" ColumnName="cod_procedimento" />
+                <ScalarProperty Name="nom_procedimento" ColumnName="nom_procedimento" />
+                <ScalarProperty Name="obs_procedimento" ColumnName="obs_procedimento" />
+                <ScalarProperty Name="des_categoria" ColumnName="des_categoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_PROFISSIONAL">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_PROFISSIONAL">
+              <MappingFragment StoreEntitySet="TAB_PROFISSIONAL">
+                <ScalarProperty Name="cod_profissional" ColumnName="cod_profissional" />
+                <ScalarProperty Name="nom_profissional" ColumnName="nom_profissional" />
+                <ScalarProperty Name="des_login" ColumnName="des_login" />
+                <ScalarProperty Name="des_senha" ColumnName="des_senha" />
+                <ScalarProperty Name="des_cargo" ColumnName="des_cargo" />
+                <ScalarProperty Name="num_rg" ColumnName="num_rg" />
+                <ScalarProperty Name="dat_nascimento" ColumnName="dat_nascimento" />
+                <ScalarProperty Name="des_email" ColumnName="des_email" />
+                <ScalarProperty Name="dat_admissao" ColumnName="dat_admissao" />
+                <ScalarProperty Name="dat_demissao" ColumnName="dat_demissao" />
+                <ScalarProperty Name="des_sexo" ColumnName="des_sexo" />
+                <ScalarProperty Name="num_end" ColumnName="num_end" />
+                <ScalarProperty Name="des_complemento_end" ColumnName="des_complemento_end" />
+                <ScalarProperty Name="des_referencia_end" ColumnName="des_referencia_end" />
+                <ScalarProperty Name="img_foto" ColumnName="img_foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_SAIDA">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_SAIDA">
+              <MappingFragment StoreEntitySet="TAB_SAIDA">
+                <ScalarProperty Name="cod_saida" ColumnName="cod_saida" />
+                <ScalarProperty Name="dat_saida" ColumnName="dat_saida" />
+                <ScalarProperty Name="des_razao" ColumnName="des_razao" />
+                <ScalarProperty Name="des_obs" ColumnName="des_obs" />
+                <ScalarProperty Name="TAB_PACIENTE_cod_paciente" ColumnName="TAB_PACIENTE_cod_paciente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_UP">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_UP">
+              <MappingFragment StoreEntitySet="TAB_UP">
+                <ScalarProperty Name="cod_up" ColumnName="cod_up" />
+                <ScalarProperty Name="des_momento" ColumnName="des_momento" />
+                <ScalarProperty Name="des_estagio" ColumnName="des_estagio" />
+                <ScalarProperty Name="dat_up" ColumnName="dat_up" />
+                <ScalarProperty Name="TAB_PACIENTE_cod_paciente" ColumnName="TAB_PACIENTE_cod_paciente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_VISITA">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_VISITA">
+              <MappingFragment StoreEntitySet="TAB_VISITA">
+                <ScalarProperty Name="cod_visita" ColumnName="cod_visita" />
+                <ScalarProperty Name="cod_paciente" ColumnName="cod_paciente" />
+                <ScalarProperty Name="dat_visita" ColumnName="dat_visita" />
+                <ScalarProperty Name="des_status" ColumnName="des_status" />
+                <ScalarProperty Name="cod_profissional" ColumnName="cod_profissional" />
+                <ScalarProperty Name="des_periodicidade" ColumnName="des_periodicidade" />
+                <ScalarProperty Name="des_obs" ColumnName="des_obs" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TAB_VISITA_PROC">
+            <EntityTypeMapping TypeName="SocialCareModel.TAB_VISITA_PROC">
+              <MappingFragment StoreEntitySet="TAB_VISITA_PROC">
+                <ScalarProperty Name="cod_vis_proc" ColumnName="cod_vis_proc" />
+                <ScalarProperty Name="cod_visita" ColumnName="cod_visita" />
+                <ScalarProperty Name="cod_procedimento" ColumnName="cod_procedimento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,564 @@
+﻿@{
+    ViewBag.Title = "Novo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Scripts.Render("~/bundles/jquery")
+
+<h2 style="color:#428bca;"><span class="glyphicon glyphicon-list-alt"></span>  Formulário de Acompanhamento Domiciliar</h2>
+<div class="panel panel-info ">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Informações do Paciente</h3>
+    </div>
+    <div class="panel-body">
+        <!--========================================== DADOS PESSOAIS ================================================-->
+
+        <p class="col-md-12"><h2>Prontuário: 233322</h2></p>
+        <div class="panel-body" style="padding:20px; margin: 20px 0;  border: 1px solid #eee; border-left-width: 5px; border-radius: 3px; border-left-color:#5bc0de; ">
+            <h4 style="color:#428bca;">Dados Pessoais</h4>
+            <p class="col-md-12"><strong>Paciente:</strong> Thays Boschi Oliveira</p>
+            <p class="col-md-12"><strong>Idade:</strong>19 anos</p>
+            <p class="col-md-12"><strong>Telefone:</strong> (011) 97652-0876</p>
+            <p class="col-md-12"><strong>Endereço:</strong> Rua Brócolis, 10 - São Clemente</p">
+            <p class="col-md-12"><strong>Cuidador:</strong> Lucas Mitsuo &nbsp;&nbsp;&nbsp;&nbsp; <strong>Parentesco:</strong> Pai</p>
+            <br />
+
+            <!--========================================== CID 10 ================================================-->
+
+            <h4 style="color:#428bca;">CID 10</h4>
+            <small class="col-md-12">Digite o cid ou sua descrição no campo abaixo e clique no botão para adicionar na lista</small>
+
+            <div id="rp-cids" class="col-md-12" data-target-input="target-input-cids" data-url="http://localhost:32110/api/cid10/{0}">
+                <input id="target-insert" type="text" style="min-width:100%;" placeholder="Entre com o CID ou a descrição" class="form-control" />
+            </div>
+
+            <div class="col-md-12">
+                <input id="target-input-cids" type="text" style="min-width:100%;" class="hidden" />
+            </div>
+            <br />
+            <!--========================================== MATERIAIS ================================================-->
+
+            <h4 style="color:#428bca;"> Materiais</h4>
+
+            <small>Escolha os materiais que foram utilizados durante a visita</small>
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkbox" /> Cama
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkbox" /> Cadeira de rodas
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkbox" /> Cadeira de banho
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkbox" /> Aspirador
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkbox" /> Inalador
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkbox" /> Colchão
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkbox" /> Conc_O2
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkbox" /> Torp_Transp
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkbox" /> Oxímetro
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        <input type="checkbox" class="checkbox" /> CPAP
+                    </div>
+                </div>
+            </div>
+
+            <!--========================================== OBS ENFERMEIRA ================================================-->
+
+            <h4 style="color:#428bca;">Observação Enfermeira</h4>
+            <small>Selecione os procedimentos realizados pela enfermeira</small>
+
+            <table class="table">
+                <tr>
+                    <td style="width:100px;">
+                        <div class="checkbox">
+                            <input type="checkbox" class="checkbox" /> Gastro
+                        </div>
+                    </td>
+                    <td>
+                        <div class="checkbox">
+                            <input type="checkbox" class="checkbox" /> POD
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-md-1">
+                            <h5>CE:</h5>
+                        </div>
+                        <div class="col-md-9">
+                            <select class="form-control">
+                                <option value="volvo">Grau 0</option>
+                                <option value="saab">Grau 1</option>
+                                <option value="opel">Grau 2</option>
+                                <option value="audi">Grau 3</option>
+                                <option value="opel">Grau 4</option>
+                                <option value="audi">Grau 5</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="checkbox">
+                            <input type="checkbox" class="checkbox" /> SNasoEnteral
+                        </div>
+                    </td>
+                    <td>
+                        <div class="checkbox">
+                            <input type="checkbox" class="checkbox" /> SVesicalDemora
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="checkbox">
+                            <input type="checkbox" class="checkbox" /> SVesicalInterm
+                        </div>
+                    </td>
+                    <td>
+                        <div class="checkbox">
+                            <input type="checkbox" class="checkbox" /> Traqueostomia
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <small>Preencha o formulário de acordo com as informações sobre<code>ÚLCERA POR PRESSÃO (UP)</code></small>
+            <table class="table">
+                <tr>
+                    <th>O Paciente teve UP ?</th>
+                    <td><div class="radio"><input type="radio" name="optionsRadios" id="rdoSIM" value="option1">SIM </div></td>
+                    <td><div class="radio"><input type="radio" name="optionsRadios" id="rdoNAO" value="option1" checked>NÃO</div></td>
+                </tr>
+                <tr>
+                    <th><div class="" id="labelUP">Momento que o paciente foi diagnosticado com UP</div></th>
+                    <td><div class="radio"><input type="radio" name="optionsRadios1" id="rdoPRE" value="option1" disabled>PRÉ</div></td>
+                    <td><div class="radio"><input type="radio" name="optionsRadios1" id="rdoPOS" value="option1" disabled>PÓS</div></td>
+                </tr>
+                <tr>
+                    <th><div class="" id="">Estágio da UP</div></th>
+                    <td>
+                        <select class="form-control" id="comboEstagio" disabled>
+                            <option value="volvo"></option>
+                            <option value="volvo">Estágio I</option>
+                            <option value="saab">Estágio II</option>
+                            <option value="opel">Estágio III</option>
+                            <option value="audi">Estágio IV</option>
+                            <option value="opel">Estágio V</option>
+                            <option value="audi">Inclassificável</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th><div class="" id="">Data em que foi diagnosticado o estágio</div></th>
+                    <td><input type="text" class="form-control" id="txtData" placeholder="dd/mm/aaaa" disabled /></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!--============================================= REGISTRO DE VISISTAS ====================================-->
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-calendar"></span> Registros das visitas</h3>
+    </div>
+
+    <table class="table table-condensed">
+        <tr>
+            <th class="col-md-2">Data da visita</th>
+            <th class="col-md-2">Responsável</th>
+            <th class="col-md-2">Periodicidade</th>
+            <th class="col-md-6">Procedimentos</th>
+        </tr>
+        <tr>
+            <td>15/07/1994</td>
+            <td>Lucas Mitsuo</td>
+            <td>Semanal</td>
+            <td>I6,C6,H8 Foi feiot uma análise mto grande em relação ao paciente e ele se encontra bem mal pra carai hahaha se loco cachorrera.feiot uma análise mto grande em relação ao paciente e ele se encontra bem mal pra carai hahaha se loco cachorrera</td>
+        </tr>
+        <tr>
+            <td>15/07/1994</td>
+            <td>Thays Boschi</td>
+            <td>Trimestral</td>
+            <td>I6,C6,H8,I9,82,9</td>
+        </tr>
+        <tr>
+            <td>16/11/1998</td>
+            <td>Damaris Oliveira</td>
+            <td>Trimestral</td>
+            <td>I6,09,A67,97. O paciente demonstrou muita lerdeza pra entender as coisas porque é meio burro mesmo mas é natural do Congo. Pode ser que o santos seja campeão essa noite e 8 + 9 pode ser considerado perigoso de acordo com o aposição da lua</td>
+        </tr>
+    </table>
+
+</div>
+
+<div class="row">
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" style="float:right;margin-right:15px">Registrar Visita</button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content" style="border: 1px solid #eee; border-left-width: 5px; border-radius: 3px; border-left-color:#5bc0de; ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Registre sua visita</h4>
+                </div>
+                <div class="modal-body">
+                    <div style="margin-left:20px">
+                        <div class="row">
+                            <p><strong>Data da visita:</strong> &nbsp; 14/08/2016</p>
+                        </div>
+                        <div class="row">
+                            <p><strong>Responsável:</strong> &nbsp; Enfermeiro</p>
+                        </div>
+                        <div class="row">
+                            <p>
+                                <strong>Periodicidade:</strong> &nbsp;
+                                <select style="border-radius:4px">
+                                    <option></option>
+                                    <option>Semanal</option>
+                                    <option>Mensal</option>
+                                    <option>Bimestral</option>
+                                    <option>Trimestral</option>
+                                    <option>Semestral</option>
+                                    <option>Stand By</option>
+                                </select>
+                            </p>
+                        </div>
+                        <div class="row">
+                            <strong>Procedimento:</strong>
+                            <input type="text" class="form-control" style="min-width:100%" placeholder="Digite os procedimentos realizados aqui" />
+                        </div>
+                        <br />
+                        <div class="row">
+                            <strong>Observação:</strong>
+                            <textarea class="form-control" style="min-width:100%" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<button type="button" class="btn btn-info" style="float:right;">Registrar Visita</button>*@
+</div>
+<br />
+
+<!--=================================== SAÍDA DO PACIENTE ===================================-->
+
+<div class="panel panel-info ">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-flag"></span> Saída do paciente</h3>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th class="col-md-2">Data da saída:</th>
+            <td><input type="text" class="form-control" placeholder="dd/mm/aaaa" /></td>
+        </tr>
+        <tr>
+            <th class="col-md-2">Motivo:</th>
+            <td>
+                <select class="form-control" id="comboMotivo">
+                    <option value=""></option>
+                    <option value="alta">Alta</option>
+                    <option value="obito">Óbito</option>
+                </select>
+            </td>
+        </tr>
+        <tr class="hidden" id="saida-alta">
+            <th class="col-md-2">Informe o motivo:</th>
+            <td>
+                <div class="radio"><input type="radio" name="optionsRadios1" value="option1">Administrativo</div>
+                <div class="radio"><input type="radio" name="optionsRadios1" value="option1">Mudança de região</div>
+                <div class="radio"><input type="radio" name="optionsRadios1" value="option1">UBS</div>
+                <div class="radio"><input type="radio" name="optionsRadios1" value="option1">Amb_HU</div>
+                <div class="radio"><input type="radio" name="optionsRadios1" value="option1">Reabilitação</div>
+            </td>
+            <td>
+                <label>Outros: </label><input type="text" class="form-control" placeholder="Informe o motivo" />
+            </td>
+        </tr>
+
+        <tr class="hidden" id="saida-obito">
+            <th class="col-md-2">Informe o local:</th>
+            <td>
+                <div class="radio"><input type="radio" name="optionsRadios2" value="Domicílio">Domicílio</div>
+                <div class="radio"><input type="radio" name="optionsRadios2" value="option1">PS_HU</div>
+                <div class="radio"><input type="radio" name="optionsRadios2" value="option1">Int_HU</div>
+                <div class="radio"><input type="radio" name="optionsRadios2" value="option1">H_Clínicas</div>
+                <div class="radio"><input type="radio" name="optionsRadios2" value="option1">ICESP</div>
+            </td>
+            <td>
+                <label>Outros: </label><input type="text" class="form-control" placeholder="Informe o local" />
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            cidEngine();
+            UPClick();
+            SelecionaMotivo();
+
+            function SelecionaMotivo() {
+                var cmbMotivo = $("#comboMotivo");
+                var panel_alta = $("#saida-alta");
+                var panel_obito = $("#saida-obito");
+
+                cmbMotivo.change(function () {
+                    if (cmbMotivo.val() === "alta")
+                    {
+                        panel_alta.removeClass("hidden");
+                        panel_obito.addClass("hidden")
+                    }
+                    else if (cmbMotivo.val() == "obito")
+                    {
+                        panel_obito.removeClass("hidden");
+                        panel_alta.addClass("hidden");
+                    }
+                    else
+                    {
+                        panel_alta.addClass("hidden");
+                        panel_obito.addClass("hidden");
+                    }
+                });
+            }
+
+
+            function UPClick() {
+                $("#rdoSIM").change(function () {
+                    if ($(this).is(":checked")) {
+                        $("#rdoPRE").removeProp("disabled");
+                        $("#rdoPOS").removeProp("disabled");
+                        $("#comboEstagio").removeProp("disabled");
+                        $("#txtData").removeProp("disabled");
+                    }
+                });
+
+                $("#rdoNAO").change(function () {
+                    if ($(this).is(":checked")) {
+                        $("#rdoPRE").prop("disabled", true);
+                        $("#rdoPRE").prop("checked", false);
+
+                        $("#rdoPOS").prop("disabled", true);
+                        $("#rdoPOS").prop("checked", false);
+
+                        $("#comboEstagio").prop("disabled", true);
+                        $("#comboEstagio").val("");
+
+                        $("#txtData").prop("disabled", true);
+                        $("#txtData").val("");
+
+                    }
+                });
+            };
+
+
+
+            //Recupera os dados da localStorage de nome lstCID
+            var cidRecovery = localStorage.getItem("lstCID");
+
+            //Se o lstCID no localStorage estiver vazio, executa a função GetCids responsável por carregar a lista de CIDs no localStorage.
+            if (cidRecovery == null) {
+                GetCids();
+            }
+            
+
+
+            //Tranforma a string obtida do localStorage e converte para JSON
+            var lst = JSON.parse(cidRecovery);
+
+            //Função que busca todos os CIDS e armazena no localStorage
+            function GetCids() {
+                $.ajax({
+                    url: "http://localhost:32110/api/cid10",
+                    dataType: "json",
+                    cache: true,
+                    success: function (data) {
+                        //Armazena no localStorage todos os CIDS
+                        localStorage.setItem("lstCID", JSON.stringify(data));
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        return "ERRO";
+                    }
+                });
+            }
+
+            function checkCID(cid) {
+                var termo = $("#target-insert").val();
+                return cid.toLowerCase().indexOf(termo.toLowerCase()) >= 0;
+            }
+
+            function cidEngine() {
+                var elem = $('#rp-cids');
+
+                if (elem.length > 0) {
+
+                    var targetInput = $("#" + elem.attr("data-target-input"));
+                    var route = elem.attr("data-url");
+                    if (targetInput.length > 0) {
+
+                        var targetInsert = $("#rp-cids input");
+
+                        var regex = /[.,\/#!$%\^&\*;:{}=\_`~()+º"!¨§]/ig;
+
+                        //Controle de evento do targetInsert
+                        targetInsert.on({
+                            //Quando perde o foco
+                            focusout: function () {
+                                var txt = this.value.replace(regex, ''); //Pega o valor digitado no targetInsert e remove os caracteres especiais
+
+                                if (txt != "") {
+                                    //Adiciona o texto com css aplicado
+                                    elem.append("<p class='tag-item'>" + txt + "</p>");
+
+                                    //Adiciona o texto digitado no targetInput
+                                    var listTags = targetInput.val();
+
+                                    if (listTags == "") {
+                                        targetInput.val(txt);
+                                    }
+                                    else {
+                                        targetInput.val(listTags + ";" + txt);
+                                    }
+                                }
+
+                            },
+                            //Quando solta uma tecla
+                            keyup: function (ev) {
+                                //termo utilizado para o tratamento de resultado não encontrado
+                                var termo = $("#target-insert").val();
+
+                                if (/(13)/.test(ev.which)) {
+                                    return false;
+                                }
+
+                                if (/(188|191)/.test(ev.which)) {
+                                    $(this).focusout();
+                                    this.focus();
+                                }
+                                else {
+                                    var txt = this.value.replace(regex, '');
+                                    var _url = route.replace("{0}", txt);
+                                    var inpText = this;
+
+                                    $(this).autocomplete({
+                                        messages: {
+                                            noResults: function () {
+                                                var spanError = elem.find("span.no-search");
+
+                                                if (spanError.length == 0) {
+                                                    $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para " + termo + "'", insertAfter: targetInsert });
+                                                }
+                                                else {
+                                                    spanError.remove();
+                                                    $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
+                                                }
+                                            },
+                                            results: function (count) {
+                                                elem.find("span.no-search").remove();
+                                            }
+
+                                        },
+                                        source: function (request, response) {
+                                            var result = lst.filter(checkCID); //Obtem os a lista de CIDs já filtrados com o termo
+                                            response($.map(result.slice(0, 8), function (a) {
+                                                return {
+                                                    word: a
+                                                };
+                                            }));
+                                        },
+                                        select: function (event, ui) {
+                                            elem.append("<p class='tag-item'>" + ui.item.word + "</p>");
+
+                                            //Se a lista estiver vazia, coloca somente o valor selecionado
+                                            //Caso contrário, adiciona um ';' e o valor selecionado
+                                            var listTags = targetInput.val();
+
+                                            if (listTags == "") {
+                                                targetInput.val(ui.item.word);
+                                            }
+                                            else {
+                                                targetInput.val(listTags + ";" + ui.item.word);
+                                            }
+                                        },
+                                        open: function () {
+                                            $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+                                        },
+                                        close: function () {
+                                            $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+                                        }
+                                    }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                                        return $("<li class='extention' role='presentation'>")
+                                        .append("<a role='menuitem' tabindex='-1'><i class='glyphicon glyphicon-tags'></i>&nbsp;&nbsp;" + item.word + "</a>")
+                                        .appendTo(ul);
+                                    };
+                                }
+                            }
+                        });
+
+                        elem.on('click', 'p', function () {
+                            $(this).remove();
+                            targetInput.val("");
+                            targetInsert.val("");
+
+                            elem.find("p.tag-item").each(function () {
+                                targetInput.val(targetInput.val() + $(this).html() + ";");
+                            });
+                        });
+                    }
+                }
+            }
+        });
+</script>
+
+
+

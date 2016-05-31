@@ -1,0 +1,68 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+#ez-tags{
+  float:left;
+  border:1px solid #ccc;
+  padding:5px;
+  font-family:Arial;
+  width:100%;
+}
+#rp-cids > p.tag-item{
+  cursor:pointer;
+  /*  display:inline-block!important;
+  float:left;*/
+  color:#fff;
+  background:#4682B4;
+  padding:5px 10px;
+  padding-right:25px;
+  margin:4px;
+  border-radius:50px;
+  width:100%;
+}
+#rp-cids > p.tag-item:hover{
+  opacity:0.7;
+}
+#rp-cids > p.tag-item:after{
+ position:absolute;
+ content:"x";
+ right:18px!important;
+ padding:2px 6px;
+ position:absolute;
+ font-size:11px;
+ font-weight:bold;
+ border-radius:50px;
+ color:#b91e1e;
+ background-color:#fff;
+ cursor:pointer
+}
+#ez-tags > input{
+  background:#fff;
+  border:0;
+  margin:4px;
+  padding:7px;
+  width:100%;
+  display:inline-block!important;
+}
