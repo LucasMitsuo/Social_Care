@@ -172,6 +172,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServicosController.cs" />
     <Compile Include="DTO\CID10Dto.cs" />
+    <Compile Include="DTO\ProcedimentoDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

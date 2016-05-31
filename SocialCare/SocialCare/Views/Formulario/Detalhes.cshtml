@@ -266,10 +266,11 @@
                                 </select>
                             </p>
                         </div>
-                        <div class="row">
+                        <div class="row" id="rp-procedimentos" data-target-input="target-input-proc" data-url="http://localhost:32110/api/procedimentos">
                             <strong>Procedimento:</strong>
-                            <input type="text" class="form-control" style="min-width:100%" placeholder="Digite os procedimentos realizados aqui" />
+                            <input type="text" id="target-insert-proc" class="form-control" style="min-width:100%"  placeholder="Digite os procedimentos realizados aqui" />
                         </div>
+                            <input type="text" id="target-input-proc" style="min-width:100%"/>
                         <br />
                         <div class="row">
                             <strong>Observação:</strong>
@@ -345,6 +346,7 @@
 <script type="text/javascript">
         $(document).ready(function () {
             cidEngine();
+            procedimentoEngine();
             UPClick();
             SelecionaMotivo();
 
@@ -401,20 +403,28 @@
                 });
             };
 
-
-
             //Recupera os dados da localStorage de nome lstCID
             var cidRecovery = localStorage.getItem("lstCID");
+
+            //Recupera os dados da localStorage de nome lstProc
+            var procRecovery = localStorage.getItem("lstProc");
 
             //Se o lstCID no localStorage estiver vazio, executa a função GetCids responsável por carregar a lista de CIDs no localStorage.
             if (cidRecovery == null) {
                 GetCids();
             }
-            
+
+            //Se o lstProc no localStorage estiver vazio, executa a função GetProcs responsável por carregar a lista de Procedimentos no localStorage.
+            //if (procRecovery == null) {
+                GetProcs();
+            //}
+
+            //Tranforma a string obtida do localStorage e converte para JSON
+            var arrayCid = JSON.parse(cidRecovery);
 
 
             //Tranforma a string obtida do localStorage e converte para JSON
-            var lst = JSON.parse(cidRecovery);
+            var arrayProc = JSON.parse(procRecovery);
 
             //Função que busca todos os CIDS e armazena no localStorage
             function GetCids() {
@@ -432,13 +442,136 @@
                 });
             }
 
+            function GetProcs() {
+                $.ajax({
+                    url: "http://localhost:32110/api/procedimentos",
+                    dataType: "json",
+                    cache: true,
+                    success: function (data) {
+                        //Armazena no localStorage todos os CIDS
+                        localStorage.setItem("lstProc", JSON.stringify(data));
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        return "ERRO";
+                    }
+                });
+            }
+
+            function checkProc(procedimento) {
+                var termo = $("#target-insert-proc").val();
+                return procedimento.toLowerCase().indexOf(termo.toLowerCase()) >= 0;
+            }
+
             function checkCID(cid) {
                 var termo = $("#target-insert").val();
                 return cid.toLowerCase().indexOf(termo.toLowerCase()) >= 0;
             }
 
+
+            function procedimentoEngine() {
+                var elem = $("#rp-procedimentos");
+                
+                if (elem.length > 0) {
+                    var targetInput = $("#" + elem.attr("data-target-input"));
+                    var route = elem.attr("data-url");
+
+                    if (targetInput.length > 0) {
+                        var targetInsert = $("#rp-procedimentos input");
+
+                        var regex = /[.,\/#!$%\^&\*;:{}=\_`~()+º"!¨§]/ig;
+
+                        targetInsert.on({
+                            keyup:function (ev) {
+                                //termo utilizado para o tratamento de resultado não encontrado
+                                var termo = $("#target-insert-proc").val();
+
+                                if (/(13)/.test(ev.which)) {
+                                    return false;
+                                }
+
+                                if (/(188|191)/.test(ev.which)) {
+                                    $(this).focusout();
+                                    this.focus();
+                                }
+                                else {
+                                    var txt = this.value.replace(regex, '');
+                                    var _url = route.replace("{0}", txt);
+                                    var inpText = this;
+
+                                    $(this).autocomplete({
+                                        messages: {
+                                            noResults: function () {
+                                                var spanError = elem.find("span.no-search");
+
+                                                if (spanError.length == 0) {
+                                                    $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
+                                                }
+                                                else {
+                                                    spanError.remove();
+                                                    $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
+                                                }
+                                            },
+                                            results: function (count) {
+                                                elem.find("span.no-search").remove();
+                                            }
+
+                                        },
+                                        source: function (request, response) {
+                                            var result = arrayProc.filter(checkProc); //Obtem os a lista de CIDs já filtrados com o termo
+                                            response($.map(result.slice(0, 8), function (a) {
+                                                return {
+                                                    word: a
+                                                };
+                                            }));
+                                        },
+                                        select: function (event, ui) {
+                                            elem.append("<p class='tag-item'>" + ui.item.word + "</p>");
+
+                                            //Se a lista estiver vazia, coloca somente o valor selecionado
+                                            //Caso contrário, adiciona um ';' e o valor selecionado
+                                            var listTags = targetInput.val();
+
+                                            if (listTags[listTags.length - 1] == ";") {
+
+                                            }
+
+                                            if (listTags == "") {
+                                                targetInput.val(ui.item.word);
+                                            }
+                                            else {
+                                                targetInput.val(listTags + ";" + ui.item.word);
+                                            }
+                                        },
+                                        open: function () {
+                                            $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+                                        },
+                                        close: function () {
+                                            $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+                                        }
+                                    }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                                        return $("<li class='extention' role='presentation'>")
+                                        .append("<a role='menuitem' tabindex='-1'><i class='glyphicon glyphicon-tags'></i>&nbsp;&nbsp;" + item.word + "</a>")
+                                        .appendTo(ul);
+                                    };
+                                }
+                            }
+                        });
+
+                        elem.on('click', 'p', function () {
+                            $(this).remove();
+                            targetInput.val("");
+                            targetInsert.val("");
+
+                            elem.find("p.tag-item").each(function () {
+                                targetInput.val(targetInput.val() + $(this).html() + ";");
+                            });
+                        });
+                    }
+                }
+            }
+
             function cidEngine() {
-                var elem = $('#rp-cids');
+                var elem = $("#rp-cids");
 
                 if (elem.length > 0) {
 
@@ -496,7 +629,7 @@
                                                 var spanError = elem.find("span.no-search");
 
                                                 if (spanError.length == 0) {
-                                                    $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para " + termo + "'", insertAfter: targetInsert });
+                                                    $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
                                                 }
                                                 else {
                                                     spanError.remove();
@@ -509,7 +642,7 @@
 
                                         },
                                         source: function (request, response) {
-                                            var result = lst.filter(checkCID); //Obtem os a lista de CIDs já filtrados com o termo
+                                            var result = arrayCid.filter(checkCID); //Obtem os a lista de CIDs já filtrados com o termo
                                             response($.map(result.slice(0, 8), function (a) {
                                                 return {
                                                     word: a
@@ -557,6 +690,11 @@
                     }
                 }
             }
+
+
+
+
+
         });
 </script>
 
