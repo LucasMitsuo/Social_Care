@@ -100,8 +100,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Meus Pacientes", "Index", "Home",new { style="font-size:large" })</li>
-                    <li>@Html.ActionLink("Iniciar Formulário", "Lista", "Pacientes", new { style = "font-size:large" })</li>
+                    <li>@Html.ActionLink("Visitas agendadas", "Lista", "Visitas", new { },new { style="font-size:large" })</li>
+                    <li>@Html.ActionLink("Iniciar Formulário", "Lista", "Pacientes",new { }, new { style = "font-size:large" })</li>
                 </ul>
             </div>
         </div>
@@ -110,7 +110,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>Social Care - Módulo Visita</p>
         </footer>
     </div>
 

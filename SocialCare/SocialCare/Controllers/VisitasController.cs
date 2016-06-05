@@ -8,7 +8,7 @@ namespace SocialCare.Controllers
 {
     public class VisitasController : Controller
     {
-        // GET: Visitas
+        [HttpPost]
         public ActionResult Lista()
         {
             return View();

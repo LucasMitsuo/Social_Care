@@ -126,10 +126,6 @@ WITH
   )
   ON "default"
 GO
-ALTER TABLE TAB_PACIENTE
-ADD
-CHECK ( cod_paciente = 0 )
-GO
 
 CREATE
   TABLE TAB_PROCEDIMENTO

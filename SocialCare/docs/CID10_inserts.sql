@@ -1,4 +1,4 @@
-use testetcc;
+use Social_Care;
 
 select * from TAB_CID;
 

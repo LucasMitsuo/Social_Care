@@ -7,8 +7,7 @@ using System.Web.Mvc;
 namespace SocialCare.Controllers
 {
     public class PacientesController : Controller
-    {
-        // GET: Pacientes
+    {   
         public ActionResult Lista()
         {
             return View();
