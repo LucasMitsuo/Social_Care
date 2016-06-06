@@ -1,9 +1,25 @@
-﻿
+﻿@model IQueryable<TAB_PACIENTE>
 @{
     ViewBag.Title = "Lista";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 style="color:#428bca;"><span class="glyphicon glyphicon-user"></span> Escolha um paciente</h2>
+<h2 style="color:#428bca;"><span class="glyphicon glyphicon-user"></span> Lista de pacientes</h2>
+<h4>Selecione um paciente para iniciar o formulário</h4>
 
+<div class="list-group">
 
+    @if (Model.Count() > 0)
+    {
+
+        foreach (var paciente in Model)
+        {
+            <a href="#" class="list-group-item">
+                <img src="https://success.salesforce.com/resource/1463788800000/sharedlayout/img/new-user-image-default.png" style="width:70px; height:70px;float:left; border-radius:20px" />
+                <p><h3 style="padding-left:100px">@paciente.nom_paciente</h3></p>
+                <p><h4 style="padding-left:100px">Data de nascimento: @paciente.dat_nasc</h4></p>
+                <p><h4 style="padding-left:100px">Cuidador: @paciente.Nom_cuidador (@paciente.des_parentesco)</h4></p>
+            </a>
+        }
+    }
+</div>

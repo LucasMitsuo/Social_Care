@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocialCare.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,9 +10,10 @@ namespace SocialCare.Controllers
 {
     public class PacientesController : Controller
     {   
-        public ActionResult Lista()
+        public ActionResult Lista(int identifier)
         {
-            return View();
+            _SocialCare sc = new _SocialCare();
+            return View(sc.ObterPacientes());
         }
     }
 }

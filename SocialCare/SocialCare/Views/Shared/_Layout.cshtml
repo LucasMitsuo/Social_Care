@@ -104,7 +104,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Visitas agendadas", "Lista", "Visitas", new { identifier = usuarioAtual.cod_profissional },new { style="font-size:large" })</li>
-                    <li>@Html.ActionLink("Iniciar Formulário", "Lista", "Pacientes",new { }, new { style = "font-size:large" })</li>
+                    <li>@Html.ActionLink("Iniciar Formulário", "Lista", "Pacientes",new { identifier = usuarioAtual.cod_profissional }, new { style = "font-size:large" })</li>
                 </ul>
             </div>
         </div>

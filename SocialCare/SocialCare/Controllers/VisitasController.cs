@@ -17,8 +17,10 @@ namespace SocialCare.Controllers
             var profissional = sc.ObterPorfissional(identifier);
             Session["usuario"] = profissional;
 
-            //Captura somente as visitas que estejam pendentes e cujo paciente possua formulário
-            var visitas = profissional.TAB_VISITA.Where(model => model.des_status.Equals(((int)EnumStatusVisita.PENDENTE).ToString()) && model.TAB_PACIENTE.TAB_FORM.Count() > 0);
+            var statusPendente = ((int)EnumStatusVisita.PENDENTE).ToString();
+
+            //Captura somente as visitas que estejam pendentes
+            var visitas = profissional.TAB_VISITA.Where(model => model.des_status.Equals(statusPendente));
 
             return View(visitas.AsQueryable());
         }
