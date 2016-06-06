@@ -171,6 +171,7 @@
     <Compile Include="Controllers\FormularioController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PacientesController.cs" />
+    <Compile Include="Controllers\ProfissionaisController.cs" />
     <Compile Include="Controllers\ServicosController.cs" />
     <Compile Include="Controllers\VisitasController.cs" />
     <Compile Include="DTO\CID10Dto.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\_SocialCare.cs" />
     <Compile Include="Models\SocialCareModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -235,6 +237,8 @@
     <Compile Include="Models\TAB__MATERIAL.cs">
       <DependentUpon>SocialCareModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\_TAB_PROFISSIONAL.cs" />
+    <Compile Include="Models\_TAB_VISITA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -305,6 +309,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Profissionais\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -1,4 +1,4 @@
-﻿
+﻿@model IQueryable<TAB_VISITA>
 @{
     ViewBag.Title = "Lista";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,30 +7,17 @@
 <h2 style="color:#428bca;">Lista de visitas</h2>
 <h4>Selecione um paciente para registrar a visita</h4>
 <div class="list-group">
-    <a href="#" class="list-group-item">
-        <img src="https://success.salesforce.com/resource/1463788800000/sharedlayout/img/new-user-image-default.png" style="width:70px; height:70px;float:left; border-radius:20px"/> 
-        <p><h3 style="padding-left:100px">Luis Carlos Vendramini</h3></p>
-        <p><h4 style="padding-left:100px">Visita para: 13/08/1992</h4></p>
-    </a>
-    <a href="#" class="list-group-item">
-        <img src="https://success.salesforce.com/resource/1463788800000/sharedlayout/img/new-user-image-default.png" style="width:70px; height:70px;float:left; border-radius:20px" /> 
-        <p><h3 style="padding-left:100px">Kéfera Giselle</h3></p>
-        <p><h4 style="padding-left:100px">Visita para: 21/09/2014</h4></p>
-    </a>
-    <a href="#" class="list-group-item">
-        <img src="https://success.salesforce.com/resource/1463788800000/sharedlayout/img/new-user-image-default.png" style="width:70px; height:70px;float:left; border-radius:20px" /> 
-        <p><h3 style="padding-left:100px">John Cavalcante</h3></p>
-        <p><h4 style="padding-left:100px">Visita para: 16/09/2007</h4></p>
-    </a>
-    <a href="#" class="list-group-item">
-        <img src="https://success.salesforce.com/resource/1463788800000/sharedlayout/img/new-user-image-default.png" style="width:70px; height:70px;float:left; border-radius:20px" /> 
-        <p><h3 style="padding-left:100px">Luiza Possi Neguna</h3></p>
-        <p><h4 style="padding-left:100px">Visita para: 12/05/2009</h4></p>
-    </a>
-    <a href="#" class="list-group-item">
-        <img src="https://success.salesforce.com/resource/1463788800000/sharedlayout/img/new-user-image-default.png" style="width:70px; height:70px;float:left; border-radius:20px" /> 
-        <p><h3 style="padding-left:100px">Bartolomeu todo Meu</h3></p>
-        <p><h4 style="padding-left:100px">Visita para: 11/11/2011</h4></p>
-    </a>
+
+    @if(Model.Count() > 0) { 
+
+        foreach (var visita in Model)
+        {
+            <a href="#" class="list-group-item">
+                <img src="https://success.salesforce.com/resource/1463788800000/sharedlayout/img/new-user-image-default.png" style="width:70px; height:70px;float:left; border-radius:20px" />
+                <p><h3 style="padding-left:100px">@visita.TAB_PACIENTE.nom_paciente</h3></p>
+                <p><h4 style="padding-left:100px">Visita para: @visita.dat_visita</h4></p>
+            </a>
+        }
+    }
 </div>
 
