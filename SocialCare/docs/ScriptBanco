@@ -197,7 +197,7 @@ CREATE
     dat_saida                 DATE NOT NULL ,
     des_razao                 CHAR (1) NOT NULL ,
     des_obs                   VARCHAR (50) NOT NULL ,
-    TAB_PACIENTE_cod_paciente INTEGER NOT NULL ,
+    cod_paciente INTEGER NOT NULL ,
     CONSTRAINT TAB_SAIDA_PK PRIMARY KEY CLUSTERED (cod_saida)
 WITH
   (
@@ -211,7 +211,7 @@ GO
 CREATE UNIQUE NONCLUSTERED INDEX
 TAB_SAIDA__IDX ON TAB_SAIDA
 (
-  TAB_PACIENTE_cod_paciente
+  cod_paciente
 )
 ON "default"
 GO
@@ -223,7 +223,7 @@ CREATE
     des_momento               CHAR (3) NOT NULL ,
     des_estagio               VARCHAR (20) ,
     dat_up                    DATE ,
-    TAB_PACIENTE_cod_paciente INTEGER NOT NULL ,
+    cod_paciente 			  INTEGER NOT NULL ,
     CONSTRAINT TAB_UP_PK PRIMARY KEY CLUSTERED (cod_up)
 WITH
   (
@@ -237,7 +237,7 @@ GO
 CREATE UNIQUE NONCLUSTERED INDEX
 TAB_UP__IDX ON TAB_UP
 (
-  TAB_PACIENTE_cod_paciente
+  cod_paciente
 )
 ON "default"
 GO
@@ -405,7 +405,7 @@ GO
 ALTER TABLE TAB_SAIDA
 ADD CONSTRAINT TAB_SAIDA_TAB_PACIENTE_FK FOREIGN KEY
 (
-TAB_PACIENTE_cod_paciente
+cod_paciente
 )
 REFERENCES TAB_PACIENTE
 (
@@ -420,7 +420,7 @@ GO
 ALTER TABLE TAB_UP
 ADD CONSTRAINT TAB_UP_TAB_PACIENTE_FK FOREIGN KEY
 (
-TAB_PACIENTE_cod_paciente
+cod_paciente
 )
 REFERENCES TAB_PACIENTE
 (

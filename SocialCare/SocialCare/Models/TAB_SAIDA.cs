@@ -18,7 +18,7 @@ namespace SocialCare.Models
         public System.DateTime dat_saida { get; set; }
         public string des_razao { get; set; }
         public string des_obs { get; set; }
-        public int TAB_PACIENTE_cod_paciente { get; set; }
+        public int cod_paciente { get; set; }
     
         public virtual TAB_PACIENTE TAB_PACIENTE { get; set; }
     }

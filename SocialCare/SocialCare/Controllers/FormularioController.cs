@@ -8,8 +8,9 @@ namespace SocialCare.Controllers
 {
     public class FormularioController : Controller
     {
-        public ActionResult Detalhes()
+        public ActionResult Detalhes(int identifier)
         {
+
             return View();
         }
     }

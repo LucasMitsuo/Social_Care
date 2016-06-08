@@ -112,7 +112,7 @@
           <Property Name="dat_saida" Type="date" Nullable="false" />
           <Property Name="des_razao" Type="char" MaxLength="1" Nullable="false" />
           <Property Name="des_obs" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="TAB_PACIENTE_cod_paciente" Type="int" Nullable="false" />
+          <Property Name="cod_paciente" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TAB_UP">
           <Key>
@@ -122,7 +122,7 @@
           <Property Name="des_momento" Type="char" MaxLength="3" Nullable="false" />
           <Property Name="des_estagio" Type="varchar" MaxLength="20" />
           <Property Name="dat_up" Type="date" />
-          <Property Name="TAB_PACIENTE_cod_paciente" Type="int" Nullable="false" />
+          <Property Name="cod_paciente" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TAB_VISITA">
           <Key>
@@ -236,7 +236,7 @@
               <PropertyRef Name="cod_paciente" />
             </Principal>
             <Dependent Role="TAB_SAIDA">
-              <PropertyRef Name="TAB_PACIENTE_cod_paciente" />
+              <PropertyRef Name="cod_paciente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -248,7 +248,7 @@
               <PropertyRef Name="cod_paciente" />
             </Principal>
             <Dependent Role="TAB_UP">
-              <PropertyRef Name="TAB_PACIENTE_cod_paciente" />
+              <PropertyRef Name="cod_paciente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -499,7 +499,7 @@
           <Property Name="dat_saida" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="des_razao" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="des_obs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="TAB_PACIENTE_cod_paciente" Type="Int32" Nullable="false" />
+          <Property Name="cod_paciente" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TAB_PACIENTE" Relationship="Self.TAB_SAIDA_TAB_PACIENTE_FK" FromRole="TAB_SAIDA" ToRole="TAB_PACIENTE" />
         </EntityType>
         <EntityType Name="TAB_UP">
@@ -510,7 +510,7 @@
           <Property Name="des_momento" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="des_estagio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="dat_up" Type="DateTime" Precision="0" />
-          <Property Name="TAB_PACIENTE_cod_paciente" Type="Int32" Nullable="false" />
+          <Property Name="cod_paciente" Type="Int32" Nullable="false" />
           <NavigationProperty Name="TAB_PACIENTE" Relationship="Self.TAB_UP_TAB_PACIENTE_FK" FromRole="TAB_UP" ToRole="TAB_PACIENTE" />
         </EntityType>
         <EntityType Name="TAB_VISITA">
@@ -630,7 +630,7 @@
               <PropertyRef Name="cod_paciente" />
             </Principal>
             <Dependent Role="TAB_SAIDA">
-              <PropertyRef Name="TAB_PACIENTE_cod_paciente" />
+              <PropertyRef Name="cod_paciente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -642,7 +642,7 @@
               <PropertyRef Name="cod_paciente" />
             </Principal>
             <Dependent Role="TAB_UP">
-              <PropertyRef Name="TAB_PACIENTE_cod_paciente" />
+              <PropertyRef Name="cod_paciente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -884,7 +884,7 @@
                 <ScalarProperty Name="dat_saida" ColumnName="dat_saida" />
                 <ScalarProperty Name="des_razao" ColumnName="des_razao" />
                 <ScalarProperty Name="des_obs" ColumnName="des_obs" />
-                <ScalarProperty Name="TAB_PACIENTE_cod_paciente" ColumnName="TAB_PACIENTE_cod_paciente" />
+                <ScalarProperty Name="cod_paciente" ColumnName="cod_paciente" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -895,7 +895,7 @@
                 <ScalarProperty Name="des_momento" ColumnName="des_momento" />
                 <ScalarProperty Name="des_estagio" ColumnName="des_estagio" />
                 <ScalarProperty Name="dat_up" ColumnName="dat_up" />
-                <ScalarProperty Name="TAB_PACIENTE_cod_paciente" ColumnName="TAB_PACIENTE_cod_paciente" />
+                <ScalarProperty Name="cod_paciente" ColumnName="cod_paciente" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

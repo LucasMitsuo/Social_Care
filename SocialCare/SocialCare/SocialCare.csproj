@@ -179,7 +179,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\_SocialCare.cs" />
     <Compile Include="Models\SocialCareModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -237,6 +236,7 @@
     <Compile Include="Models\TAB__MATERIAL.cs">
       <DependentUpon>SocialCareModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\_SocialCare.cs" />
     <Compile Include="Models\_TAB_PACIENTE.cs" />
     <Compile Include="Models\_TAB_PROFISSIONAL.cs" />
     <Compile Include="Models\_TAB_VISITA.cs" />

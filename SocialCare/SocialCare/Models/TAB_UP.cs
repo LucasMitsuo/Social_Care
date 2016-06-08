@@ -18,7 +18,7 @@ namespace SocialCare.Models
         public string des_momento { get; set; }
         public string des_estagio { get; set; }
         public Nullable<System.DateTime> dat_up { get; set; }
-        public int TAB_PACIENTE_cod_paciente { get; set; }
+        public int cod_paciente { get; set; }
     
         public virtual TAB_PACIENTE TAB_PACIENTE { get; set; }
     }

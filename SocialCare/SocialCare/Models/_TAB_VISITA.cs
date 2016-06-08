@@ -25,7 +25,7 @@ namespace SocialCare.Models
         public int cod_paciente { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public string dat_visita { get; set; }
+        public DateTime dat_visita { get; set; }
 
         public string des_status { get; set; }
         public int cod_profissional { get; set; }
