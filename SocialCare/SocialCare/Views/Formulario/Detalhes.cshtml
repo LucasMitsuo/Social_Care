@@ -1,6 +1,9 @@
-﻿@{
-    ViewBag.Title = "Novo";
+﻿@model FormularioViewModel
+@{
+    ViewBag.Title = "Formulário";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var idade = (DateTime.Now - Model.Paciente.dat_nasc).Days / 365;
+    var endereco = Model.Paciente.des_end + ", " + Model.Paciente.num_end;
 }
 
 @Scripts.Render("~/bundles/jquery")
@@ -16,11 +19,11 @@
         <p class="col-md-12"><h2>Prontuário: 233322</h2></p>
         <div class="panel-body" style="padding:20px; margin: 20px 0;  border: 1px solid #eee; border-left-width: 5px; border-radius: 3px; border-left-color:#5bc0de; ">
             <h4 style="color:#428bca;">Dados Pessoais</h4>
-            <p class="col-md-12"><strong>Paciente:</strong> Thays Boschi Oliveira</p>
-            <p class="col-md-12"><strong>Idade:</strong>19 anos</p>
-            <p class="col-md-12"><strong>Telefone:</strong> (011) 97652-0876</p>
-            <p class="col-md-12"><strong>Endereço:</strong> Rua Brócolis, 10 - São Clemente</p">
-            <p class="col-md-12"><strong>Cuidador:</strong> Lucas Mitsuo &nbsp;&nbsp;&nbsp;&nbsp; <strong>Parentesco:</strong> Pai</p>
+            <p class="col-md-12"><strong>Paciente:</strong> @Model.Paciente.nom_paciente</p>
+            <p class="col-md-12"><strong>Idade:</strong> @idade anos</p>
+            <p class="col-md-12"><strong>Telefone:</strong> @Model.Paciente.tel_paciente</p>
+            <p class="col-md-12"><strong>Endereço:</strong> @endereco</p>
+            <p class="col-md-12"><strong>Cuidador:</strong> @Model.Paciente.Nom_cuidador &nbsp;&nbsp;&nbsp;&nbsp; <strong>Parentesco:</strong> @Model.Paciente.des_parentesco</p>
             <br />
 
             <!--========================================== CID 10 ================================================-->
@@ -33,7 +36,7 @@
             </div>
 
             <div class="col-md-12">
-                <input id="target-input-cids" type="text" style="min-width:100%;" class="hidden" />
+                @Html.TextBoxFor(model => model.lstCID10,new { @class = "hidden",id = "target-input-cids", style = "min-width:100%;" })
             </div>
             <br />
             <!--========================================== MATERIAIS ================================================-->
@@ -46,30 +49,30 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="checkbox">
-                        <input type="checkbox" class="checkbox" /> Cama
+                        @Html.CheckBoxFor(model => model.mat_cama, new { @class = "checkbox" }) Cama
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="checkbox">
-                        <input type="checkbox" class="checkbox" /> Cadeira de rodas
+                        @Html.CheckBoxFor(model => model.mat_cadRodas, new { @class = "checkbox" }) Cadeira de rodas
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="checkbox">
-                        <input type="checkbox" class="checkbox" /> Cadeira de banho
+                        @Html.CheckBoxFor(model => model.mat_cadBanho, new { @class = "checkbox" }) Cadeira de banho
                     </div>
                 </div>
 
                 <div class="col-md-2">
                     <div class="checkbox">
-                        <input type="checkbox" class="checkbox" /> Aspirador
+                        @Html.CheckBoxFor(model => model.mat_Aspirador, new { @class = "checkbox" }) Aspirador
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="checkbox">
-                        <input type="checkbox" class="checkbox" /> Inalador
+                        @Html.CheckBoxFor(model => model.mat_Inalador, new { @class = "checkbox" }) Inalador
                     </div>
                 </div>
 
@@ -78,27 +81,27 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="checkbox">
-                        <input type="checkbox" class="checkbox" /> Colchão
+                        @Html.CheckBoxFor(model => model.mat_Colchao, new { @class = "checkbox" }) Colchão
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="checkbox">
-                        <input type="checkbox" class="checkbox" /> Conc_O2
+                        @Html.CheckBoxFor(model => model.mat_Conc02, new { @class = "checkbox" }) Conc_O2
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="checkbox">
-                        <input type="checkbox" class="checkbox" /> Torp_Transp
+                        @Html.CheckBoxFor(model => model.mat_torpTransp, new { @class = "checkbox" }) Torp_Transp
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="checkbox">
-                        <input type="checkbox" class="checkbox" /> Oxímetro
+                        @Html.CheckBoxFor(model => model.mat_Oximetro, new { @class = "checkbox" }) Oxímetro
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="checkbox">
-                        <input type="checkbox" class="checkbox" /> CPAP
+                        @Html.CheckBoxFor(model => model.mat_CPAP, new { @class = "checkbox" }) CPAP
                     </div>
                 </div>
             </div>
@@ -112,12 +115,12 @@
                 <tr>
                     <td style="width:100px;">
                         <div class="checkbox">
-                            <input type="checkbox" class="checkbox" /> Gastro
+                            @Html.CheckBoxFor(model => model.proc_Gastro, new { @class = "checkbox" }) Gastro
                         </div>
                     </td>
                     <td>
                         <div class="checkbox">
-                            <input type="checkbox" class="checkbox" /> POD
+                            @Html.CheckBoxFor(model => model.proc_POD, new { @class = "checkbox" }) POD
                         </div>
                     </td>
                     <td>
@@ -139,24 +142,24 @@
                 <tr>
                     <td>
                         <div class="checkbox">
-                            <input type="checkbox" class="checkbox" /> SNasoEnteral
+                            @Html.CheckBoxFor(model => model.proc_SNasoEnteral, new { @class = "checkbox" }) SNasoEnteral
                         </div>
                     </td>
                     <td>
                         <div class="checkbox">
-                            <input type="checkbox" class="checkbox" /> SVesicalDemora
+                            @Html.CheckBoxFor(model => model.proc_SVesicalDemora, new { @class = "checkbox" }) SVesicalDemora
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="checkbox">
-                            <input type="checkbox" class="checkbox" /> SVesicalInterm
+                            @Html.CheckBoxFor(model => model.proc_SVesicalInterm, new { @class = "checkbox" }) SVesicalInterm
                         </div>
                     </td>
                     <td>
                         <div class="checkbox">
-                            <input type="checkbox" class="checkbox" /> Traqueostomia
+                            @Html.CheckBoxFor(model => model.proc_Traqueostomia, new { @class = "checkbox" }) Traqueostomia
                         </div>
                     </td>
                 </tr>
@@ -576,8 +579,21 @@
                 if (elem.length > 0) {
 
                     var targetInput = $("#" + elem.attr("data-target-input"));
+
                     var route = elem.attr("data-url");
+
                     if (targetInput.length > 0) {
+                        var str_cids = targetInput.val();
+
+                        if (str_cids != "") {
+                            var array_cids = targetInput.val().split(";");
+                            for (var i = 0; i < array_cids.length; i++) {
+                                var texto = array_cids[i];
+                                if (texto != "" && texto != " ") {
+                                    elem.append("<p class='tag-item'>" + texto + "</p>");
+                                }
+                            }
+                        }
 
                         var targetInsert = $("#rp-cids input");
 

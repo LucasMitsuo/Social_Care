@@ -25,5 +25,10 @@ namespace SocialCare.Models
         {
             return db.TAB_PACIENTE.Where(model => model.TAB_FORM.Count() == 0).AsQueryable();
         }
+
+        public TAB_PACIENTE ObterPaciente(int idPaciente)
+        {
+            return db.TAB_PACIENTE.Where(model => model.cod_paciente == idPaciente).FirstOrDefault();
+        }
     }
 }
