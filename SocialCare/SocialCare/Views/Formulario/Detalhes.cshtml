@@ -128,14 +128,7 @@
                             <h5>CE:</h5>
                         </div>
                         <div class="col-md-9">
-                            <select class="form-control">
-                                <option value="volvo">Grau 0</option>
-                                <option value="saab">Grau 1</option>
-                                <option value="opel">Grau 2</option>
-                                <option value="audi">Grau 3</option>
-                                <option value="opel">Grau 4</option>
-                                <option value="audi">Grau 5</option>
-                            </select>
+                            @Html.DropDownListFor(model => model.grauCE , Model.opcoesCE,"Escolha um grau", new { @class = "form-control " })
                         </div>
                     </td>
                 </tr>

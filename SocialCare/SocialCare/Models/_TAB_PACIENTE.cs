@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -27,5 +28,26 @@ namespace SocialCare.Models
         public string Nom_cuidador { get; set; }
         public string des_parentesco { get; set; }
         public int? num_grau_ce { get; set; }
+    }
+
+    public enum Enum_CE
+    {
+        [Description("Grau 0")]
+        Grau0 = 0,
+
+        [Description("Grau 1")]
+        Grau1,
+
+        [Description("Grau 2")]
+        Grau2,
+
+        [Description("Grau 3")]
+        Grau3,
+
+        [Description("Grau 4")]
+        Grau4,
+
+        [Description("Grau 5")]
+        Grau5
     }
 }

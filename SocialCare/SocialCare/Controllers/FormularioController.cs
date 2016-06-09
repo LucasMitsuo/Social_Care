@@ -101,6 +101,21 @@ namespace SocialCare.Controllers
             }
             #endregion
 
+            //Define CE
+            var lstCE = Enum.GetValues(typeof(Enum_CE)).Cast<Enum_CE>().ToList();
+            List<object> colCE = new List<object>();
+
+            colCE.Add(new { valor = 0, descricao = "Grau 0" });
+            colCE.Add(new { valor = 1, descricao = "Grau 1" });
+            colCE.Add(new { valor = 2, descricao = "Grau 2" });
+            colCE.Add(new { valor = 3, descricao = "Grau 3" });
+            colCE.Add(new { valor = 4, descricao = "Grau 4" });
+            colCE.Add(new { valor = 5, descricao = "Grau 5" });
+
+            List<SelectListItem> _opcoesCE = new SelectList(colCE, "valor", "descricao").ToList();
+            model.opcoesCE = _opcoesCE;
+            model.grauCE = paciente.num_grau_ce.Value;
+
             return View(model);
         }
     }
