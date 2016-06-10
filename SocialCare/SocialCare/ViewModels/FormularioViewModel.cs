@@ -1,6 +1,7 @@
 ﻿using SocialCare.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,9 @@ namespace SocialCare.ViewModels
     public class FormularioViewModel
     {
         public TAB_PACIENTE Paciente { get; set; }
+        public TAB_VISITA Visita { get; set; }
+
+        public int idFormulario { get; set; }
 
         public string lstCID10 { get; set; }
 
@@ -33,5 +37,15 @@ namespace SocialCare.ViewModels
 
         public IEnumerable<SelectListItem> opcoesCE { get; set; }
         public int grauCE { get; set; }
+
+        public bool UP { get; set; }
+        public string momento_UP { get; set; }
+        public IEnumerable<SelectListItem> opcoesEstagios { get; set; }
+        public string estagio_UP { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public string data_UP { get; set; }
+
+        public IEnumerable<SelectListItem> opcoesPeriodicidade { get; set; }
+        public string periodicidade { get; set; }
     }
 }

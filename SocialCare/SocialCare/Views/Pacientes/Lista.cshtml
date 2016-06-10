@@ -5,21 +5,47 @@
 }
 
 <h2 style="color:#428bca;"><span class="glyphicon glyphicon-user"></span> Lista de pacientes</h2>
-<h4>Selecione um paciente para iniciar o formulário</h4>
+<h4>Escolha por visualizaar ou Iniciar o formulário</h4>
 
 <div class="list-group">
 
     @if (Model.Count() > 0)
     {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th class="col-md-1">Código</th>
+                    <th class="col-md-3">Nome</th>
+                    <th class="col-md-1">Idade</th>
+                    <th class="col-md-3">Cuidador</th>
+                    <th class="col-md-1">Parentesco</th>
+                    <th class="col-md-3">Ações de Formulário</th>
+                </tr>
 
-        foreach (var paciente in Model)
-        {
-            <a href="#" class="list-group-item">
-                <img src="https://success.salesforce.com/resource/1463788800000/sharedlayout/img/new-user-image-default.png" style="width:70px; height:70px;float:left; border-radius:20px" />
-                <p><h3 style="padding-left:100px">@paciente.nom_paciente</h3></p>
-                <p><h4 style="padding-left:100px">Data de nascimento: @paciente.dat_nasc</h4></p>
-                <p><h4 style="padding-left:100px">Cuidador: @paciente.Nom_cuidador (@paciente.des_parentesco)</h4></p>
-            </a>
-        }
+                @foreach(var paciente in Model)
+                {
+                    <tr>
+                        <td>@paciente.cod_paciente</td>
+                        <td>@paciente.nom_paciente</td>
+                        <td>@paciente.Idade</td>
+                        <td>@paciente.Nom_cuidador</td>
+                        <td>@paciente.des_parentesco</td>
+                        <td>
+                            @if (paciente.PossuiFormulario)
+                            {
+                                @Html.ActionLink("Visualizar", "", "", new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Iniciar", "", "", new { @class = "btn btn-default", style = "margin-left:10px" })
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Visualizar", "", "", new { @class = "btn btn-primary", disabled = true})
+                                @Html.ActionLink("Iniciar", "", "", new { @class = "btn btn-default",style="margin-left:10px" })
+                            }
+                           
+                        </td>
+                    </tr>
+                }
+            </thead>
+        </table>
     }
 </div>

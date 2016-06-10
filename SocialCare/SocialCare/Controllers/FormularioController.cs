@@ -10,7 +10,7 @@ namespace SocialCare.Controllers
 {
     public class FormularioController : Controller
     {
-        public ActionResult Detalhes(int identifier)
+        public ActionResult Detalhes(int identifier,int idprofissional)
         {
             _SocialCare sc = new _SocialCare();
             FormularioViewModel model = new FormularioViewModel();
@@ -19,9 +19,14 @@ namespace SocialCare.Controllers
             var paciente = sc.ObterPaciente(identifier);
             model.Paciente = paciente;
 
+            var visita = paciente.TAB_VISITA.Where(x => x.cod_paciente == paciente.cod_paciente && x.cod_profissional == idprofissional).FirstOrDefault();
+            model.Visita = visita;
+
+            model.idFormulario = paciente.TAB_FORM.FirstOrDefault().cod_form;
+
             //Define os CID10
             #region Define CID10
-            foreach(var cid in paciente.TAB_FORM.FirstOrDefault().TAB_DIAGNOSTICO)
+            foreach (var cid in paciente.TAB_FORM.FirstOrDefault().TAB_DIAGNOSTICO)
             {
                 var texto = cid.TAB_CID.cod_cid10 + " - " + cid.TAB_CID.des_cid;
                 model.lstCID10 += texto + ";";
@@ -102,7 +107,7 @@ namespace SocialCare.Controllers
             #endregion
 
             //Define CE
-            var lstCE = Enum.GetValues(typeof(Enum_CE)).Cast<Enum_CE>().ToList();
+            #region Define CE
             List<object> colCE = new List<object>();
 
             colCE.Add(new { valor = 0, descricao = "Grau 0" });
@@ -115,6 +120,49 @@ namespace SocialCare.Controllers
             List<SelectListItem> _opcoesCE = new SelectList(colCE, "valor", "descricao").ToList();
             model.opcoesCE = _opcoesCE;
             model.grauCE = paciente.num_grau_ce.Value;
+            #endregion
+
+            //Define UP
+            #region Define UP
+            if(paciente.TAB_UP.Count() > 0)
+            {
+                model.UP = true;
+                var upPaciente = paciente.TAB_UP.FirstOrDefault();
+                model.momento_UP = upPaciente.des_momento;
+
+                List<object> colEstagios = new List<object>();
+
+                colEstagios.Add(new { valor = "Estágio I", descricao = "Estágio I" });
+                colEstagios.Add(new { valor = "Estágio II", descricao = "Estágio II" });
+                colEstagios.Add(new { valor = "Estágio III", descricao = "Estágio III" });
+                colEstagios.Add(new { valor = "Estágio IV", descricao = "Estágio IV" });
+                colEstagios.Add(new { valor = "Estágio V", descricao = "Estágio V" });
+                colEstagios.Add(new { valor = "Inclassificável", descricao = "Inclassificável" });
+
+                List<SelectListItem> _opcoesEstagios = new SelectList(colEstagios, "valor", "descricao").ToList();
+                model.opcoesEstagios = _opcoesEstagios;
+                model.estagio_UP = upPaciente.des_estagio;
+                model.data_UP = upPaciente.dat_up.ToString();
+            }
+            #endregion
+
+            //Define Periodicidade
+            #region Define Periodicidade
+            List<object> colPeriodicidade = new List<object>();
+
+            colPeriodicidade.Add(new { valor = "Semanal", descricao = "Semanal" });
+            colPeriodicidade.Add(new { valor = "Mensal", descricao = "Mensal" });
+            colPeriodicidade.Add(new { valor = "Bimestral", descricao = "Bimestral" });
+            colPeriodicidade.Add(new { valor = "Trimestral", descricao = "Trimestral" });
+            colPeriodicidade.Add(new { valor = "Semestral", descricao = "Semestral" });
+            colPeriodicidade.Add(new { valor = "Stand By", descricao = "Stando By" });
+
+            List<SelectListItem> _opcoesPeriodicidade = new SelectList(colPeriodicidade, "valor", "descricao").ToList();
+            model.opcoesPeriodicidade = _opcoesPeriodicidade;
+            model.periodicidade = visita.des_periodicidade;
+            #endregion
+
+
 
             return View(model);
         }

@@ -12,27 +12,19 @@
 
         foreach (var visita in Model)
         {
-            if(visita.TAB_PACIENTE.TAB_FORM.Count > 0)
-            {
+
                 <ul class="list-group">
                     <li class="list-group-item">         
                         <img src="https://success.salesforce.com/resource/1463788800000/sharedlayout/img/new-user-image-default.png" style="width:70px; height:70px;float:left; border-radius:20px" />
                         <p><h3 style="padding-left:100px">@visita.TAB_PACIENTE.nom_paciente</h3></p>
                         <p><h4 style="padding-left:100px">Visita para: @visita.dat_visita</h4></p>
-                        @Html.ActionLink("Visualizar Formulário", "Detalhes", "Formulario",new { identifier = visita.TAB_PACIENTE.cod_paciente}, new { @class = "btn btn-primary", style= "float:right;margin-top:-50px" })                
+                        @if (visita.TAB_PACIENTE.PossuiFormulario)
+                        {
+                            @Html.ActionLink("Visualizar Formulário", "Detalhes", "Formulario",new { identifier = visita.cod_paciente, idprofissional = visita.cod_profissional}, new { @class = "btn btn-primary", style= "float:right;margin-top:-50px" })                
+                        }
                     </li>
                 </ul>
-            }
-            else
-            {
-                <ul class="list-group">
-                    <li class="list-group-item">
-                        <img src="https://success.salesforce.com/resource/1463788800000/sharedlayout/img/new-user-image-default.png" style="width:70px; height:70px;float:left; border-radius:20px" />
-                        <p><h3 style="padding-left:100px">@visita.TAB_PACIENTE.nom_paciente</h3></p>
-                        <p><h4 style="padding-left:100px">Visita para: @visita.dat_visita</h4></p>
-                    </li>
-                </ul>
-            }
+
         }
     }
 </div>

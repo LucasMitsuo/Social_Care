@@ -23,7 +23,7 @@ namespace SocialCare.Models
 
         public IQueryable<TAB_PACIENTE> ObterPacientes()
         {
-            return db.TAB_PACIENTE.Where(model => model.TAB_FORM.Count() == 0).AsQueryable();
+            return db.TAB_PACIENTE.AsQueryable();
         }
 
         public TAB_PACIENTE ObterPaciente(int idPaciente)

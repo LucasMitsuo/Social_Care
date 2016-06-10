@@ -10,6 +10,22 @@ namespace SocialCare.Models
     [MetadataType(typeof(TAB_PACIENTEMetadata))]
     public partial class TAB_PACIENTE
     {
+        public int Idade
+        {
+            get
+            {
+                return (DateTime.Now - this.dat_nasc).Days / 365;
+            }
+        }
+
+        public bool PossuiFormulario
+        {
+            get
+            {
+                return this.TAB_FORM.Count() > 0 ? true : false;
+            }
+        }
+           
     }
 
     public class TAB_PACIENTEMetadata
