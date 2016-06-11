@@ -22,24 +22,17 @@
         var dataVisita = $("#label-data-visita").text();
         var dataVisitaCustom = dataVisita.substring(17,dataVisita.length);
 
-        $("#novo-registro-visita").find('td.td-data').each(function () {
-            $(this).text(dataVisitaCustom);
-        });
+        $("#novo-registro-visita").find('td.td-data').text(dataVisitaCustom);
 
-        $("#novo-registro-visita").find('td.td-nome').each(function () {
-            $(this).text(cargoCustom);
-        });
+        $("#novo-registro-visita").find('td.td-nome').text(cargoCustom);
 
-        $("#novo-registro-visita").find('td.td-periodo').each(function () {
-            $(this).text(periodicidade);
-        });
+        $("#novo-registro-visita").find('td.td-periodo').text(periodicidade);
 
-        $("#novo-registro-visita").find('td.td-anotacoes').each(function () {
-            $(this).text(procedimentos  + '\n' +  observacao);
-        });
-
+        $("#novo-registro-visita").find('td.td-anotacoes').text(procedimentos + '\n' + observacao)
 
         $("#novo-registro-visita").removeClass("hidden");
+
+        $("#btnAdicionarVisita").text("Editar Visita");
     }
 </script>
 <h2 style="color:#428bca;"><span class="glyphicon glyphicon-list-alt"></span>  Formulário de Acompanhamento Domiciliar</h2>
@@ -279,7 +272,7 @@
 </div>
 
 <div class="row">
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" style="float:right;margin-right:15px">Adicionar Visita</button>
+    <button type="button" id="btnAdicionarVisita" class="btn btn-info" data-toggle="modal" data-target="#myModal" style="float:right;margin-right:15px">Adicionar Visita</button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -324,7 +317,6 @@
             </div>
         </div>
     </div>
-    @*<button type="button" class="btn btn-info" style="float:right;">Registrar Visita</button>*@
 </div>
 <br />
 
@@ -380,6 +372,9 @@
     </table>
 </div>
 
+<div class="row">
+    <button type="button" id="btnSalvarDados" class="btn btn-primary" style="float:right;margin-right:15px"><span class="glyphicon glyphicon-floppy-saved"></span>Salvar Dados</button>
+</div>
 
 <script type="text/javascript">
         $(document).ready(function () {
