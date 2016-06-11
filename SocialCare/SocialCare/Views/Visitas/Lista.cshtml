@@ -20,7 +20,7 @@
                         <p><h4 style="padding-left:100px">Visita para: @visita.dat_visita</h4></p>
                         @if (visita.TAB_PACIENTE.PossuiFormulario)
                         {
-                            @Html.ActionLink("Visualizar Formulário", "Detalhes", "Formulario",new { identifier = visita.cod_paciente, idprofissional = visita.cod_profissional}, new { @class = "btn btn-primary", style= "float:right;margin-top:-50px" })                
+                            @Html.ActionLink("Registrar Visita", "Detalhes", "Formulario",new { identifier = visita.cod_paciente, idprofissional = visita.cod_profissional}, new { @class = "btn btn-primary", style= "float:right;margin-top:-50px" })                
                         }
                     </li>
                 </ul>

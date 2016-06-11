@@ -6,7 +6,37 @@
 }
 
 @Scripts.Render("~/bundles/jquery")
+<script type="text/javascript">
+    function AdicionaVisita() {
+        console.log("entrou");
+        var procedimentos = $("#target-input-proc").val();
+        var observacao = $("#txtObservacao").val().trim();
+        var periodicidade = $("#periodicidade").val();
+        var cargo = $("#label-nome-profissional").text();
+        var cargoCustom = cargo.substring(15, cargo.length);
+        var dataVisita = $("#label-data-visita").text();
+        var dataVisitaCustom = dataVisita.substring(17,dataVisita.length);
 
+        $("#novo-registro-visita").find('td.td-data').each(function () {
+            $(this).text(dataVisitaCustom);
+        });
+
+        $("#novo-registro-visita").find('td.td-nome').each(function () {
+            $(this).text(cargoCustom);
+        });
+
+        $("#novo-registro-visita").find('td.td-periodo').each(function () {
+            $(this).text(periodicidade);
+        });
+
+        $("#novo-registro-visita").find('td.td-anotacoes').each(function () {
+            $(this).text(procedimentos  + '\n' +  observacao);
+        });
+
+
+        $("#novo-registro-visita").removeClass("hidden");
+    }
+</script>
 <h2 style="color:#428bca;"><span class="glyphicon glyphicon-list-alt"></span>  Formulário de Acompanhamento Domiciliar</h2>
 <div class="panel panel-info ">
     <div class="panel-heading">
@@ -233,6 +263,12 @@
             <td>Trimestral</td>
             <td>I6,09,A67,97. O paciente demonstrou muita lerdeza pra entender as coisas porque é meio burro mesmo mas é natural do Congo. Pode ser que o santos seja campeão essa noite e 8 + 9 pode ser considerado perigoso de acordo com o aposição da lua</td>
         </tr>
+        <tr id="novo-registro-visita" class="hidden" >
+            <td class="td-data">data</td>
+            <td class="td-nome">nome</td>
+            <td class="td-periodo">periodo</td>
+            <td class="td-anotacoes" style="white-space:pre-line">anotacoes<br />haha </td>
+        </tr>
     </table>
 
 </div>
@@ -252,10 +288,10 @@
                 <div class="modal-body">
                     <div style="margin-left:20px">
                         <div class="row">
-                            <p><strong>Data da visita:</strong> &nbsp; @Model.Visita.dat_visita</p>
+                            <p id="label-data-visita"><strong>Data da visita:</strong> &nbsp; @Model.Visita.dat_visita</p>
                         </div>
                         <div class="row">
-                            <p><strong>Responsável:</strong> &nbsp; @Model.Visita.TAB_PROFISSIONAL.des_cargo</p>
+                            <p id="label-nome-profissional"><strong>Responsável:</strong> &nbsp; @Model.Visita.TAB_PROFISSIONAL.des_cargo</p>
                         </div>
                         <div class="row">
                             <p>
@@ -271,14 +307,14 @@
                         <br />
                         <div class="row">
                             <strong>Observação:</strong>
-                            <textarea class="form-control" style="min-width:100%" rows="4"></textarea>
+                            <textarea class="form-control" id="txtObservacao" style="min-width:100%" rows="4"></textarea>
                         </div>
                     </div>
 
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AdicionaVisita()"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
                 </div>
             </div>
         </div>

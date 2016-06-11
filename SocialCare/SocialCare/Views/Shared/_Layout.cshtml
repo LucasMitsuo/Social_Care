@@ -106,7 +106,7 @@
                     <li>@Html.ActionLink("Visitas agendadas", "Lista", "Visitas", new { identifier = usuarioAtual.cod_profissional },new { style="font-size:large" })</li>
                     @if(usuarioAtual.des_cargo == "Enfermeira" || usuarioAtual.des_cargo == "Enfermeiro")
                     {
-                        <li>@Html.ActionLink("Iniciar Formulário", "Lista", "Pacientes",new { identifier = usuarioAtual.cod_profissional }, new { style = "font-size:large" })</li>
+                        <li>@Html.ActionLink("Prontuários", "Lista", "Pacientes",new { identifier = usuarioAtual.cod_profissional }, new { style = "font-size:large" })</li>
                     }
                 </ul>
             </div>
