@@ -7,6 +7,11 @@
 
 @Scripts.Render("~/bundles/jquery")
 <script type="text/javascript">
+    function LimparCampos() {
+        $("#periodicidade").val("");
+        $("#txtObservacao").val("");
+    }
+
     function AdicionaVisita() {
         console.log("entrou");
         var procedimentos = $("#target-input-proc").val();
@@ -274,7 +279,7 @@
 </div>
 
 <div class="row">
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" style="float:right;margin-right:15px">Registrar Visita</button>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" style="float:right;margin-right:15px">Adicionar Visita</button>
 
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
@@ -313,7 +318,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                    <button type="button" class="btn btn-default" onclick="LimparCampos()"><span class="glyphicon glyphicon-remove"></span> Close</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AdicionaVisita()"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
                 </div>
             </div>
@@ -469,9 +474,9 @@
             }
 
             //Se o lstProc no localStorage estiver vazio, executa a função GetProcs responsável por carregar a lista de Procedimentos no localStorage.
-            //if (procRecovery == null) {
+            if (procRecovery == null) {
                 GetProcs();
-            //}
+            }
 
             //Tranforma a string obtida do localStorage e converte para JSON
             var arrayCid = JSON.parse(cidRecovery);
