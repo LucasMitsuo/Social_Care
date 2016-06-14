@@ -19,7 +19,7 @@
                     <th class="col-md-1">Idade</th>
                     <th class="col-md-3">Cuidador</th>
                     <th class="col-md-1">Parentesco</th>
-                    <th class="col-md-3">Ações de Formulário</th>
+                    <th class="col-md-3">Ações de Prontuário</th>
                 </tr>
 
                 @foreach(var paciente in Model)
@@ -34,12 +34,12 @@
                             @if (paciente.PossuiFormulario)
                             {
                                 @Html.ActionLink("Visualizar", "", "", new { @class = "btn btn-primary" })
-                                @Html.ActionLink("Iniciar", "", "", new { @class = "btn btn-default", style = "margin-left:10px", disabled = true, title = "Prontuário já iniciado" })
+                                @Html.ActionLink("Iniciar", "Novo", "Formulario",new { identfier = paciente.cod_paciente}, new { @class = "btn btn-default", style = "margin-left:10px", disabled = true, title = "Prontuário já iniciado" })
                             }
                             else
                             {
                                 @Html.ActionLink("Visualizar", "", "", new { @class = "btn btn-primary", disabled = true})
-                                @Html.ActionLink("Iniciar", "", "", new { @class = "btn btn-default",style="margin-left:10px" })
+                                @Html.ActionLink("Iniciar", "Novo", "Formulario", new { identifier = paciente.cod_paciente }, new { @class = "btn btn-default",style="margin-left:10px" })
                             }
                            
                         </td>

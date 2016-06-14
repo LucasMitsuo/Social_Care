@@ -1,0 +1,205 @@
+﻿@model FormularioViewModel
+@{
+    ViewBag.Title = "Novo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var endereco = Model.Paciente.des_end + ", " + Model.Paciente.num_end;
+}
+
+@Scripts.Render("~/bundles/socialcare")
+
+<h2 style="color:#428bca;"><span class="glyphicon glyphicon-list-alt"></span>  Formulário de Acompanhamento Domiciliar</h2>
+<h3>Preencha os campos a seguir para criar um prontuário para o paciente</h3>
+<div class="panel panel-info ">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Informações do Paciente</h3>
+    </div>
+    <div class="panel-body">
+        <!--========================================== DADOS PESSOAIS ================================================-->
+        <div class="panel-body" style="padding:20px; margin: 20px 0;  border: 1px solid #eee; border-left-width: 5px; border-radius: 3px; border-left-color:#5bc0de; ">
+            <h4 style="color:#428bca;">Dados Pessoais</h4>
+            <p class="col-md-12"><strong>Paciente:</strong> @Model.Paciente.nom_paciente</p>
+            <p class="col-md-12"><strong>Idade:</strong> @Model.Paciente.Idade anos</p>
+            <p class="col-md-12"><strong>Telefone:</strong> @Model.Paciente.tel_paciente</p>
+            <p class="col-md-12"><strong>Endereço:</strong> @endereco</p>
+            <p class="col-md-12"><strong>Cuidador:</strong> @Model.Paciente.Nom_cuidador &nbsp;&nbsp;&nbsp;&nbsp; <strong>Parentesco:</strong> @Model.Paciente.des_parentesco</p>
+            <br />
+
+            <!--========================================== CID 10 ================================================-->
+
+            <h4 style="color:#428bca;">CID 10</h4>
+            <small class="col-md-12">Digite o cid ou sua descrição no campo abaixo e clique no botão para adicionar na lista</small>
+
+            <div id="rp-cids" class="col-md-12" data-target-input="target-input-cids" data-url="http://localhost:32110/api/cid10/{0}">
+                <input id="target-insert" type="text" style="min-width:100%;" placeholder="Entre com o CID ou a descrição" class="form-control" />
+            </div>
+
+            <div class="col-md-12">
+                @Html.TextBoxFor(model => model.lstCID10, new { @class = "hidden", id = "target-input-cids", style = "min-width:100%;" })
+            </div>
+            <br />
+            <!--========================================== MATERIAIS ================================================-->
+
+            <h4 style="color:#428bca;"> Materiais</h4>
+
+            <small>Escolha os materiais que foram utilizados durante a visita</small>
+
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.mat_cama, new { @class = "checkbox" }) Cama
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.mat_cadRodas, new { @class = "checkbox" }) Cadeira de rodas
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.mat_cadBanho, new { @class = "checkbox" }) Cadeira de banho
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.mat_Aspirador, new { @class = "checkbox" }) Aspirador
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.mat_Inalador, new { @class = "checkbox" }) Inalador
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.mat_Colchao, new { @class = "checkbox" }) Colchão
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.mat_Conc02, new { @class = "checkbox" }) Conc_O2
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.mat_torpTransp, new { @class = "checkbox" }) Torp_Transp
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.mat_Oximetro, new { @class = "checkbox" }) Oxímetro
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="checkbox">
+                        @Html.CheckBoxFor(model => model.mat_CPAP, new { @class = "checkbox" }) CPAP
+                    </div>
+                </div>
+            </div>
+
+            <!--========================================== OBS ENFERMEIRA ================================================-->
+
+            <h4 style="color:#428bca;">Observação Enfermeira</h4>
+            <small>Selecione os procedimentos realizados pela enfermeira</small>
+
+            <table class="table">
+                <tr>
+                    <td style="width:100px;">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.proc_Gastro, new { @class = "checkbox" }) Gastro
+                        </div>
+                    </td>
+                    <td>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.proc_POD, new { @class = "checkbox" }) POD
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-md-1">
+                            <h5>CE:</h5>
+                        </div>
+                        <div class="col-md-9">
+                            @Html.DropDownListFor(model => model.grauCE, Model.opcoesCE, "Escolha um grau", new { @class = "form-control " })
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.proc_SNasoEnteral, new { @class = "checkbox" }) SNasoEnteral
+                        </div>
+                    </td>
+                    <td>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.proc_SVesicalDemora, new { @class = "checkbox" }) SVesicalDemora
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.proc_SVesicalInterm, new { @class = "checkbox" }) SVesicalInterm
+                        </div>
+                    </td>
+                    <td>
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(model => model.proc_Traqueostomia, new { @class = "checkbox" }) Traqueostomia
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+            <small>Preencha o formulário de acordo com as informações sobre<code>ÚLCERA POR PRESSÃO (UP)</code></small>
+            <table class="table">
+                <tr>
+                    <th>O Paciente teve UP ?</th>
+                    <td>
+                        <div class="radio">
+                            @Html.RadioButtonFor(model => model.UP, true, new { id = "rdoSIM" }) SIM
+                        </div>
+                    </td>
+                    <td>
+                        <div class="radio">
+                            @Html.RadioButtonFor(model => model.UP, false, new { id = "rdoNAO" }) NÃO
+                        </div>
+                    </td>
+                <tr>
+                    <th><div class="" id="labelUP">Momento que o paciente foi diagnosticado com UP</div></th>
+                    <td>
+                        <div class="radio">
+                            @Html.RadioButtonFor(model => model.momento_UP, "PRÉ", new { id = "rdoPRE", disabled = true }) PRÉ
+                        </div>
+                    </td>
+                    <td>
+                        <div class="radio">
+                            @Html.RadioButtonFor(model => model.momento_UP, "PÓS", new { id = "rdoPOS", disabled = true }) POS
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th><div class="" id="">Estágio da UP</div></th>
+                    <td>
+                        @Html.DropDownListFor(model => model.estagio_UP, Model.opcoesEstagios, "Selecione o estágio", new { @class = "form-control", id = "comboEstagio", disabled = true })
+                    </td>
+                </tr>
+                <tr>
+                    <th><div class="" id="">Data em que foi diagnosticado o estágio</div></th>
+                    <td>
+                        @Html.TextBoxFor(model => model.data_UP, new { @class = "form-control", id = "txtData", placeholder = "dd/mm/aaaa", disabled = true })
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <button type="button" id="btnSalvarDados" class="btn btn-primary" style="float:right;margin-right:15px"><span class="glyphicon glyphicon-floppy-saved"></span> Salvar Dados</button>
+</div>

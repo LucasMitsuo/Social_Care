@@ -10,6 +10,7 @@ namespace SocialCare.Controllers
 {
     public class FormularioController : Controller
     {
+        [Route("profissionais/{idprofissional}/pacientes/{identifier}/prontuario")]
         public ActionResult Detalhes(int identifier,int idprofissional)
         {
             _SocialCare sc = new _SocialCare();
@@ -163,6 +164,48 @@ namespace SocialCare.Controllers
             #endregion
 
 
+
+            return View(model);
+        }
+
+        [Route("pacientes/{identifier}/novoprontuario")]
+        public ActionResult Novo (int identifier)
+        {
+            _SocialCare sc = new _SocialCare();
+            FormularioViewModel model = new FormularioViewModel();
+
+            var paciente = sc.ObterPaciente(identifier);
+            model.Paciente = paciente;
+
+            //Define CE
+            #region Define CE
+            List<object> colCE = new List<object>();
+
+            colCE.Add(new { valor = 0, descricao = "Grau 0" });
+            colCE.Add(new { valor = 1, descricao = "Grau 1" });
+            colCE.Add(new { valor = 2, descricao = "Grau 2" });
+            colCE.Add(new { valor = 3, descricao = "Grau 3" });
+            colCE.Add(new { valor = 4, descricao = "Grau 4" });
+            colCE.Add(new { valor = 5, descricao = "Grau 5" });
+
+            List<SelectListItem> _opcoesCE = new SelectList(colCE, "valor", "descricao").ToList();
+            model.opcoesCE = _opcoesCE;
+            #endregion
+
+            //Define UP
+            #region Define UP
+            List<object> colEstagios = new List<object>();
+
+            colEstagios.Add(new { valor = "Estágio I", descricao = "Estágio I" });
+            colEstagios.Add(new { valor = "Estágio II", descricao = "Estágio II" });
+            colEstagios.Add(new { valor = "Estágio III", descricao = "Estágio III" });
+            colEstagios.Add(new { valor = "Estágio IV", descricao = "Estágio IV" });
+            colEstagios.Add(new { valor = "Estágio V", descricao = "Estágio V" });
+            colEstagios.Add(new { valor = "Inclassificável", descricao = "Inclassificável" });
+
+            List<SelectListItem> _opcoesEstagios = new SelectList(colEstagios, "valor", "descricao").ToList();
+            model.opcoesEstagios = _opcoesEstagios; 
+            #endregion
 
             return View(model);
         }

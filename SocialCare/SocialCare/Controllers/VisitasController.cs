@@ -9,7 +9,7 @@ namespace SocialCare.Controllers
 {
     public class VisitasController : Controller
     {
-        [Route("socialcare/visitas")]
+        [Route("profissionais/{identifier}/visitas")]
         public ActionResult Lista(int identifier)
         {
             _SocialCare sc = new _SocialCare();

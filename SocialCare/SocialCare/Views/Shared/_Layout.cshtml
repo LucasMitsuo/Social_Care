@@ -106,10 +106,16 @@
                     <li>@Html.ActionLink("Visitas agendadas", "Lista", "Visitas", new { identifier = usuarioAtual.cod_profissional },new { style="font-size:large" })</li>
                     @if(usuarioAtual.des_cargo == "Enfermeira" || usuarioAtual.des_cargo == "Enfermeiro")
                     {
-                        <li>@Html.ActionLink("Prontuários", "Lista", "Pacientes",new { identifier = usuarioAtual.cod_profissional }, new { style = "font-size:large" })</li>
+                        <li>@Html.ActionLink("Prontuários", "Lista", "Pacientes",new { }, new { style = "font-size:large" })</li>
                     }
                 </ul>
+                <ul class="nav navbar-nav navbar-right ">
+                    <li>
+                        <a><span class="label label-success" style="font-size:large;color:white;margin-top:20px">@usuarioAtual.nom_profissional</span></a>
+                    </li>
+                </ul>
             </div>
+           
         </div>
     </div>
     <div class="container body-content">

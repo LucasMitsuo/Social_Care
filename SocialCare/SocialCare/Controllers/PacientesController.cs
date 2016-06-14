@@ -10,10 +10,13 @@ namespace SocialCare.Controllers
 {
     public class PacientesController : Controller
     {   
-        public ActionResult Lista(int identifier)
+        [Route("pacientes")]
+        public ActionResult Lista()
         {
             _SocialCare sc = new _SocialCare();
             return View(sc.ObterPacientes());
         }
+
+
     }
 }
