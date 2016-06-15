@@ -143,7 +143,7 @@ namespace SocialCare.Controllers
                 List<SelectListItem> _opcoesEstagios = new SelectList(colEstagios, "valor", "descricao").ToList();
                 model.opcoesEstagios = _opcoesEstagios;
                 model.estagio_UP = upPaciente.des_estagio;
-                model.data_UP = upPaciente.dat_up.ToString();
+                model.data_UP = upPaciente.dat_up.Value.ToShortDateString();
             }
             #endregion
 

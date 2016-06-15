@@ -11,7 +11,8 @@ namespace SocialCare
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-1.12.4.js",
                         "~/Scripts/jquery-1.12.4.min.js",
-                        "~/Scripts/jquery-1.12.4.min.map.js"));
+                        "~/Scripts/jquery-1.12.4.min.map.js",
+                        "~/Scripts/jquery-ui-1.9.2.custom.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

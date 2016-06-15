@@ -1,4 +1,30 @@
 ﻿$(document).ready(function () {
+
+    //Recupera os dados da localStorage de nome lstCID
+    var cidRecovery = localStorage.getItem("lstCID");
+
+    //Recupera os dados da localStorage de nome lstProc
+    var procRecovery = localStorage.getItem("lstProc");
+
+    //Se o lstCID no localStorage estiver vazio, executa a função GetCids responsável por carregar a lista de CIDs no localStorage.
+    if (cidRecovery == null) {
+        console.log("vazio carai haha");
+        GetCids();
+        cidRecovery = localStorage.getItem("lstCID");
+    }
+
+    //Se o lstProc no localStorage estiver vazio, executa a função GetProcs responsável por carregar a lista de Procedimentos no localStorage.
+    if (procRecovery == null) {
+        GetProcs();
+        procRecovery = localStorage.getItem("lstProc");
+    }
+
+    //Tranforma a string obtida do localStorage e converte para JSON
+    var arrayCid = JSON.parse(cidRecovery);
+
+    //Tranforma a string obtida do localStorage e converte para JSON
+    var arrayProc = JSON.parse(procRecovery);
+
     cidEngine();
     procedimentoEngine();
     UPClick();
@@ -113,29 +139,6 @@
         });
     };
 
-    //Recupera os dados da localStorage de nome lstCID
-    var cidRecovery = localStorage.getItem("lstCID");
-
-    //Recupera os dados da localStorage de nome lstProc
-    var procRecovery = localStorage.getItem("lstProc");
-
-    //Se o lstCID no localStorage estiver vazio, executa a função GetCids responsável por carregar a lista de CIDs no localStorage.
-    if (cidRecovery == null) {
-        GetCids();
-    }
-
-    //Se o lstProc no localStorage estiver vazio, executa a função GetProcs responsável por carregar a lista de Procedimentos no localStorage.
-    if (procRecovery == null) {
-        GetProcs();
-    }
-
-    //Tranforma a string obtida do localStorage e converte para JSON
-    var arrayCid = JSON.parse(cidRecovery);
-
-
-    //Tranforma a string obtida do localStorage e converte para JSON
-    var arrayProc = JSON.parse(procRecovery);
-
     //Função que busca todos os CIDS e armazena no localStorage
     function GetCids() {
         $.ajax({
@@ -195,75 +198,66 @@
                         //termo utilizado para o tratamento de resultado não encontrado
                         var termo = $("#target-insert-proc").val();
 
-                        if (/(13)/.test(ev.which)) {
-                            return false;
-                        }
+                        var txt = this.value.replace(regex, '');
+                        var _url = route.replace("{0}", txt);
+                        var inpText = this;
 
-                        if (/(188|191)/.test(ev.which)) {
-                            $(this).focusout();
-                            this.focus();
-                        }
-                        else {
-                            var txt = this.value.replace(regex, '');
-                            var _url = route.replace("{0}", txt);
-                            var inpText = this;
+                        $(this).autocomplete({
+                            messages: {
+                                noResults: function () {
+                                    var spanError = elem.find("span.no-search");
 
-                            $(this).autocomplete({
-                                messages: {
-                                    noResults: function () {
-                                        var spanError = elem.find("span.no-search");
-
-                                        if (spanError.length == 0) {
-                                            $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
-                                        }
-                                        else {
-                                            spanError.remove();
-                                            $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
-                                        }
-                                    },
-                                    results: function (count) {
-                                        elem.find("span.no-search").remove();
-                                    }
-
-                                },
-                                source: function (request, response) {
-                                    var result = arrayProc.filter(checkProc); //Obtem os a lista de CIDs já filtrados com o termo
-                                    response($.map(result.slice(0, 8), function (a) {
-                                        return {
-                                            word: a
-                                        };
-                                    }));
-                                },
-                                select: function (event, ui) {
-                                    elem.append("<p class='tag-item'>" + ui.item.word + "</p>");
-
-                                    //Se a lista estiver vazia, coloca somente o valor selecionado
-                                    //Caso contrário, adiciona um ';' e o valor selecionado
-                                    var listTags = targetInput.val();
-
-                                    if (listTags[listTags.length - 1] == ";") {
-
-                                    }
-
-                                    if (listTags == "") {
-                                        targetInput.val(ui.item.word);
+                                    if (spanError.length == 0) {
+                                        $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
                                     }
                                     else {
-                                        targetInput.val(listTags + ";" + ui.item.word);
+                                        spanError.remove();
+                                        $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
                                     }
                                 },
-                                open: function () {
-                                    $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
-                                },
-                                close: function () {
-                                    $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+                                results: function (count) {
+                                    elem.find("span.no-search").remove();
                                 }
-                            }).data("ui-autocomplete")._renderItem = function (ul, item) {
-                                return $("<li class='extention' role='presentation'>")
-                                .append("<a role='menuitem' tabindex='-1'><i class='glyphicon glyphicon-tags'></i>&nbsp;&nbsp;" + item.word + "</a>")
-                                .appendTo(ul);
-                            };
-                        }
+
+                            },
+                            source: function (request, response) {
+                                var result = arrayProc.filter(checkProc); //Obtem os a lista de CIDs já filtrados com o termo
+                                response($.map(result.slice(0, 8), function (a) {
+                                    return {
+                                        word: a
+                                    };
+                                }));
+                            },
+                            select: function (event, ui) {
+                                elem.append("<p class='tag-item'>" + ui.item.word + "</p>");
+
+                                //Se a lista estiver vazia, coloca somente o valor selecionado
+                                //Caso contrário, adiciona um ';' e o valor selecionado
+                                var listTags = targetInput.val();
+
+                                if (listTags[listTags.length - 1] == ";") {
+
+                                }
+
+                                if (listTags == "") {
+                                    targetInput.val(ui.item.word);
+                                }
+                                else {
+                                    targetInput.val(listTags + ";" + ui.item.word);
+                                }
+                            },
+                            open: function () {
+                                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+                            },
+                            close: function () {
+                                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+                            }
+                        }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                            return $("<li class='extention' role='presentation'>")
+                            .append("<a role='menuitem' tabindex='-1'><i class='glyphicon glyphicon-tags'></i>&nbsp;&nbsp;" + item.word + "</a>")
+                            .appendTo(ul);
+                        };
+                        
                     }
                 });
 
@@ -308,96 +302,67 @@
 
                 //Controle de evento do targetInsert
                 targetInsert.on({
-                    //Quando perde o foco
-                    focusout: function () {
-                        var txt = this.value.replace(regex, ''); //Pega o valor digitado no targetInsert e remove os caracteres especiais
-
-                        if (txt != "") {
-                            //Adiciona o texto com css aplicado
-                            elem.append("<p class='tag-item'>" + txt + "</p>");
-
-                            //Adiciona o texto digitado no targetInput
-                            var listTags = targetInput.val();
-
-                            if (listTags == "") {
-                                targetInput.val(txt);
-                            }
-                            else {
-                                targetInput.val(listTags + ";" + txt);
-                            }
-                        }
-
-                    },
                     //Quando solta uma tecla
                     keyup: function (ev) {
                         //termo utilizado para o tratamento de resultado não encontrado
                         var termo = $("#target-insert").val();
 
-                        if (/(13)/.test(ev.which)) {
-                            return false;
-                        }
+                        var txt = this.value.replace(regex, '');
+                        var _url = route.replace("{0}", txt);
+                        var inpText = this;
 
-                        if (/(188|191)/.test(ev.which)) {
-                            $(this).focusout();
-                            this.focus();
-                        }
-                        else {
-                            var txt = this.value.replace(regex, '');
-                            var _url = route.replace("{0}", txt);
-                            var inpText = this;
+                        $(this).autocomplete({
+                            messages: {
+                                noResults: function () {
+                                    var spanError = elem.find("span.no-search");
 
-                            $(this).autocomplete({
-                                messages: {
-                                    noResults: function () {
-                                        var spanError = elem.find("span.no-search");
-
-                                        if (spanError.length == 0) {
-                                            $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
-                                        }
-                                        else {
-                                            spanError.remove();
-                                            $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
-                                        }
-                                    },
-                                    results: function (count) {
-                                        elem.find("span.no-search").remove();
-                                    }
-
-                                },
-                                source: function (request, response) {
-                                    var result = arrayCid.filter(checkCID); //Obtem os a lista de CIDs já filtrados com o termo
-                                    response($.map(result.slice(0, 8), function (a) {
-                                        return {
-                                            word: a
-                                        };
-                                    }));
-                                },
-                                select: function (event, ui) {
-                                    elem.append("<p class='tag-item'>" + ui.item.word + "</p>");
-
-                                    //Se a lista estiver vazia, coloca somente o valor selecionado
-                                    //Caso contrário, adiciona um ';' e o valor selecionado
-                                    var listTags = targetInput.val();
-
-                                    if (listTags == "") {
-                                        targetInput.val(ui.item.word);
+                                    if (spanError.length == 0) {
+                                        $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
                                     }
                                     else {
-                                        targetInput.val(listTags + ";" + ui.item.word);
+                                        spanError.remove();
+                                        $("<span/>", { class: "no-search", text: "Não foram encontrados resultados para '" + termo + "'", insertAfter: targetInsert });
                                     }
                                 },
-                                open: function () {
-                                    $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
-                                },
-                                close: function () {
-                                    $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+                                results: function (count) {
+                                    elem.find("span.no-search").remove();
                                 }
-                            }).data("ui-autocomplete")._renderItem = function (ul, item) {
-                                return $("<li class='extention' role='presentation'>")
-                                .append("<a role='menuitem' tabindex='-1'><i class='glyphicon glyphicon-tags'></i>&nbsp;&nbsp;" + item.word + "</a>")
-                                .appendTo(ul);
-                            };
-                        }
+
+                            },
+                            source: function (request, response) {
+                                var result = arrayCid.filter(checkCID); //Obtem os a lista de CIDs já filtrados com o termo
+                                response($.map(result.slice(0, 8), function (a) {
+                                    return {
+                                        word: a
+                                    };
+                                }));
+                            },
+                            select: function (event, ui) {
+                                elem.append("<p class='tag-item'>" + ui.item.word + "</p>");
+
+                                //Se a lista estiver vazia, coloca somente o valor selecionado
+                                //Caso contrário, adiciona um ';' e o valor selecionado
+                                var listTags = targetInput.val();
+
+                                if (listTags == "") {
+                                    targetInput.val(ui.item.word);
+                                }
+                                else {
+                                    targetInput.val(listTags + ";" + ui.item.word);
+                                }
+                            },
+                            open: function () {
+                                $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+                            },
+                            close: function () {
+                                $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+                            }
+                        }).data("ui-autocomplete")._renderItem = function (ul, item) {
+                            return $("<li class='extention' role='presentation'>")
+                            .append("<a role='menuitem' tabindex='-1'><i class='glyphicon glyphicon-tags'></i>&nbsp;&nbsp;" + item.word + "</a>")
+                            .appendTo(ul);
+                        };
+                        
                     }
                 });
 

@@ -5,8 +5,6 @@
     var endereco = Model.Paciente.des_end + ", " + Model.Paciente.num_end;
 }
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/socialcare")
 
 <h2 style="color:#428bca;"><span class="glyphicon glyphicon-list-alt"></span>  Formulário de Acompanhamento Domiciliar</h2>
 <div class="panel panel-info ">
@@ -258,7 +256,7 @@
                 <div class="modal-body">
                     <div style="margin-left:20px">
                         <div class="row">
-                            <p id="label-data-visita"><strong>Data da visita:</strong> &nbsp; @Model.Visita.dat_visita</p>
+                            <p id="label-data-visita"><strong>Data da visita:</strong> &nbsp; @Model.Visita.dat_visita.ToShortDateString()</p>
                         </div>
                         <div class="row">
                             <p id="label-nome-profissional"><strong>Responsável:</strong> &nbsp; @Model.Visita.TAB_PROFISSIONAL.des_cargo</p>
@@ -283,7 +281,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnLimpaCampos"class="btn btn-default" onclick="LimparCampos()"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                    <button type="button" id="btnLimpaCampos"class="btn btn-default" onclick="LimparCampos()"><span class="glyphicon glyphicon-remove"></span> Limpar</button>
                     <button type="button" id="btnSalvarVisita" class="btn btn-primary" data-dismiss="modal" onclick="AdicionaVisita()"><span class="glyphicon glyphicon-ok"></span> Salvar</button>
                 </div>
             </div>
