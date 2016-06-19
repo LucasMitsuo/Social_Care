@@ -34,14 +34,17 @@ namespace SocialCare.Controllers
                 var texto = cid.TAB_CID.cod_cid10 + " - " + cid.TAB_CID.des_cid;
                 model.lstCID10 += texto + ";";
             }
-            //Remove o último ';'
-            model.lstCID10 = model.lstCID10.Remove(model.lstCID10.LastIndexOf(";"));
 
+            if(model.lstCID10 != null)
+            { 
+                //Remove o último ';'
+                model.lstCID10 = model.lstCID10.Remove(model.lstCID10.LastIndexOf(";"));
+            }
             #endregion
 
             //Define os materiais
             #region Define Materiais
-            foreach(var material in paciente.TAB_FORM.FirstOrDefault().TAB_FORM_MAT)
+            foreach (var material in paciente.TAB_FORM.FirstOrDefault().TAB_FORM_MAT)
             {
                 switch (material.TAB__MATERIAL.nom_material)
                 {
@@ -232,25 +235,27 @@ namespace SocialCare.Controllers
             // Obtem a lista com as alterações do CID10
             var lstNovaCID10 = dadosFormulario.lstCID10;
 
-            string[] strlstNovaCID10 = lstNovaCID10.Split(';');
+            if(lstNovaCID10 != null)
+            { 
+                string[] strlstNovaCID10 = lstNovaCID10.Split(';');
 
-            for (var i = 0; i < strlstNovaCID10.Length - 1; i++)
-            {
-                // Comparando a lista de cid10 nova com os dados do banco
-                if (lstCID10.Contains(strlstNovaCID10[i]))
+                for (var i = 0; i < strlstNovaCID10.Length - 1; i++)
                 {
+                    // Comparando a lista de cid10 nova com os dados do banco
+                    if (lstCID10.Contains(strlstNovaCID10[i]))
+                    {
 
-                    lstCID10 = lstCID10.Replace(strlstNovaCID10[i] + ";", "");
-                }
-                else
-                {
-                    // Obtem o código do CID10 inserido e passa como parametro para o método AdicionaCID10
-                    formulario.AdicionaCID10(strlstNovaCID10[i].Substring(0, strlstNovaCID10[i].IndexOf('-')-1));
-                }
+                        lstCID10 = lstCID10.Replace(strlstNovaCID10[i] + ";", "");
+                    }
+                    else
+                    {
+                        // Obtem o código do CID10 inserido e passa como parametro para o método AdicionaCID10
+                        formulario.AdicionaCID10(strlstNovaCID10[i].Substring(0, strlstNovaCID10[i].IndexOf('-')-1));
+                    }
                                    
 
+                }
             }
-
             string[] strlstVelhaCID10 = lstCID10.Split(';');
 
             for (var i = 0; i < strlstVelhaCID10.Length-1; i++ )
@@ -408,12 +413,101 @@ namespace SocialCare.Controllers
                 formulario.ExcluiMaterial(lstMateriais[i]);
             }
 
-           
+
 
             #endregion
 
+            #region Obs Enfermeira
+
+            string obsEnfermeira = "";
+
+            foreach (var i in paciente.TAB_FORM.FirstOrDefault().TAB_FORM_PROC_ENF)
+            {
+                obsEnfermeira += i.TAB_PROC_ENF.nom_proc_enf + ";";
+            }
+
+            if (dadosFormulario.proc_Gastro)
+            {
+                if (!obsEnfermeira.Contains("Gastro"))
+                {
+                    formulario.AdicionaObsEnfermeira("Gastro");
+                }
+                else
+                {
+                    obsEnfermeira = obsEnfermeira.Replace("Gastro;", "");
+                }
+            }
+
+            if (dadosFormulario.proc_POD)
+            {
+                if (!obsEnfermeira.Contains("POD"))
+                {
+                    formulario.AdicionaObsEnfermeira("POD");
+                }
+                else
+                {
+                    obsEnfermeira = obsEnfermeira.Replace("POD;", "");
+                }
+            }
+
+            if (dadosFormulario.proc_SNasoEnteral)
+            {
+                if (!obsEnfermeira.Contains("SNasoEnteral"))
+                {
+                    formulario.AdicionaObsEnfermeira("SNasoEnteral");
+                }
+                else
+                {
+                    obsEnfermeira = obsEnfermeira.Replace("SNasoEnteral;", "");
+                }
+            }
 
 
+            if (dadosFormulario.proc_SVesicalDemora)
+            {
+                if (!obsEnfermeira.Contains("SVesicalDemora"))
+                {
+                    formulario.AdicionaObsEnfermeira("SVesicalDemora");
+                }
+                else
+                {
+                    obsEnfermeira = obsEnfermeira.Replace("SVesicalDemora;", "");
+                }
+            }
+
+            if (dadosFormulario.proc_SVesicalInterm)
+            {
+                if (!obsEnfermeira.Contains("SVesicalInterm"))
+                {
+                    formulario.AdicionaObsEnfermeira("SVesicalInterm");
+                }
+                else
+                {
+                    obsEnfermeira = obsEnfermeira.Replace("VesicalInterm;", "");
+                }
+            }
+            
+            if (dadosFormulario.proc_Traqueostomia)
+            {
+                if (!obsEnfermeira.Contains("Traqueostomia"))
+                {
+                    formulario.AdicionaObsEnfermeira("Traqueostomia");
+                }
+                else
+                {
+                    obsEnfermeira = obsEnfermeira.Replace("Traqueostomia;", "");
+                }
+            }
+
+            string[] lstProcEnfermeira = obsEnfermeira.Split(';');
+
+            for (var i = 0; i < lstProcEnfermeira.Length - 1; i++)
+            {
+                formulario.ExcluiObsEnfermeira(lstProcEnfermeira[i]);
+            }
+
+
+            #endregion
 
             return View();
         }

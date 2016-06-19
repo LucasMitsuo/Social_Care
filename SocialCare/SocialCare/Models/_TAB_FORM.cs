@@ -56,6 +56,28 @@ namespace SocialCare.Models
             
         }
 
+        public void AdicionaObsEnfermeira (string nomeProcEnf)
+        {
+            var obsEnfermeira = db.TAB_PROC_ENF.Where(model => model.nom_proc_enf.Equals(nomeProcEnf)).FirstOrDefault();
+            var novoObsEnfermeira = new TAB_FORM_PROC_ENF()
+            {
+                cod_proc_enf = obsEnfermeira.cod_proc_enf,
+                cod_form = this.cod_form
+
+            };
+
+            db.TAB_FORM_PROC_ENF.Add(novoObsEnfermeira);
+            db.SaveChanges();
+
+        }
+        
+        public void ExcluiObsEnfermeira (string nomeProcEnf)
+        {
+            var obsEnfermeira = db.TAB_PROC_ENF.Where(model => model.nom_proc_enf.Equals(nomeProcEnf)).FirstOrDefault();
+            db.TAB_FORM_PROC_ENF.Remove(obsEnfermeira.TAB_FORM_PROC_ENF.Where(model => model.cod_form == this.cod_form).FirstOrDefault());
+            db.SaveChanges();
+        } 
+
 
     }
 
