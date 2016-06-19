@@ -74,6 +74,7 @@ textarea {
   display:inline-block!important;
 }
 
-.label-blue{
-    color:#5bc0de;
+.label-white{
+    color:white;
+    font-weight:bold;
 }
