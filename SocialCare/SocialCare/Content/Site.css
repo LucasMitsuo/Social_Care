@@ -9,6 +9,17 @@
     padding-right: 15px;
 }
 
+.position-login {
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin-left:-40px;
+    margin-top:-40px;
+    width:300px;
+    margin-left:-150px;
+    margin-top:-153px;
+
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -74,7 +85,48 @@ textarea {
   display:inline-block!important;
 }
 
-.label-white{
-    color:white;
+.label-login{
+    font-size:large;
+    color:#4682B4;
+    font-size:20px;
     font-weight:bold;
 }
+
+.label-login-title {
+    color:#4682B4;
+    text-shadow:#000 -1px -1px 2px; 
+    font-size:45px;
+    margin-top:0px;
+ }
+
+.btn-info {
+    background-color:#4682B4;
+    border-color:#4682B4;
+    font-weight:bold;
+    
+}
+
+.btn-info:hover,
+.btn-info:focus
+{
+    background-color:white;
+    color:#4682B4;
+    
+}
+
+.btn-login {
+
+     min-width:100%;
+} 
+
+.label-nav-principal {
+    font-size:large;
+    color:white;
+}
+
+.label-nav-principal:hover {
+    font-weight:bold;
+    font-size:larger;
+}
+
+
