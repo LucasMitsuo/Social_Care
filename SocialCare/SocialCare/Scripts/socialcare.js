@@ -8,7 +8,6 @@
 
     //Se o lstCID no localStorage estiver vazio, executa a função GetCids responsável por carregar a lista de CIDs no localStorage.
     if (cidRecovery == null) {
-        console.log("vazio carai haha");
         GetCids();
         cidRecovery = localStorage.getItem("lstCID");
     }
@@ -25,10 +24,15 @@
     //Tranforma a string obtida do localStorage e converte para JSON
     var arrayProc = JSON.parse(procRecovery);
 
+    //Chama funções necessárias no carregamento da página
     cidEngine();
     procedimentoEngine();
     UPClick();
     SelecionaMotivo();
+
+    $("#btnSalvarDados").click(function () {
+        EnviarDadosFormulario();
+    });
 
     $("#btnSalvarVisita").click(function () {
         AdicionaVisita();
@@ -37,6 +41,10 @@
     $("#btnLimpaCampos").click(function () {
         LimparCampos();
     });
+
+    function EnviarDadosFormulario() {
+        console.log("Aeee viado");
+    }
 
     function LimparCampos() {
         $("#periodicidade").val("");
@@ -134,7 +142,6 @@
 
                 $("#txtData").prop("disabled", true);
                 $("#txtData").val("");
-
             }
         });
     };
@@ -378,6 +385,8 @@
             }
         }
     }
+
+
 });
 
 
