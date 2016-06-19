@@ -1,7 +1,5 @@
 use Social_Care;
 
-select * from TAB_CID;
-
 INSERT INTO TAB_CID VALUES ('A00.0','Cólera devida a Vibrio  01, biótipo ');
 INSERT INTO TAB_CID VALUES ('A00.1','Cólera devida a Vibrio  01, biótipo El Tor');
 INSERT INTO TAB_CID VALUES ('A00.9','Cólera não especificada');
@@ -9666,3 +9664,6 @@ INSERT INTO TAB_CID VALUES ('W40.6','Explosão de outros materiais - áreas indust
 INSERT INTO TAB_CID VALUES ('W40.7','Explosão de outros materiais - fazenda');
 INSERT INTO TAB_CID VALUES ('W40.8','Explosão de outros materiais - outros locais especificados');
 INSERT INTO TAB_CID VALUES ('W40.9','Explosão de outros materiais');
+
+
+select * from TAB_CID;

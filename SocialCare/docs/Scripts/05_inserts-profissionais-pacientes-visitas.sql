@@ -1,7 +1,5 @@
 use Social_Care;
 
-select * from TAB_PROFISSIONAL;
-
 --DELETE FROM TAB_PROFISSIONAL;
 --DBCC CHECKIDENT ('TAB_PROFISSIONAL', RESEED, 0)
 
@@ -15,10 +13,9 @@ VALUES ('Sérgio Roberto','sergio','123456','Fisioterapeuta');
 INSERT INTO TAB_PROFISSIONAL (nom_profissional,des_login,des_senha,des_cargo) 
 VALUES ('Carlos Alberto','carlos','123456','Médico');
 
+select * from TAB_PROFISSIONAL;
 
 -- ======================================== PACIENTES
-SELECT * FROM TAB_PACIENTE;
-
 --DELETE FROM TAB_PACIENTE;
 --DBCC CHECKIDENT ('TAB_PACIENTE', RESEED, 0)
 
@@ -37,9 +34,9 @@ VALUES ('Ana Clara Gema',CONVERT(DATETIME,'01/02/1997',103),'2881-2781','F','Rua
 INSERT INTO TAB_PACIENTE (nom_paciente,dat_nasc,tel_paciente,des_sexo,des_end,num_end,Nom_cuidador,des_parentesco)
 VALUES ('Roseanne Rejanne',CONVERT(DATETIME,'01/10/1998',103),'8972-2673','F','Rua Marechal Sampaio',287,'José Felipe','Pai');
 
--- ================================== VISITAS
+SELECT * FROM TAB_PACIENTE;
 
-SELECT cod_visita, cod_paciente,cod_profissional, dat_visita, des_status,des_obs  FROM TAB_VISITA;
+-- ================================== VISITAS
 
 --DELETE FROM TAB_VISITA;
 --DBCC CHECKIDENT ('TAB_VISITA', RESEED, 0)
@@ -74,3 +71,4 @@ VALUES (5,1,CONVERT(DATETIME,'20/06/2016',103),'2','Mensal');
 INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
 VALUES (5,3,CONVERT(DATETIME,'20/06/2016',103),'2','Mensal');
 
+SELECT cod_visita, cod_paciente,cod_profissional, dat_visita, des_status,des_obs  FROM TAB_VISITA;

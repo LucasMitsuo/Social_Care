@@ -1,6 +1,5 @@
 use Social_Care;
 
-select * from TAB_PROCEDIMENTO;
 
 INSERT INTO TAB_PROCEDIMENTO VALUES ('C1','AGE','Curativos');
 INSERT INTO TAB_PROCEDIMENTO VALUES ('C2','Desbridamento','Curativos');
@@ -96,3 +95,5 @@ INSERT INTO TAB_PROCEDIMENTO VALUES ('TT','Troca de traqueo','Fisio Respiratória
 INSERT INTO TAB_PROCEDIMENTO VALUES ('VM','Ventilação mecânica','Fisio Respiratória');
 
 INSERT INTO TAB_PROCEDIMENTO VALUES ('Alta','Alta','');
+
+select * from TAB_PROCEDIMENTO;
