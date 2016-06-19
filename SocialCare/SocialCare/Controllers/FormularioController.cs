@@ -19,6 +19,8 @@ namespace SocialCare.Controllers
             //Define os dados de Paciente
             var paciente = sc.ObterPaciente(identifier);
             model.Paciente = paciente;
+            model.idPaciente = identifier;
+            model.idProfissional = idprofissional;
 
             var visita = paciente.TAB_VISITA.Where(x => x.cod_paciente == paciente.cod_paciente && x.cod_profissional == idprofissional).FirstOrDefault();
             model.Visita = visita;
@@ -208,6 +210,13 @@ namespace SocialCare.Controllers
             #endregion
 
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Create(FormularioViewModel dadosFormulario)
+        {
+
+            return View();
         }
     }
 }

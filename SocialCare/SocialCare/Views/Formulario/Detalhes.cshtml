@@ -5,6 +5,8 @@
     var endereco = Model.Paciente.des_end + ", " + Model.Paciente.num_end;
 }
 
+@Html.HiddenFor(model => model.idPaciente)
+@Html.HiddenFor(model => model.idProfissional)
 
 <h2 style="color:#428bca;"><span class="glyphicon glyphicon-list-alt"></span>  Formulário de Acompanhamento Domiciliar</h2>
 <div class="panel panel-info ">
@@ -34,7 +36,7 @@
             </div>
 
             <div class="col-md-12">
-                @Html.TextBoxFor(model => model.lstCID10,new { @class = "hidden",id = "target-input-cids", style = "min-width:100%;" })
+                @Html.TextBoxFor(model => model.lstCID10,new { @class = "",id = "target-input-cids", style = "min-width:100%;" })
             </div>
             <br />
             <!--========================================== MATERIAIS ================================================-->
@@ -343,7 +345,5 @@
 </div>
 
 <div class="row">
-    <button type="button" id="btnSalvarDados" class="btn btn-primary" style="float:right;margin-right:15px"><span class="glyphicon glyphicon-floppy-saved"></span> Salvar Dados</button>
+    <button type="submit" id="btnSalvarDados" class="btn btn-primary" style="float:right;margin-right:15px"><span class="glyphicon glyphicon-floppy-saved"></span> Salvar Dados</button>
 </div>
-
-
