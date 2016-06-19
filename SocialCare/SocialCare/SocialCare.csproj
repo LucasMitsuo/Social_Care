@@ -237,6 +237,7 @@
       <DependentUpon>SocialCareModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\_SocialCare.cs" />
+    <Compile Include="Models\_TAB_FORM.cs" />
     <Compile Include="Models\_TAB_PACIENTE.cs" />
     <Compile Include="Models\_TAB_PROFISSIONAL.cs" />
     <Compile Include="Models\_TAB_VISITA.cs" />

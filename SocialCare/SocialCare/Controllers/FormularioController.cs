@@ -215,7 +215,33 @@ namespace SocialCare.Controllers
         [HttpPost]
         public ActionResult Create(FormularioViewModel dadosFormulario)
         {
+            _SocialCare sc = new _SocialCare();
+            var paciente = sc.ObterPaciente(1);
+            var formulario = paciente.TAB_FORM;
+            
+            string materiais = "";
 
+            //Obtém todos os materiais do paciente e seta a string
+            foreach(var material in paciente.TAB_FORM.FirstOrDefault().TAB_FORM_MAT)
+            {
+                materiais += material.TAB__MATERIAL.nom_material + ";";
+            }
+
+            if (dadosFormulario.mat_cama)
+            {
+                if (!materiais.Contains("Cama"))
+                {
+                    //Logica para adicionar no banco
+                }
+                materiais.Replace("Cama", "");
+            }
+
+            //FAZ ISSO COM TODOS QUE ESTIVEREM TRUE;    
+
+
+            //PEGA OS QUE SOBRARAM E REMOVE
+            
+            
             return View();
         }
     }

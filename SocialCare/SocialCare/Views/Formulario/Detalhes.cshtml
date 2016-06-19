@@ -5,8 +5,10 @@
     var endereco = Model.Paciente.des_end + ", " + Model.Paciente.num_end;
 }
 
+@using (Html.BeginForm("Create", "Formulario", FormMethod.Post)) { 
 @Html.HiddenFor(model => model.idPaciente)
 @Html.HiddenFor(model => model.idProfissional)
+@Html.HiddenFor(model => model.idFormulario)
 
 <h2 style="color:#428bca;"><span class="glyphicon glyphicon-list-alt"></span>  Formulário de Acompanhamento Domiciliar</h2>
 <div class="panel panel-info ">
@@ -347,3 +349,4 @@
 <div class="row">
     <button type="submit" id="btnSalvarDados" class="btn btn-primary" style="float:right;margin-right:15px"><span class="glyphicon glyphicon-floppy-saved"></span> Salvar Dados</button>
 </div>
+}
