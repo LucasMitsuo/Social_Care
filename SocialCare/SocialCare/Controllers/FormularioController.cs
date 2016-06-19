@@ -217,8 +217,53 @@ namespace SocialCare.Controllers
         {
             _SocialCare sc = new _SocialCare();
             var paciente = sc.ObterPaciente(1);
-            var formulario = paciente.TAB_FORM;
-            
+            var formulario = paciente.TAB_FORM.FirstOrDefault();
+
+            #region CID10
+            string lstCID10 = "";
+
+            // Obtem lista de CID10
+            foreach (var cid in paciente.TAB_FORM.FirstOrDefault().TAB_DIAGNOSTICO)
+            {
+                var texto = cid.TAB_CID.cod_cid10 + " - " + cid.TAB_CID.des_cid;
+                lstCID10 += texto + ";";
+            }
+
+            // Obtem a lista com as alterações do CID10
+            var lstNovaCID10 = dadosFormulario.lstCID10;
+
+            string[] strlstNovaCID10 = lstNovaCID10.Split(';');
+
+            for (var i = 0; i < strlstNovaCID10.Length - 1; i++)
+            {
+                // Comparando a lista de cid10 nova com os dados do banco
+                if (lstCID10.Contains(strlstNovaCID10[i]))
+                {
+
+                    lstCID10 = lstCID10.Replace(strlstNovaCID10[i] + ";", "");
+                }
+                else
+                {
+                    // Obtem o código do CID10 inserido e passa como parametro para o método AdicionaCID10
+                    formulario.AdicionaCID10(strlstNovaCID10[i].Substring(0, strlstNovaCID10[i].IndexOf('-')-1));
+                }
+                                   
+
+            }
+
+            string[] strlstVelhaCID10 = lstCID10.Split(';');
+
+            for (var i = 0; i < strlstVelhaCID10.Length-1; i++ )
+            {
+                
+                formulario.ExcluiCID10(strlstVelhaCID10[i].Substring(0, strlstVelhaCID10[i].IndexOf('-') - 1));
+            }
+
+
+
+            #endregion
+
+            #region Materiais
             string materiais = "";
 
             //Obtém todos os materiais do paciente e seta a string
@@ -231,17 +276,145 @@ namespace SocialCare.Controllers
             {
                 if (!materiais.Contains("Cama"))
                 {
-                    //Logica para adicionar no banco
+                    formulario.AdicionaMaterial("Cama");
                 }
-                materiais.Replace("Cama", "");
+                else
+                { 
+                    materiais = materiais.Replace("Cama;", "");
+                }
             }
 
-            //FAZ ISSO COM TODOS QUE ESTIVEREM TRUE;    
+            if (dadosFormulario.mat_cadRodas)
+            {
+                if (!materiais.Contains("Cadeira de rodas"))
+                {
+                    formulario.AdicionaMaterial("Cadeira de rodas");
+                }
+                else
+                {
+                    materiais = materiais.Replace("Cadeira de rodas;", "");
+                }
+            
+            }
+
+            if (dadosFormulario.mat_cadBanho)
+            {
+                if (!materiais.Contains("Cadeira de banho"))
+                {
+                    formulario.AdicionaMaterial("Cadeira de banho");
+                }
+                else
+                {
+                    materiais = materiais.Replace("Cadeira de banho;", "");
+                }
+
+            }
+
+            if (dadosFormulario.mat_Aspirador)
+            {
+                if (!materiais.Contains("Aspirador"))
+                {
+                    formulario.AdicionaMaterial("Aspirador");
+                }
+                else
+                {
+                    materiais = materiais.Replace("Aspirador;", "");
+                }
+
+            }
+
+            if (dadosFormulario.mat_Inalador)
+            {
+                if (!materiais.Contains("Inalador"))
+                {
+                    formulario.AdicionaMaterial("Inalador");
+                }
+                else
+                {
+                    materiais = materiais.Replace("Inalador;", "");
+                }
+
+            }
+
+            if (dadosFormulario.mat_Colchao)
+            {
+                if (!materiais.Contains("Colchão"))
+                {
+                    formulario.AdicionaMaterial("Colchão");
+                }
+                else
+                {
+                    materiais = materiais.Replace("Colchão;", "");
+                }
+
+            }
+
+            if (dadosFormulario.mat_Conc02)
+            {
+                if (!materiais.Contains("Conc_02"))
+                {
+                    formulario.AdicionaMaterial("Conc_02");
+                }
+                else
+                {
+                    materiais = materiais.Replace("Conc_02;", "");
+                }
+
+            }
+
+            if (dadosFormulario.mat_torpTransp)
+            {
+                if (!materiais.Contains("Torp_Transp"))
+                {
+                    formulario.AdicionaMaterial("Torp_Transp");
+                }
+                else
+                {
+                    materiais = materiais.Replace("Torp_Transp;", "");
+                }
+
+            }
+
+            if (dadosFormulario.mat_Oximetro)
+            {
+                if (!materiais.Contains("Oxímetro"))
+                {
+                    formulario.AdicionaMaterial("Oxímetro");
+                }
+                else
+                {
+                    materiais = materiais.Replace("Oxímetro;", "");
+                }
+
+            }
+
+            if (dadosFormulario.mat_CPAP)
+            {
+                if (!materiais.Contains("CPAP"))
+                {
+                    formulario.AdicionaMaterial("CPAP");
+                }
+                else
+                {
+                    materiais = materiais.Replace("CPAP;", "");
+                }
+
+            }
+
+            string[] lstMateriais = materiais.Split(';');
+
+            for(var i = 0;i < lstMateriais.Length - 1 ; i++)
+            {
+                formulario.ExcluiMaterial(lstMateriais[i]);
+            }
+
+           
+
+            #endregion
 
 
-            //PEGA OS QUE SOBRARAM E REMOVE
-            
-            
+
+
             return View();
         }
     }
