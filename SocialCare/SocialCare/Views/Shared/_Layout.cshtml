@@ -101,19 +101,19 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Social Care", "Detalhes", "Formulario", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Social Care", "Detalhes", "Formulario", new { area = "" }, new { @class = "navbar-brand label-nav-principal", style = "font-size:large;color:white;" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Visitas agendadas", "Lista", "Visitas", new { identifier = usuarioAtual.cod_profissional },new { style="font-size:large" })</li>
+                    <li>@Html.ActionLink("Visitas agendadas", "Lista", "Visitas", new { identifier = usuarioAtual.cod_profissional }, new { @class= "label-nav-principal" ,style = "font-size:large;color:white;" })</li>
                     @if(usuarioAtual.des_cargo == "Enfermeira" || usuarioAtual.des_cargo == "Enfermeiro")
                     {
-                        <li>@Html.ActionLink("Prontuários", "Lista", "Pacientes",new { }, new { style = "font-size:large" })</li>
+                        <li>@Html.ActionLink("Prontuários", "Lista", "Pacientes",new { }, new { @class = "label-nav-principal", style = "font-size:large;color:white;" })</li>
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right ">
                     <li>
-                        <a><span class="label label-info" style="font-size:large;color:white;margin-top:20px">@usuarioAtual.nom_profissional</span></a>
+                        <a><span class="label" style="font-size:large;color:white;margin-top:20px;color:white;">Olá @usuarioAtual.nom_profissional !</span></a>
                     </li>
                 </ul>
             </div>
