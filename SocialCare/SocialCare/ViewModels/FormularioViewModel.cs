@@ -13,6 +13,9 @@ namespace SocialCare.ViewModels
         public TAB_PACIENTE Paciente { get; set; }
         public TAB_VISITA Visita { get; set; }
 
+        public int idPaciente { get; set; }
+        public int idProfissional { get; set; }
+
         public int idFormulario { get; set; }
 
         public string lstCID10 { get; set; }
