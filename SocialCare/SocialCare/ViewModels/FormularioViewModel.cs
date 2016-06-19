@@ -46,7 +46,7 @@ namespace SocialCare.ViewModels
         public IEnumerable<SelectListItem> opcoesEstagios { get; set; }
         public string estagio_UP { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public string data_UP { get; set; }
+        public DateTime? data_UP { get; set; }
 
         public IEnumerable<SelectListItem> opcoesPeriodicidade { get; set; }
         public string periodicidade { get; set; }

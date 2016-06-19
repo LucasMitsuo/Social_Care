@@ -135,21 +135,21 @@ namespace SocialCare.Controllers
                 model.UP = true;
                 var upPaciente = paciente.TAB_UP.FirstOrDefault();
                 model.momento_UP = upPaciente.des_momento;
-
-                List<object> colEstagios = new List<object>();
-
-                colEstagios.Add(new { valor = "Estágio I", descricao = "Estágio I" });
-                colEstagios.Add(new { valor = "Estágio II", descricao = "Estágio II" });
-                colEstagios.Add(new { valor = "Estágio III", descricao = "Estágio III" });
-                colEstagios.Add(new { valor = "Estágio IV", descricao = "Estágio IV" });
-                colEstagios.Add(new { valor = "Estágio V", descricao = "Estágio V" });
-                colEstagios.Add(new { valor = "Inclassificável", descricao = "Inclassificável" });
-
-                List<SelectListItem> _opcoesEstagios = new SelectList(colEstagios, "valor", "descricao").ToList();
-                model.opcoesEstagios = _opcoesEstagios;
                 model.estagio_UP = upPaciente.des_estagio;
-                model.data_UP = upPaciente.dat_up.Value.ToShortDateString();
+                model.data_UP = upPaciente.dat_up.Value;
             }
+
+            List<object> colEstagios = new List<object>();
+
+            colEstagios.Add(new { valor = "Estágio I", descricao = "Estágio I" });
+            colEstagios.Add(new { valor = "Estágio II", descricao = "Estágio II" });
+            colEstagios.Add(new { valor = "Estágio III", descricao = "Estágio III" });
+            colEstagios.Add(new { valor = "Estágio IV", descricao = "Estágio IV" });
+            colEstagios.Add(new { valor = "Estágio V", descricao = "Estágio V" });
+            colEstagios.Add(new { valor = "Inclassificável", descricao = "Inclassificável" });
+
+            List<SelectListItem> _opcoesEstagios = new SelectList(colEstagios, "valor", "descricao").ToList();
+            model.opcoesEstagios = _opcoesEstagios;
             #endregion
 
             //Define Periodicidade
@@ -507,6 +507,40 @@ namespace SocialCare.Controllers
             }
 
 
+            #endregion
+
+            #region UP
+
+            var UP_BD = paciente.TAB_UP.Count > 0 ? true : false;
+            
+            if(UP_BD && dadosFormulario.UP)
+            {
+                var novoUP = new TAB_UP()
+                {
+                    des_momento = dadosFormulario.momento_UP,
+                    des_estagio = dadosFormulario.estagio_UP,
+                    dat_up = dadosFormulario.data_UP
+                };
+
+                paciente.AlteraUP(novoUP);
+            }
+            else if (UP_BD)
+            {
+                paciente.ExcluiUP();
+            }
+            else if(dadosFormulario.UP)
+            {
+                var novoUP = new TAB_UP()
+                {
+                    des_momento = dadosFormulario.momento_UP,
+                    des_estagio = dadosFormulario.estagio_UP,
+                    dat_up = dadosFormulario.data_UP
+                };
+
+                paciente.CadastraUP(novoUP);
+
+            }
+            
             #endregion
 
             return View();

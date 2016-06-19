@@ -10,6 +10,8 @@ namespace SocialCare.Models
     [MetadataType(typeof(TAB_PACIENTEMetadata))]
     public partial class TAB_PACIENTE
     {
+        SocialCareEntities db = new SocialCareEntities();
+
         public int Idade
         {
             get
@@ -25,7 +27,31 @@ namespace SocialCare.Models
                 return this.TAB_FORM.Count() > 0 ? true : false;
             }
         }
-           
+
+        public void AlteraUP(TAB_UP tabUp)
+        {
+            var UP = db.TAB_UP.Where(model => model.cod_paciente == this.cod_paciente).FirstOrDefault();
+
+            UP.des_momento = tabUp.des_momento;
+            UP.des_estagio = tabUp.des_estagio;
+            UP.dat_up = tabUp.dat_up;
+
+            db.SaveChanges();
+        }
+        
+        public void ExcluiUP()
+        {
+            db.TAB_UP.Remove(db.TAB_UP.Where(model => model.cod_paciente == this.cod_paciente).FirstOrDefault());
+            db.SaveChanges();
+        }
+
+        public void CadastraUP(TAB_UP tabup)
+        {
+            tabup.cod_paciente = this.cod_paciente;
+
+            db.TAB_UP.Add(tabup);
+            db.SaveChanges();
+        }
     }
 
     public class TAB_PACIENTEMetadata
