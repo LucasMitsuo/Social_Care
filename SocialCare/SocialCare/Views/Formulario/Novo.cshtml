@@ -12,7 +12,8 @@
 <div class="panel panel-info" id="novo-prontuario" data-target-input-cids="#target-input-cids" data-chkmatCama="#chk-mat-Cama" data-chkmatCadRodas="#chk-mat-cadRodas"
      data-chkmatCadBanho="#chk-mat-cadBanho" data-chkmatAspirador="#chk-mat-aspirador" data-chkmatInalador="#chk-mat-inalador" data-chkmatColchao="#chk-mat-colchao"
      data-chkmatConc02="#chk-mat-conc02" data-chkmatTorpTransp="#chk-mat-torpTransp" data-chkmatOximetro="#chk-mat-oximetro" data-chkmatCpap="#chk-mat-cpap"
-     data-idPaciente="#idPaciente">
+     data-idPaciente="#idPaciente" data-chkprocGastro="#chk-proc-gastro" data-chkprocPOD="#chk-proc-pod" data-chkprocNasoEnteral="#chk-proc-snasoEnteral"
+     data-chkprocVesicalDemora="#chk-proc-svesicalDemora" data-chkprocVesicalInterm="#chk-proc-svesicalInterm" data-chkprocTraqueostomia="#chk-proc-traqueostomia">
     <div class="panel-heading">
         <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Informações do Paciente</h3>
     </div>
@@ -116,12 +117,12 @@
                 <tr>
                     <td style="width:100px;">
                         <div class="checkbox">
-                            @Html.CheckBoxFor(model => model.proc_Gastro, new { @class = "checkbox" }) Gastro
+                            @Html.CheckBoxFor(model => model.proc_Gastro, new { @class = "checkbox" , id="chk-proc-gastro"}) Gastro
                         </div>
                     </td>
                     <td>
                         <div class="checkbox">
-                            @Html.CheckBoxFor(model => model.proc_POD, new { @class = "checkbox" }) POD
+                            @Html.CheckBoxFor(model => model.proc_POD, new { @class = "checkbox",id="chk-proc-pod" }) POD
                         </div>
                     </td>
                     <td>
@@ -136,24 +137,24 @@
                 <tr>
                     <td>
                         <div class="checkbox">
-                            @Html.CheckBoxFor(model => model.proc_SNasoEnteral, new { @class = "checkbox" }) SNasoEnteral
+                            @Html.CheckBoxFor(model => model.proc_SNasoEnteral, new { @class = "checkbox", id="chk-proc-snasoEnteral"}) SNasoEnteral
                         </div>
                     </td>
                     <td>
                         <div class="checkbox">
-                            @Html.CheckBoxFor(model => model.proc_SVesicalDemora, new { @class = "checkbox" }) SVesicalDemora
+                            @Html.CheckBoxFor(model => model.proc_SVesicalDemora, new { @class = "checkbox",id="chk-proc-svesicalDemora" }) SVesicalDemora
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>
                         <div class="checkbox">
-                            @Html.CheckBoxFor(model => model.proc_SVesicalInterm, new { @class = "checkbox" }) SVesicalInterm
+                            @Html.CheckBoxFor(model => model.proc_SVesicalInterm, new { @class = "checkbox",id = "chk-proc-svesicalInterm" }) SVesicalInterm
                         </div>
                     </td>
                     <td>
                         <div class="checkbox">
-                            @Html.CheckBoxFor(model => model.proc_Traqueostomia, new { @class = "checkbox" }) Traqueostomia
+                            @Html.CheckBoxFor(model => model.proc_Traqueostomia, new { @class = "checkbox" ,id = "chk-proc-traqueostomia"}) Traqueostomia
                         </div>
                     </td>
                 </tr>

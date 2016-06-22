@@ -18,7 +18,7 @@
                 var lstCID10 = elem.attr("data-target-input-cids");
                 dadosProntuario.lstCID10 = $(lstCID10).val();
 
-                //Captura os elementos data
+                //Captura os elementos data relacionados aos materiais
                 var chkMatCama = elem.attr("data-chkmatCama");
                 var chkMatCadRodas = elem.attr("data-chkmatCadRodas");
                 var chkMatCadBanho = elem.attr("data-chkmatCadBanho");
@@ -29,6 +29,13 @@
                 var chkMatTorpTransp = elem.attr("data-chkmatTorpTransp");
                 var chkMatOximetro = elem.attr("data-chkmatOximetro");
                 var chkMatCpap = elem.attr("data-chkmatCpap");
+
+                var chkProcGastro = elem.attr("data-chkprocGastro");
+                var chkProcPOD = elem.attr("data-chkprocPOD");
+                var chkProcNasoEnteral = elem.attr("data-chkprocNasoEnteral");
+                var chkProcVesicalDemora = elem.attr("data-chkprocVesicalDemora");
+                var chkProcVesicalInterm = elem.attr("data-chkprocVesicalInterm");
+                var chkProcTraqueostomia = elem.attr("data-chkprocTraqueostomia");
 
                 //Define os valores das CheckBoxes
 
