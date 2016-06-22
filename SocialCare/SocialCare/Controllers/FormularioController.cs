@@ -199,6 +199,7 @@ namespace SocialCare.Controllers
 
             var paciente = sc.ObterPaciente(identifier);
             model.Paciente = paciente;
+            model.idPaciente = paciente.cod_paciente;
 
             //Define CE
             #region Define CE

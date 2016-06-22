@@ -88,8 +88,7 @@
         }
 
         cmbMotivo.change(function () {
-            
-            console.log(cmbMotivo.val())
+
             if (cmbMotivo.val() == "1")
             {
                 panel_alta.removeClass("hidden");

@@ -1,11 +1,13 @@
 ﻿using SocialCare.DTO;
 using SocialCare.Models;
+using SocialCare.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Transactions;
 
 namespace SocialCare.Controllers
 {
@@ -34,6 +36,21 @@ namespace SocialCare.Controllers
             var colProcedimentos = from p in result select new ProcedimentoDto(p).descricao;
 
             return Request.CreateResponse(HttpStatusCode.OK, colProcedimentos.ToArray());
+        }
+
+        [HttpPost]
+        [Route("api/pacientes/{idPaciente}/prontuario")]
+        public HttpResponseMessage IniciarProntuario(int idPaciente, DadosNovoProntuario dadosProntuario)
+        {
+            _SocialCare sc = new _SocialCare();
+
+            var paciente = sc.ObterPaciente(idPaciente);
+
+            using(var tx = new TransactionScope())
+            {
+                
+            }
+            throw new NotImplementedException();
         }
     }
 }

@@ -28,7 +28,8 @@ namespace SocialCare
                       "~/Scripts/respond.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/socialcare").Include(
-                "~/Scripts/socialcare.js"
+                "~/Scripts/socialcare.js",
+                "~/Scripts/socialcare-savedata.js"
                 ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
