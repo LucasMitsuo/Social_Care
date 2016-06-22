@@ -110,16 +110,15 @@
                     {
                         <li>@Html.ActionLink("Prontuários", "Lista", "Pacientes",new { }, new { @class = "label-nav-principal", style = "font-size:large;color:white;" })</li>
                     }
+
                 </ul>
                 <ul class="nav navbar-nav navbar-right ">
                     <li>
                         <a><span class="label" style="font-size:large;color:white;margin-top:20px;color:white;">Olá @usuarioAtual.nom_profissional !</span></a>
                     </li>
                     <li>
-                        @Html.ActionLink(" ","","",new {@class = "label-nav-principal glyphicon glyphicon-off", style = "font-size:large;color:white;" })
-                    </li>
-                    <li> 
-                       <!-- <span class="glyphicon glyphicon-off label-nav-principal", style = "font-size:large;color:white;margin-top:15px"></span>-->
+                       @Html.ActionLink("Sair", "", "", new { @class = "label-nav-principal", style = "font-size:large;color:white;margin-bottom:5px" }) 
+                      <!-- @Html.ActionLink(" ", "", "", new { @class = "glyphicon glyphicon-off", style = "font-size:large;color:white;margin-bottom:5px" })-->
                     </li>
 
                 </ul>
