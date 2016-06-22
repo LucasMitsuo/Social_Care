@@ -20,6 +20,8 @@ namespace SocialCare.ViewModels
 
         public string lstCID10 { get; set; }
 
+        public string lstProcedimentos { get; set; }
+
         public bool mat_cama { get; set; }
         public bool mat_cadRodas { get; set; }
         public bool mat_cadBanho { get; set; }
@@ -50,5 +52,11 @@ namespace SocialCare.ViewModels
 
         public IEnumerable<SelectListItem> opcoesPeriodicidade { get; set; }
         public string periodicidade { get; set; }
+
+        public bool saida { get; set; }
+        public DateTime saidaData { get; set; }
+        public string saidaMotivo { get; set; }
+        public string saidaDescricao { get; set; }
+        public IEnumerable<SelectListItem> opcoesMotivoSaida { get; set; }
     }
 }

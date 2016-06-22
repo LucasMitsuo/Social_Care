@@ -12,6 +12,9 @@ namespace SocialCare.Models
     {
         SocialCareEntities db = new SocialCareEntities();
 
+        /// <summary>
+        /// Idade do Paciente
+        /// </summary>
         public int Idade
         {
             get
@@ -20,6 +23,9 @@ namespace SocialCare.Models
             }
         }
 
+        /// <summary>
+        /// Verifica se o Paciente possui ou não um prontuário
+        /// </summary>
         public bool PossuiFormulario
         {
             get
@@ -28,6 +34,10 @@ namespace SocialCare.Models
             }
         }
 
+        /// <summary>
+        /// Altera os dados em relação à Úlcera por Pressão
+        /// </summary>
+        /// <param name="tabUp"></param>
         public void AlteraUP(TAB_UP tabUp)
         {
             var UP = db.TAB_UP.Where(model => model.cod_paciente == this.cod_paciente).FirstOrDefault();
@@ -39,17 +49,45 @@ namespace SocialCare.Models
             db.SaveChanges();
         }
         
+        /// <summary>
+        /// Exclui os dados em relação a Ulcera por Pressão
+        /// </summary>
         public void ExcluiUP()
         {
             db.TAB_UP.Remove(db.TAB_UP.Where(model => model.cod_paciente == this.cod_paciente).FirstOrDefault());
             db.SaveChanges();
         }
 
+        /// <summary>
+        /// Cadastra os dados em relação a Úlcera por Pressão
+        /// </summary>
+        /// <param name="tabup"></param>
         public void CadastraUP(TAB_UP tabup)
         {
             tabup.cod_paciente = this.cod_paciente;
 
             db.TAB_UP.Add(tabup);
+            db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Exclui as informações referentes a saída do Paciente
+        /// </summary>
+        public void ExcluiSaida()
+        {
+            db.TAB_SAIDA.Remove(db.TAB_SAIDA.Where(model => model.cod_paciente == this.cod_paciente).FirstOrDefault());
+            db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Adiciona informações relacionada a Saída do Paciente
+        /// </summary>
+        /// <param name="tabSaida"></param>
+        public void AdicionaSaida(TAB_SAIDA tabSaida)
+        {
+            tabSaida.cod_paciente = this.cod_paciente;
+
+            db.TAB_SAIDA.Add(tabSaida);
             db.SaveChanges();
         }
     }

@@ -78,13 +78,24 @@
         var panel_alta = $("#saida-alta");
         var panel_obito = $("#saida-obito");
 
+        if (cmbMotivo.val() == "1") {
+            panel_alta.removeClass("hidden");
+            panel_obito.addClass("hidden")
+        }
+        else if (cmbMotivo.val() == "2") {
+            panel_obito.removeClass("hidden");
+            panel_alta.addClass("hidden");
+        }
+
         cmbMotivo.change(function () {
-            if (cmbMotivo.val() === "alta")
+            
+            console.log(cmbMotivo.val())
+            if (cmbMotivo.val() == "1")
             {
                 panel_alta.removeClass("hidden");
                 panel_obito.addClass("hidden")
             }
-            else if (cmbMotivo.val() == "obito")
+            else if (cmbMotivo.val() == "2")
             {
                 panel_obito.removeClass("hidden");
                 panel_alta.addClass("hidden");

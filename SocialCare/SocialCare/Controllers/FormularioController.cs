@@ -168,7 +168,25 @@ namespace SocialCare.Controllers
             model.periodicidade = visita.des_periodicidade;
             #endregion
 
+            //Define Saida
+            #region Define Saída
+            if(paciente.TAB_SAIDA.Count() > 0)
+            {
+                model.saida = true;
+                var saidaPaciente = paciente.TAB_SAIDA.FirstOrDefault();
+                model.saidaData = saidaPaciente.dat_saida;
+                model.saidaMotivo = saidaPaciente.des_razao;
+                model.saidaDescricao = saidaPaciente.des_obs;
+            }
 
+            List<object> colMotivos = new List<object>();
+
+            colMotivos.Add(new { valor = "1", descricao = "Alta" });
+            colMotivos.Add(new { valor = "2", descricao = "Óbito" });
+
+            List<SelectListItem> _opcoesMotivos = new SelectList(colMotivos, "valor", "descricao").ToList();
+            model.opcoesMotivoSaida = _opcoesMotivos;
+            #endregion
 
             return View(model);
         }
@@ -540,7 +558,43 @@ namespace SocialCare.Controllers
                 paciente.CadastraUP(novoUP);
 
             }
-            
+
+            #endregion
+
+            #region Visita
+
+            #endregion
+
+            #region Saída
+            var saida = paciente.TAB_SAIDA.Count() > 0 ? true : false;
+
+            dadosFormulario.saida = true;
+
+            //Verifica se o paciente já tinha uma saída no BD e se foi alterado no formulário
+            if (saida && dadosFormulario.saida)
+            {
+                paciente.ExcluiSaida();
+
+                var novaSaida = new TAB_SAIDA()
+                {
+                    dat_saida = dadosFormulario.saidaData,
+                    des_razao = dadosFormulario.saidaMotivo,
+                    des_obs = dadosFormulario.saidaDescricao
+                };
+
+                paciente.AdicionaSaida(novaSaida);
+            }
+            else //Entrará no else se for registrado uma nova saída a partir do formulário
+            {
+                var novaSaida = new TAB_SAIDA()
+                {
+                    dat_saida = dadosFormulario.saidaData,
+                    des_razao = dadosFormulario.saidaMotivo,
+                    des_obs = dadosFormulario.saidaDescricao
+                };
+
+                paciente.AdicionaSaida(novaSaida);
+            }
             #endregion
 
             return View();

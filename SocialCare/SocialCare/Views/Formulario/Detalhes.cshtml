@@ -38,7 +38,7 @@
             </div>
 
             <div class="col-md-12">
-                @Html.TextBoxFor(model => model.lstCID10,new { @class = "",id = "target-input-cids", style = "min-width:100%;" })
+                @Html.TextBoxFor(model => model.lstCID10,new { @class = "hidden",id = "target-input-cids", style = "min-width:100%;" })
             </div>
             <br />
             <!--========================================== MATERIAIS ================================================-->
@@ -221,7 +221,7 @@
             <td>15/07/1994</td>
             <td>Lucas Mitsuo</td>
             <td>Semanal</td>
-            <td>I6,C6,H8 Foi feiot uma análise mto grande em relação ao paciente e ele se encontra bem mal pra carai hahaha se loco cachorrera.feiot uma análise mto grande em relação ao paciente e ele se encontra bem mal pra carai hahaha se loco cachorrera</td>
+            <td>I6,C6,H8 <br /> Foi feito uma análise, e foi constatado um comportamento anormal em relação ao falar.</td>
         </tr>
         <tr>
             <td>15/07/1994</td>
@@ -233,7 +233,7 @@
             <td>16/11/1998</td>
             <td>Damaris Oliveira</td>
             <td>Trimestral</td>
-            <td>I6,09,A67,97. O paciente demonstrou muita lerdeza pra entender as coisas porque é meio burro mesmo mas é natural do Congo. Pode ser que o santos seja campeão essa noite e 8 + 9 pode ser considerado perigoso de acordo com o aposição da lua</td>
+            <td>I6,09,A67,97.<br /> O paciente demonstrou melhoria da última visita para cá. Está falando mais e gesticulando com mais facilidade.</td>
         </tr>
         <tr id="novo-registro-visita" class="hidden" >
             <td class="td-data">data</td>
@@ -304,26 +304,24 @@
     <table class="table">
         <tr>
             <th class="col-md-2">Data da saída:</th>
-            <td><input type="text" class="form-control" placeholder="dd/mm/aaaa" /></td>
+            <td>
+                @Html.TextBoxFor(model => model.saidaData, new { @class = "form-control",placeholder = "dd/mm/aaaa"})
+            </td>
         </tr>
         <tr>
             <th class="col-md-2">Motivo:</th>
             <td>
-                <select class="form-control" id="comboMotivo">
-                    <option value=""></option>
-                    <option value="alta">Alta</option>
-                    <option value="obito">Óbito</option>
-                </select>
+                @Html.DropDownListFor(model => model.saidaMotivo, Model.opcoesMotivoSaida,"Selecione o motivo", new { @class = "form-control",id = "comboMotivo"})
             </td>
         </tr>
         <tr class="hidden" id="saida-alta">
             <th class="col-md-2">Informe o motivo:</th>
             <td>
-                <div class="radio"><input type="radio" name="optionsRadios1" value="option1">Administrativo</div>
-                <div class="radio"><input type="radio" name="optionsRadios1" value="option1">Mudança de região</div>
-                <div class="radio"><input type="radio" name="optionsRadios1" value="option1">UBS</div>
-                <div class="radio"><input type="radio" name="optionsRadios1" value="option1">Amb_HU</div>
-                <div class="radio"><input type="radio" name="optionsRadios1" value="option1">Reabilitação</div>
+                <div class="radio">@Html.RadioButtonFor(model => model.saidaDescricao, "Administrativo",new { }) Administrativo</div>
+                <div class="radio">@Html.RadioButtonFor(model => model.saidaDescricao, "Mudança de região", new { }) Mudança de região</div>
+                <div class="radio">@Html.RadioButtonFor(model => model.saidaDescricao, "UBS", new { }) UBS</div>
+                <div class="radio">@Html.RadioButtonFor(model => model.saidaDescricao, "Amb_HU", new { }) Amb_HU</div>
+                <div class="radio">@Html.RadioButtonFor(model => model.saidaDescricao, "Reabilitação", new { }) Reabilitação</div>
             </td>
             <td>
                 <label>Outros: </label><input type="text" class="form-control" placeholder="Informe o motivo" />
@@ -333,11 +331,11 @@
         <tr class="hidden" id="saida-obito">
             <th class="col-md-2">Informe o local:</th>
             <td>
-                <div class="radio"><input type="radio" name="optionsRadios2" value="Domicílio">Domicílio</div>
-                <div class="radio"><input type="radio" name="optionsRadios2" value="option1">PS_HU</div>
-                <div class="radio"><input type="radio" name="optionsRadios2" value="option1">Int_HU</div>
-                <div class="radio"><input type="radio" name="optionsRadios2" value="option1">H_Clínicas</div>
-                <div class="radio"><input type="radio" name="optionsRadios2" value="option1">ICESP</div>
+                <div class="radio">@Html.RadioButtonFor(model => model.saidaDescricao, "Domicílio", new { }) Domicílio</div>
+                <div class="radio">@Html.RadioButtonFor(model => model.saidaDescricao, "PS_HU", new { }) PS_HU</div>
+                <div class="radio">@Html.RadioButtonFor(model => model.saidaDescricao, "Int_HU", new { }) Int_HU</div>
+                <div class="radio">@Html.RadioButtonFor(model => model.saidaDescricao, "H_Clínicas", new { }) H_Clínicas</div>
+                <div class="radio">@Html.RadioButtonFor(model => model.saidaDescricao, "ICESP", new { }) ICESP</div>
             </td>
             <td>
                 <label>Outros: </label><input type="text" class="form-control" placeholder="Informe o local" />
