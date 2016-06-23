@@ -36,9 +36,13 @@
                 var chkProcVesicalDemora = elem.attr("data-chkprocVesicalDemora");
                 var chkProcVesicalInterm = elem.attr("data-chkprocVesicalInterm");
                 var chkProcTraqueostomia = elem.attr("data-chkprocTraqueostomia");
+                var grauCE = elem.attr("data-grau-CE");
+
+                dadosProntuario.grauCE = $(grauCE).val();
 
                 //Define os valores das CheckBoxes
 
+                // ============== MATERIAIS ==============
                 if ($(chkMatCama).is(":checked")) {
                     dadosProntuario.mat_cama = true;
                 }
@@ -110,6 +114,75 @@
                     dadosProntuario.mat_CPAP = false;
                 }
 
+                // ============== PROC ENFERMEIRA ==============
+                
+                if ($(chkProcGastro).is(":checked")) {
+                    dadosProntuario.proc_Gastro = true;
+                }
+                else {
+                    dadosProntuario.proc_Gastro = false;
+                }
+
+                if ($(chkProcPOD).is(":checked")) {
+                    dadosProntuario.proc_POD = true;
+                }
+                else {
+                    dadosProntuario.proc_POD = false;
+                }
+
+                if ($(chkProcNasoEnteral).is(":checked")) {
+                    dadosProntuario.proc_SNasoEnteral = true;
+                }
+                else {
+                    dadosProntuario.proc_SNasoEnteral = false;
+                }
+
+                if ($(chkProcVesicalDemora).is(":checked")) {
+                    dadosProntuario.proc_SVesicalDemora = true;
+                }
+                else {
+                    dadosProntuario.proc_SVesicalDemora = false;
+                }
+
+                if ($(chkProcVesicalInterm).is(":checked")) {
+                    dadosProntuario.proc_SVesicalInterm = true;
+                }
+                else {
+                    dadosProntuario.proc_SVesicalInterm = false;
+                }
+
+                if ($(chkProcTraqueostomia).is(":checked")) {
+                    dadosProntuario.proc_Traqueostomia = true;
+                }
+                else {
+                    dadosProntuario.proc_Traqueostomia = false;
+                }
+
+                //Captura os elementos referente a UP
+                var UP = elem.attr("data-rdoSIM");
+                
+                //Verifica se o paciente tem UP
+                if ($(UP).is(":checked")) {
+                    dadosProntuario.UP = true;
+
+                    //Verifica se o momento é PRÉ ou PÓS
+                    var momento = elem.attr("data-rdoPRE");
+                    if ($(momento).is(":checked")) {
+                        dadosProntuario.momento_UP = "PRÉ";
+                    }
+                    else {
+                        dadosProntuario.momento_UP = "PÓS";
+                    }
+
+                    var estagio = elem.attr("data-comboEstagio");
+                    var dataUP = elem.attr("data-txtData");
+
+                    dadosProntuario.estagio_UP = $(estagio).val();
+                    dadosProntuario.data_UP = $(dataUP).val();
+
+                }
+                
+                
                 $.ajax({
                     url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
                     type: "POST",
@@ -121,7 +194,7 @@
                     error: function (xhr, textStatus, errorThrown) {
 
                     }
-                })
+                });
             }
         });        
     }

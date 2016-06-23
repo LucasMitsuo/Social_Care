@@ -13,7 +13,8 @@
      data-chkmatCadBanho="#chk-mat-cadBanho" data-chkmatAspirador="#chk-mat-aspirador" data-chkmatInalador="#chk-mat-inalador" data-chkmatColchao="#chk-mat-colchao"
      data-chkmatConc02="#chk-mat-conc02" data-chkmatTorpTransp="#chk-mat-torpTransp" data-chkmatOximetro="#chk-mat-oximetro" data-chkmatCpap="#chk-mat-cpap"
      data-idPaciente="#idPaciente" data-chkprocGastro="#chk-proc-gastro" data-chkprocPOD="#chk-proc-pod" data-chkprocNasoEnteral="#chk-proc-snasoEnteral"
-     data-chkprocVesicalDemora="#chk-proc-svesicalDemora" data-chkprocVesicalInterm="#chk-proc-svesicalInterm" data-chkprocTraqueostomia="#chk-proc-traqueostomia">
+     data-chkprocVesicalDemora="#chk-proc-svesicalDemora" data-chkprocVesicalInterm="#chk-proc-svesicalInterm" data-chkprocTraqueostomia="#chk-proc-traqueostomia"
+     data-grau-CE="#grau-CE" data-rdoSIM="#rdoSIM" data-rdoNAO="#rdoNAO" data-rdoPRE="#rdoPRE" data-rdoPOS="#rdoPOS" data-comboEstagio="#comboEstagio" data-txtData="#txtData">
     <div class="panel-heading">
         <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span> Informações do Paciente</h3>
     </div>
@@ -130,7 +131,7 @@
                             <h5>CE:</h5>
                         </div>
                         <div class="col-md-9">
-                            @Html.DropDownListFor(model => model.grauCE, Model.opcoesCE, "Escolha um grau", new { @class = "form-control " })
+                            @Html.DropDownListFor(model => model.grauCE, Model.opcoesCE, "Escolha um grau", new { @class = "form-control" , id="grau-CE"})
                         </div>
                     </td>
                 </tr>
@@ -183,7 +184,7 @@
                     </td>
                     <td>
                         <div class="radio">
-                            @Html.RadioButtonFor(model => model.momento_UP, "PÓS", new { id = "rdoPOS", disabled = true }) POS
+                            @Html.RadioButtonFor(model => model.momento_UP, "PÓS", new { id = "rdoPOS", disabled = true }) PÓS
                         </div>
                     </td>
                 </tr>

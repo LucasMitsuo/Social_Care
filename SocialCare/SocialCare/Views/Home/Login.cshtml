@@ -20,12 +20,12 @@
         <div class="form-group" >
             @Html.LabelFor(model => model.login, new { @class = "label-login"})
             @Html.TextBoxFor(model => model.login, new { @class = "form-control", placeholder = "Entre com o login"})
-            @Html.ValidationMessageFor(model => model.login,string.Empty,new { style = "color:red" })
+            @Html.ValidationMessageFor(model => model.login,string.Empty,new { @class = "text-danger"} )
         </div>
         <div class="form-group">
             @Html.LabelFor(model => model.senha, new { @class = "label-login" })
             @Html.TextBoxFor(model => model.senha, new { @class = "form-control",placeholder = "Entre com a senha", type = "password" })
-            @Html.ValidationMessageFor(model => model.senha, string.Empty, new { style = "color:red" })
+            @Html.ValidationMessageFor(model => model.senha, string.Empty, new { @class = "text-danger" })
         </div>
         
         <br />
