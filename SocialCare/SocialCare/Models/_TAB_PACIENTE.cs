@@ -90,6 +90,53 @@ namespace SocialCare.Models
             db.TAB_SAIDA.Add(tabSaida);
             db.SaveChanges();
         }
+
+        /// <summary>
+        /// Cria um formulário para o paciente
+        /// </summary>
+        /// <returns></returns>
+        public TAB_FORM CriarFormulario()
+        {
+            var novoFormulario = new TAB_FORM()
+            {
+                cod_paciente = this.cod_paciente
+            };
+
+            db.TAB_FORM.Add(novoFormulario);
+            db.SaveChanges();
+
+            return novoFormulario;
+        }
+
+        /// <summary>
+        /// Altera o grau CE do paciente
+        /// </summary>
+        /// <param name="grauCE"></param>
+        public void AlteraCE(int grauCE)
+        {
+            var paciente = db.TAB_PACIENTE.Where(model => model.cod_paciente == this.cod_paciente).FirstOrDefault();
+            paciente.num_grau_ce = grauCE;
+            db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Cria um novo UP caso o paciente tenha úlcera por pressão
+        /// </summary>
+        /// <param name="dadosUP">Objeto contendo dados de UP</param>
+        /// <returns></returns>
+        public void CriaUP(TAB_UP dadosUP)
+        {
+            var novoUP = new TAB_UP()
+            {
+                des_momento = dadosUP.des_momento,
+                des_estagio = dadosUP.des_estagio,
+                dat_up = dadosUP.dat_up,
+                cod_paciente = this.cod_paciente
+            };
+
+            db.TAB_UP.Add(novoUP);
+            db.SaveChanges();
+        }
     }
 
     public class TAB_PACIENTEMetadata

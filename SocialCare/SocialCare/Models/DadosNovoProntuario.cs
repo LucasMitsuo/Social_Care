@@ -49,6 +49,6 @@ namespace SocialCare.Models
 
         public string momento_UP { get; set; }
         public string estagio_UP { get; set; }
-        public string data_UP { get; set; }
+        public DateTime data_UP { get; set; }
     }
 }

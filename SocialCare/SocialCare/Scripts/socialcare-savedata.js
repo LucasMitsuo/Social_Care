@@ -188,8 +188,8 @@
                     type: "POST",
                     dataType: "json",
                     data: dadosProntuario,
-                    success: function (data) {
-
+                    success: function (data) {         
+                        alert("DADOS CADASTRADO COM SUCESSO !!");
                     },
                     error: function (xhr, textStatus, errorThrown) {
 

@@ -525,7 +525,11 @@ namespace SocialCare.Controllers
                 formulario.ExcluiObsEnfermeira(lstProcEnfermeira[i]);
             }
 
-
+            //Define o CE
+            if(paciente.num_grau_ce != dadosFormulario.grauCE)
+            {
+                paciente.AlteraCE(dadosFormulario.grauCE);
+            }
             #endregion
 
             #region UP
