@@ -12,6 +12,7 @@ namespace SocialCare.ViewModels
     {
         public TAB_PACIENTE Paciente { get; set; }
         public TAB_VISITA Visita { get; set; }
+        public IQueryable<TAB_VISITA> visitasConcluidas { get; set; }
 
         public int idPaciente { get; set; }
         public int idProfissional { get; set; }
@@ -41,7 +42,7 @@ namespace SocialCare.ViewModels
         public bool proc_Traqueostomia { get; set; }
 
         public IEnumerable<SelectListItem> opcoesCE { get; set; }
-        public int grauCE { get; set; }
+        public int? grauCE { get; set; }
 
         public bool UP { get; set; }
         public string momento_UP { get; set; }

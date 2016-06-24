@@ -129,4 +129,7 @@ textarea {
     font-size:larger;
 }
 
+.break-line{
+    white-space:pre-line;
+}
 

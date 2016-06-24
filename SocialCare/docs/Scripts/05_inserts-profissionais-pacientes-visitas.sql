@@ -72,3 +72,9 @@ INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_
 VALUES (5,3,CONVERT(DATETIME,'20/06/2016',103),'2','Mensal');
 
 SELECT cod_visita, cod_paciente,cod_profissional, dat_visita, des_status,des_obs  FROM TAB_VISITA;
+
+-- ============================ INSERÇÃO DE PROCEDIMENTO ENFERMEIRA PARA A VISITA 1
+INSERT INTO TAB_VISITA_PROC (cod_visita,cod_procedimento)
+VALUES(1,8)
+INSERT INTO TAB_VISITA_PROC (cod_visita,cod_procedimento)
+VALUES(1,9)

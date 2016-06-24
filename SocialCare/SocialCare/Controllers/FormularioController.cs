@@ -22,8 +22,12 @@ namespace SocialCare.Controllers
             model.idPaciente = identifier;
             model.idProfissional = idprofissional;
 
+            //Obtém a visita referente ao paciente selecionado e ao profissional logado
             var visita = paciente.TAB_VISITA.Where(x => x.cod_paciente == paciente.cod_paciente && x.cod_profissional == idprofissional).FirstOrDefault();
             model.Visita = visita;
+
+            //Obtém a lista de visitas já concluídas daquele paciente
+            model.visitasConcluidas = paciente.TAB_VISITA.Where(p => p.des_status.Equals(((int)EnumStatusVisita.CONCLUIDA).ToString())).AsQueryable();
 
             model.idFormulario = paciente.TAB_FORM.FirstOrDefault().cod_form;
 
@@ -197,6 +201,9 @@ namespace SocialCare.Controllers
             _SocialCare sc = new _SocialCare();
             FormularioViewModel model = new FormularioViewModel();
 
+            var profissional = Session["usuario"] as TAB_PROFISSIONAL;
+            model.idProfissional = profissional.cod_profissional;
+
             var paciente = sc.ObterPaciente(identifier);
             model.Paciente = paciente;
             model.idPaciente = paciente.cod_paciente;
@@ -214,6 +221,7 @@ namespace SocialCare.Controllers
 
             List<SelectListItem> _opcoesCE = new SelectList(colCE, "valor", "descricao").ToList();
             model.opcoesCE = _opcoesCE;
+            model.grauCE = null;
             #endregion
 
             //Define UP
@@ -257,33 +265,33 @@ namespace SocialCare.Controllers
             if(lstNovaCID10 != null)
             { 
                 string[] strlstNovaCID10 = lstNovaCID10.Split(';');
-
-                for (var i = 0; i < strlstNovaCID10.Length - 1; i++)
+                strlstNovaCID10 = strlstNovaCID10.Distinct().ToArray();
+                for (var i = 0; i < strlstNovaCID10.Length; i++)
                 {
-                    // Comparando a lista de cid10 nova com os dados do banco
-                    if (lstCID10.Contains(strlstNovaCID10[i]))
+                    if (strlstNovaCID10[i] != "")
                     {
-
-                        lstCID10 = lstCID10.Replace(strlstNovaCID10[i] + ";", "");
+                        // Comparando a lista de cid10 nova com os dados do banco
+                        if (lstCID10.Contains(strlstNovaCID10[i]))
+                        {
+                            lstCID10 = lstCID10.Replace(strlstNovaCID10[i] + ";", "");
+                        }
+                        else
+                        {
+                            // Obtem o código do CID10 inserido e passa como parametro para o método AdicionaCID10
+                            formulario.AdicionaCID10(strlstNovaCID10[i].Substring(0, strlstNovaCID10[i].IndexOf('-') - 1));
+                        }
                     }
-                    else
-                    {
-                        // Obtem o código do CID10 inserido e passa como parametro para o método AdicionaCID10
-                        formulario.AdicionaCID10(strlstNovaCID10[i].Substring(0, strlstNovaCID10[i].IndexOf('-')-1));
-                    }
-                                   
-
                 }
             }
             string[] strlstVelhaCID10 = lstCID10.Split(';');
 
-            for (var i = 0; i < strlstVelhaCID10.Length-1; i++ )
-            {
-                
-                formulario.ExcluiCID10(strlstVelhaCID10[i].Substring(0, strlstVelhaCID10[i].IndexOf('-') - 1));
+            for (var i = 0; i < strlstVelhaCID10.Length; i++ )
+            {               
+                if(strlstVelhaCID10[i] != "")
+                { 
+                    formulario.ExcluiCID10(strlstVelhaCID10[i].Substring(0, strlstVelhaCID10[i].IndexOf('-') - 1));
+                }
             }
-
-
 
             #endregion
 
@@ -427,9 +435,12 @@ namespace SocialCare.Controllers
 
             string[] lstMateriais = materiais.Split(';');
 
-            for(var i = 0;i < lstMateriais.Length - 1 ; i++)
+            for(var i = 0;i < lstMateriais.Length; i++)
             {
-                formulario.ExcluiMaterial(lstMateriais[i]);
+                if(lstMateriais[i] != "")
+                { 
+                    formulario.ExcluiMaterial(lstMateriais[i]);
+                }
             }
 
 
@@ -520,15 +531,18 @@ namespace SocialCare.Controllers
 
             string[] lstProcEnfermeira = obsEnfermeira.Split(';');
 
-            for (var i = 0; i < lstProcEnfermeira.Length - 1; i++)
+            for (var i = 0; i < lstProcEnfermeira.Length; i++)
             {
-                formulario.ExcluiObsEnfermeira(lstProcEnfermeira[i]);
+                if(lstProcEnfermeira[i] != "")
+                { 
+                    formulario.ExcluiObsEnfermeira(lstProcEnfermeira[i]);
+                }
             }
 
             //Define o CE
             if(paciente.num_grau_ce != dadosFormulario.grauCE)
             {
-                paciente.AlteraCE(dadosFormulario.grauCE);
+                paciente.AlteraCE(dadosFormulario.grauCE.Value);
             }
             #endregion
 

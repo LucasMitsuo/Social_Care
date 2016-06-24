@@ -42,6 +42,7 @@ namespace SocialCare.Controllers
         [Route("api/pacientes/{idPaciente}/prontuario")]
         public HttpResponseMessage IniciarProntuario(int idPaciente, DadosNovoProntuario dadosProntuario)
         {
+            throw new Exception();
             _SocialCare sc = new _SocialCare();
 
             try
@@ -60,11 +61,14 @@ namespace SocialCare.Controllers
                     if (lstNovaCID10 != null)
                     {
                         string[] strlstNovaCID10 = lstNovaCID10.Split(';');
-
-                        for (var i = 0; i < strlstNovaCID10.Length - 1; i++)
+  
+                        for (var i = 0; i < strlstNovaCID10.Length; i++)
                         {
-                            // Obtem o código do CID10 inserido e passa como parametro para o método AdicionaCID10
-                            formulario.AdicionaCID10(strlstNovaCID10[i].Substring(0, strlstNovaCID10[i].IndexOf('-') - 1));                     
+                            if(strlstNovaCID10[i] != "")
+                            { 
+                                // Obtem o código do CID10 inserido e passa como parametro para o método AdicionaCID10
+                                formulario.AdicionaCID10(strlstNovaCID10[i].Substring(0, strlstNovaCID10[i].IndexOf('-') - 1));
+                            }
                         }
                     }
 
@@ -101,7 +105,7 @@ namespace SocialCare.Controllers
 
                     if (dadosProntuario.mat_Conc02)
                     {
-                        formulario.AdicionaMaterial("Conc_02");
+                        formulario.AdicionaMaterial("Conc_O2");
                     }
 
                     if (dadosProntuario.mat_torpTransp)

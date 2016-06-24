@@ -217,24 +217,16 @@
             <th class="col-md-2">Periodicidade</th>
             <th class="col-md-6">Procedimentos</th>
         </tr>
-        <tr>
-            <td>15/07/1994</td>
-            <td>Lucas Mitsuo</td>
-            <td>Semanal</td>
-            <td>I6,C6,H8 <br /> Foi feito uma análise, e foi constatado um comportamento anormal em relação ao falar.</td>
-        </tr>
-        <tr>
-            <td>15/07/1994</td>
-            <td>Thays Boschi</td>
-            <td>Trimestral</td>
-            <td>I6,C6,H8,I9,82,9</td>
-        </tr>
-        <tr>
-            <td>16/11/1998</td>
-            <td>Damaris Oliveira</td>
-            <td>Trimestral</td>
-            <td>I6,09,A67,97.<br /> O paciente demonstrou melhoria da última visita para cá. Está falando mais e gesticulando com mais facilidade.</td>
-        </tr>
+        @foreach(var item in Model.visitasConcluidas)
+        {
+            <tr>
+                <td>@item.dat_visita</td>
+                <td>@item.TAB_PROFISSIONAL.nom_profissional</td>
+                <td>@item.des_periodicidade</td>
+                <td class="break-line">@item.ProcedimentoObs</td>
+            </tr>
+        }
+        
         <tr id="novo-registro-visita" class="hidden" >
             <td class="td-data">data</td>
             <td class="td-nome">nome</td>

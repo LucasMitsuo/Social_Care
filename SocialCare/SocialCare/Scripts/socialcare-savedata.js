@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-
     var btnNovoProntuario = $("#btnSalvarNovoProntuario");
 
     if (btnNovoProntuario.length > 0)
@@ -13,6 +12,9 @@
 
                 var idPaciente = elem.attr("data-idPaciente");
                 idPaciente = $(idPaciente).val();
+
+                var idProfissional = elem.attr("data-idProfissional");
+                idProfissional = $(idProfissional).val();
 
                 //Captura o valor da lista de CID10
                 var lstCID10 = elem.attr("data-target-input-cids");
@@ -188,10 +190,21 @@
                     type: "POST",
                     dataType: "json",
                     data: dadosProntuario,
-                    success: function (data) {         
-                        alert("DADOS CADASTRADO COM SUCESSO !!");
+                    success: function (data) {
+                        //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
+                        var url = "http://localhost:32110/profissionais/" + idProfissional + "/visitas";
+                        $.get(url, null, function (response) {
+                            $("#body-site").html(response);
+                        });
                     },
                     error: function (xhr, textStatus, errorThrown) {
+                        alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
+
+                        localStorage.setItem("dadosNovoProntuario", JSON.stringify(dadosProntuario));
+
+                        //REALIZAR ESSE CÓDIGO ABAIXO ONDE FOR RECUPERAR OS DADOS DO LOCALSTORAGE
+                        //var objeto = localStorage.getItem("dadosNovoProntuario");
+                        //console.log(JSON.parse(objeto));
 
                     }
                 });
