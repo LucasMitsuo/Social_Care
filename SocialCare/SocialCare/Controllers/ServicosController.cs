@@ -52,8 +52,8 @@ namespace SocialCare.Controllers
         /// <param name="idPaciente">Número identificador do paciente</param>
         /// <param name="dadosFormulario">Objeto contendo os dados do formulário</param>
         /// <returns></returns>
-        [HttpPost]
-        [Route("api/pacientees/{idPacientes}/prontuario")]
+        [HttpPut]
+        [Route("api/pacientes/{idPaciente}/prontuario")]
         public HttpResponseMessage SalvarDadosProntuario (int idPaciente, FormularioViewModel dadosFormulario)
         {
             try

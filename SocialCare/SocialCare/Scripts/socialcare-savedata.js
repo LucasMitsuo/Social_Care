@@ -394,8 +394,8 @@
                 }
 
                 $.ajax({
-                    url: "http://localhost:32110/api/pacientees/" + idPaciente + "/prontuario",
-                    type: "POST",
+                    url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
+                    type: "PUT",
                     dataType: "json",
                     data: dadosProntuario,
                     success: function (data) {
