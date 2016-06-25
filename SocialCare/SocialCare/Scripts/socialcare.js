@@ -30,10 +30,6 @@
     UPClick();
     SelecionaMotivo();
 
-    $("#btnSalvarDados").click(function () {
-        EnviarDadosFormulario();
-    });
-
     $("#btnSalvarVisita").click(function () {
         AdicionaVisita();
     });
@@ -42,9 +38,6 @@
         LimparCampos();
     });
 
-    function EnviarDadosFormulario() {
-        console.log("Aeee viado");
-    }
 
     function LimparCampos() {
         $("#periodicidade").val("");

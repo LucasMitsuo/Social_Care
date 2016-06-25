@@ -29,8 +29,8 @@ namespace SocialCare
 
             bundles.Add(new ScriptBundle("~/bundles/socialcare").Include(
                 "~/Scripts/socialcare.js",
-                "~/Scripts/socialcare-savedata.js"
-                ));
+                "~/Scripts/socialcare-savedata.js",
+                "~/Scripts/socialcare-export.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",

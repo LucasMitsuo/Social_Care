@@ -14,7 +14,7 @@ namespace SocialCare.Controllers
         {
             _SocialCare sc = new _SocialCare();
 
-            var profissional = sc.ObterPorfissional(identifier);
+            var profissional = sc.ObterProfissional(identifier);
             Session["usuario"] = profissional;
 
             var statusPendente = ((int)EnumStatusVisita.PENDENTE).ToString();
