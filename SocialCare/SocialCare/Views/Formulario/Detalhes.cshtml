@@ -274,6 +274,7 @@
                             <strong>Procedimento:</strong>
                             <input type="text" id="target-insert-proc" class="form-control" style="min-width:100%"  placeholder="Digite os procedimentos realizados aqui" />
                         </div>
+                            @Html.TextBoxFor(model => model.lstProcedimento, new {@class = "hidden", style = "min-width:100%" })
                             <input class="hidden" type="text" id="target-input-proc" style="min-width:100%"/>
                         <br />
                         <div class="row">

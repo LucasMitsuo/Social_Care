@@ -10,6 +10,7 @@ namespace SocialCare.Models
 
     public partial class TAB_VISITA
     {
+        SocialCareEntities db = new SocialCareEntities();
         public string ProcedimentoObs
         {
             get
@@ -22,6 +23,41 @@ namespace SocialCare.Models
 
                 return result + "\n" + this.des_obs;
             }
+        }
+
+        /// <summary>
+        /// Cadastra Procedimento 
+        /// </summary>
+        /// <param name="procedimento">Procedimento</param>
+
+        public void CadastrarProcedimento(string procedimento)
+        {
+            //Obtem o procedimento pelo parametro 
+            var proc = db.TAB_PROCEDIMENTO.Where(model => model.nom_procedimento.Equals(procedimento)).FirstOrDefault();
+            //Cria um novo objeto TAB_VISITA_PROC com os ids certinho
+            var novoProc = new TAB_VISITA_PROC()
+            {
+                cod_procedimento = proc.cod_procedimento,
+                cod_visita = this.cod_visita
+            };
+            //add e save changes
+            db.TAB_VISITA_PROC.Add(novoProc);
+            db.SaveChanges();
+        }
+
+        /// <summary>
+        /// Atualiza a visita com a periodicidade, obs e status
+        /// </summary>
+        /// <param name="peridiocidade"> Periodicidade</param>
+        /// <param name="obs">Observação</param>
+        /// <param name="status">Status</param>
+        public void AlteraVisita (string peridiocidade, string obs)
+        {
+            var visita = db.TAB_VISITA.Where(model => model.cod_visita == this.cod_visita).FirstOrDefault();
+            visita.des_periodicidade = peridiocidade;
+            visita.des_status = ((int)EnumStatusVisita.CONCLUIDA).ToString();
+            visita.des_obs = obs;
+            db.SaveChanges();
         }
     }
 
