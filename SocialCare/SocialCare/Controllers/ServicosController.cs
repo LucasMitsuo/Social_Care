@@ -61,6 +61,7 @@ namespace SocialCare.Controllers
                 _SocialCare sc = new _SocialCare();
                 var paciente = sc.ObterPaciente(dadosFormulario.idPaciente);
                 var formulario = paciente.TAB_FORM.FirstOrDefault();
+                var visita = sc.ObterVisita(idPaciente, dadosFormulario.idProfissional);
 
                 #region CID10
                 string lstCID10 = "";
@@ -105,6 +106,7 @@ namespace SocialCare.Controllers
                         formulario.ExcluiCID10(strlstVelhaCID10[i].Substring(0, strlstVelhaCID10[i].IndexOf('-') - 1));
                     }
                 }
+
 
                 #endregion
 
@@ -395,6 +397,24 @@ namespace SocialCare.Controllers
 
                 #region Visita
 
+                string[] arrayProc = dadosFormulario.lstProcedimento.Split(';');
+                if (arrayProc != null)
+                {
+                    
+                    for (var i = 0; i < arrayProc.Length; i++)
+                    {
+                        if (arrayProc[i] != "")
+                        {
+                            visita.CadastrarProcedimento(arrayProc[i].Substring(0, arrayProc[i].IndexOf('-') - 1));
+
+                        }
+
+
+                    }
+                }
+
+                visita.AlteraVisita(dadosFormulario.periodicidade, dadosFormulario.txtObs);
+                    
                 #endregion
 
                 #region Saída

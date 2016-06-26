@@ -10,6 +10,18 @@ namespace SocialCare.Models
         SocialCareEntities db = new SocialCareEntities();
 
         /// <summary>
+        /// Obtem uma visita de acordo com o id do profissional e o id do paciente e o status pendente.
+        /// </summary>
+        /// <param name="idPaciente">número identificador do paciente</param>
+        /// <param name="idProfissional">número identificar do profissional</param>
+        /// <returns></returns>
+        public TAB_VISITA ObterVisita(int idPaciente, int idProfissional)
+        {
+            var visita = db.TAB_VISITA.Where(model => model.cod_paciente == idPaciente && model.cod_profissional == idProfissional && model.des_status == ((int)EnumStatusVisita.PENDENTE).ToString()).FirstOrDefault();
+            return visita;
+        }
+
+        /// <summary>
         /// Autentica o profissional 
         /// </summary>
         /// <param name="login">login do profissional</param>
