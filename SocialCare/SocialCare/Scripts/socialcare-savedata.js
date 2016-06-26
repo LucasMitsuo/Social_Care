@@ -211,17 +211,17 @@
                     console.log($(dataUP).val());
                 }
                 
-                $.ajax({
-                    url: "http://localhost:32110/api/checknetwork",
-                    type: "GET",
-                    datatype: "json",
-                    success: function (data) {
+                //$.ajax({
+                //    url: "http://localhost:32110/api/checknetwork",
+                //    type: "GET",
+                //    datatype: "json",
+                //    success: function (data) {
 
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
+                //    },
+                //    error: function (xhr, textStatus, errorThrown) {
 
-                    }
-                })
+                //    }
+                //})
 
                 $.ajax({
                     url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",

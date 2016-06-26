@@ -476,7 +476,6 @@ namespace SocialCare.Controllers
         public HttpResponseMessage IniciarProntuario(int idPaciente, DadosNovoProntuario dadosProntuario)
         {
             _SocialCare sc = new _SocialCare();
-            throw new Exception();
             try
             {
                 var paciente = sc.ObterPaciente(idPaciente);
