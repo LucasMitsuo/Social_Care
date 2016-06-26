@@ -225,6 +225,7 @@
 
                 var idProfissional = elem.attr("data-idProfissional");
                 idProfissional = $(idProfissional).val();
+                dadosProntuario.idProfissional = idProfissional;
 
                 //Captura o valor da lista de CID10
                 var lstCID10 = elem.attr("data-target-input-cids");
@@ -237,7 +238,7 @@
                 var chkMatAspirador = elem.attr("data-chkmatAspirador");
                 var chkMatInalador = elem.attr("data-chkmatInalador");
                 var chkMatColchao = elem.attr("data-chkmatColchao");
-                var chkMatConc02 = elem.attr("data-chkmatConc02");
+                var chkMatConcO2 = elem.attr("data-chkmatConc02");
                 var chkMatTorpTransp = elem.attr("data-chkmatTorpTransp");
                 var chkMatOximetro = elem.attr("data-chkmatOximetro");
                 var chkMatCpap = elem.attr("data-chkmatCpap");
@@ -297,11 +298,11 @@
                     dadosProntuario.mat_Colchao = false;
                 }
 
-                if ($(chkMatConc02).is(":checked")) {
-                    dadosProntuario.mat_Conc02 = true;
+                if ($(chkMatConcO2).is(":checked")) {
+                    dadosProntuario.mat_ConcO2 = true;
                 }
                 else {
-                    dadosProntuario.mat_Conc02 = false;
+                    dadosProntuario.mat_ConcO2 = false;
                 }
 
                 if ($(chkMatTorpTransp).is(":checked")) {
@@ -427,6 +428,7 @@
                     dataType: "json",
                     data: dadosProntuario,
                     success: function (data) {
+                        console.log("Deu certo");
                         //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
                         var url = "http://localhost:32110/profissionais/" + idProfissional + "/visitas";
                         $.get(url, null, function (response) {

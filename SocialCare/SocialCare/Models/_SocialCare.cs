@@ -17,7 +17,8 @@ namespace SocialCare.Models
         /// <returns></returns>
         public TAB_VISITA ObterVisita(int idPaciente, int idProfissional)
         {
-            var visita = db.TAB_VISITA.Where(model => model.cod_paciente == idPaciente && model.cod_profissional == idProfissional && model.des_status == ((int)EnumStatusVisita.PENDENTE).ToString()).FirstOrDefault();
+            var statusPendente = ((int)EnumStatusVisita.PENDENTE).ToString();
+            var visita = db.TAB_VISITA.Where(model => model.cod_paciente == idPaciente && model.cod_profissional == idProfissional && model.des_status == statusPendente).FirstOrDefault();
             return visita;
         }
 

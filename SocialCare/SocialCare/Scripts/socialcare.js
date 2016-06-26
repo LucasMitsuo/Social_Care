@@ -31,23 +31,9 @@
     SelecionaMotivo();
 
     $("#btnSalvarVisita").click(function () {
-        AdicionaVisita();
-    });
-
-    $("#btnLimpaCampos").click(function () {
-        LimparCampos();
-    });
-
-
-    function LimparCampos() {
-        $("#periodicidade").val("");
-        $("#txtObservacao").val("");
-    }
-
-    function AdicionaVisita() {
         var procedimentos = $("#target-input-proc").val();
-        var observacao = $("#txtObservacao").val().trim();
-        var periodicidade = $("#periodicidade").val();
+        var observacao = $("#txtObs").val().trim();
+        var periodicidade = $("#txtPeriodicidade").val();
         var cargo = $("#label-nome-profissional").text();
         var cargoCustom = cargo.substring(15, cargo.length);
         var dataVisita = $("#label-data-visita").text();
@@ -64,6 +50,16 @@
         $("#novo-registro-visita").removeClass("hidden");
 
         $("#btnAdicionarVisita").text("Editar Visita");
+    });
+
+    $("#btnLimpaCampos").click(function () {
+        LimparCampos();
+    });
+
+
+    function LimparCampos() {
+        $("#periodicidade").val("");
+        $("#txtObs").val("");
     }
 
     function SelecionaMotivo() {

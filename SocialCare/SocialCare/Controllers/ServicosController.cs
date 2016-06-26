@@ -59,7 +59,7 @@ namespace SocialCare.Controllers
             try
             {
                 _SocialCare sc = new _SocialCare();
-                var paciente = sc.ObterPaciente(dadosFormulario.idPaciente);
+                var paciente = sc.ObterPaciente(idPaciente);
                 var formulario = paciente.TAB_FORM.FirstOrDefault();
                 var visita = sc.ObterVisita(idPaciente, dadosFormulario.idProfissional);
 
@@ -408,8 +408,6 @@ namespace SocialCare.Controllers
                             visita.CadastrarProcedimento(arrayProc[i].Substring(0, arrayProc[i].IndexOf('-') - 1));
 
                         }
-
-
                     }
                 }
 
@@ -436,20 +434,23 @@ namespace SocialCare.Controllers
                 }
                 else //Entrará no else se for registrado uma nova saída a partir do formulário
                 {
-                    var novaSaida = new TAB_SAIDA()
-                    {
-                        dat_saida = dadosFormulario.saidaData,
-                        des_razao = dadosFormulario.saidaMotivo,
-                        des_obs = dadosFormulario.saidaDescricao
-                    };
+                    if (dadosFormulario.saida)
+                    { 
+                        var novaSaida = new TAB_SAIDA()
+                        {
+                            dat_saida = dadosFormulario.saidaData,
+                            des_razao = dadosFormulario.saidaMotivo,
+                            des_obs = dadosFormulario.saidaDescricao
+                        };
 
-                    paciente.AdicionaSaida(novaSaida);
+                        paciente.AdicionaSaida(novaSaida);
+                    }
                 }
                 #endregion
 
                 return Request.CreateResponse(HttpStatusCode.Created, "Prontuário salvo com sucesso");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, "Ocorreu um erro interno.");
             }
