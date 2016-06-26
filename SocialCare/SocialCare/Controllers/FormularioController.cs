@@ -182,6 +182,10 @@ namespace SocialCare.Controllers
                 model.saidaMotivo = saidaPaciente.des_razao;
                 model.saidaDescricao = saidaPaciente.des_obs;
             }
+            else
+            {
+                model.saidaData = null;
+            }
 
             List<object> colMotivos = new List<object>();
 
@@ -596,7 +600,7 @@ namespace SocialCare.Controllers
 
                 var novaSaida = new TAB_SAIDA()
                 {
-                    dat_saida = dadosFormulario.saidaData,
+                    dat_saida = dadosFormulario.saidaData.Value,
                     des_razao = dadosFormulario.saidaMotivo,
                     des_obs = dadosFormulario.saidaDescricao
                 };
@@ -607,7 +611,7 @@ namespace SocialCare.Controllers
             {
                 var novaSaida = new TAB_SAIDA()
                 {
-                    dat_saida = dadosFormulario.saidaData,
+                    dat_saida = dadosFormulario.saidaData.Value,
                     des_razao = dadosFormulario.saidaMotivo,
                     des_obs = dadosFormulario.saidaDescricao
                 };

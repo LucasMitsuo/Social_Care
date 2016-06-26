@@ -1,4 +1,30 @@
 ﻿$(document).ready(function () {
+    EnviaDadosNovoProntuario();
+    EnviaDadosEditaProntuario();
+
+
+    function EnviaDadosNovoProntuario() {
+        var restoreData = localStorage.getItem("dadosNovoProntuario");
+        if (restoreData != null) {
+            console.log("NOVO PRONTUÁRIO: TEM DADOS A SEREM ATUALIZADOS");
+            console.log(JSON.parse(restoreData));
+        }
+        else {
+            console.log("NOVO PRONTUÁRIO: NÃO TEM DADOS A SEREM ATUALIZADOS");
+        }
+    }
+
+    function EnviaDadosEditaProntuario() {
+        var restoreData = localStorage.getItem("dadosProntuario");
+        if (restoreData != null) {
+            console.log("PRONTUÁRIO: TEM DADOS A SEREM ATUALIZADOS");
+        }
+        else {
+            console.log("PRONTUÁRIO: NÃO TEM DADOS A SEREM ATUALIZADOS");
+        }
+    }
+
+    // ================================== BOTÃO PARA CRIAR UM NOVO PRONTUÁRIO ========================
     var btnNovoProntuario = $("#btnSalvarNovoProntuario");
 
     if (btnNovoProntuario.length > 0)
@@ -175,16 +201,28 @@
                     else {
                         dadosProntuario.momento_UP = "PÓS";
                     }
-
                     var estagio = elem.attr("data-comboEstagio");
                     var dataUP = elem.attr("data-txtData");
 
                     dadosProntuario.estagio_UP = $(estagio).val();
                     dadosProntuario.data_UP = $(dataUP).val();
 
+                    console.log($(estagio).val());
+                    console.log($(dataUP).val());
                 }
                 
-                
+                $.ajax({
+                    url: "http://localhost:32110/api/checknetwork",
+                    type: "GET",
+                    datatype: "json",
+                    success: function (data) {
+
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+
+                    }
+                })
+
                 $.ajax({
                     url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
                     type: "POST",
@@ -196,6 +234,8 @@
                         $.get(url, null, function (response) {
                             $("#body-site").html(response);
                         });
+
+                        alert("O prontuário foi criado com sucesso !!");
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
@@ -208,9 +248,14 @@
 
                     }
                 });
+
+
+
             }
         });        
     }
+
+    // ================================== BOTÃO PARA SALVAR OS DADOS DO PRONTUÁRIO ========================
 
     var btnSalvarDados = $("#btnSalvarDados");
     if (btnSalvarDados.length > 0) {
@@ -391,7 +436,6 @@
 
                     dadosProntuario.estagio_UP = $(estagio).val();
                     dadosProntuario.data_UP = $(dataUP).val();
-
                 }
 
                 //Dados relacionados à visita
@@ -404,13 +448,17 @@
                 dadosProntuario.txtObs = $(observacao).val();
 
                 //Dados relacionados a saída
-                var dataSaida = elem.attr("#data-saidaData");
-                var motivoSaida = elem.attr("#data-comboMotivo");
+                var dataSaida = elem.attr("data-saidaData");
+                var motivoSaida = elem.attr("data-comboMotivo");
 
                 dadosProntuario.saidaData = $(dataSaida).val();
                 dadosProntuario.saidaMotivo = $(motivoSaida).val();
 
+                console.log($(dataSaida).val());
+                console.log($(motivoSaida).val());
+
                 if (dadosProntuario.saidaData != "" && dadosProntuario.saidaMotivo != "") {
+                    console.log("TEM SAIDA");
                     dadosProntuario.saida = true;
                 }
 
@@ -420,7 +468,14 @@
                     }
                 });
 
-                //if para ver se alguma descricao foi escolhida, sençao pega o outros !!
+                if (dadosProntuario.saidaDescricao == null) {
+                    if (dadosProntuario.saidaMotivo == "1") {
+                        dadosProntuario.saidaDescricao = $("#txtNovoMotivo").val();
+                    }
+                    else {
+                        dadosProntuario.saidaDescricao = $("#txtNovoLocal").val();
+                    }
+                }
 
                 $.ajax({
                     url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
@@ -434,6 +489,8 @@
                         $.get(url, null, function (response) {
                             $("#body-site").html(response);
                         });
+
+                        alert("O prontuário foi atualizado com sucesso !!");
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");

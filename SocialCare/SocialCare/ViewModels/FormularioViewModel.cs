@@ -46,7 +46,6 @@ namespace SocialCare.ViewModels
         public string momento_UP { get; set; }
         public IEnumerable<SelectListItem> opcoesEstagios { get; set; }
         public string estagio_UP { get; set; }
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? data_UP { get; set; }
 
         public IEnumerable<SelectListItem> opcoesPeriodicidade { get; set; }
@@ -56,7 +55,7 @@ namespace SocialCare.ViewModels
         public string txtObs { get; set; }        
 
         public bool saida { get; set; }
-        public DateTime saidaData { get; set; }
+        public DateTime? saidaData { get; set; }
         public string saidaMotivo { get; set; }
         public string saidaDescricao { get; set; }
         public IEnumerable<SelectListItem> opcoesMotivoSaida { get; set; }

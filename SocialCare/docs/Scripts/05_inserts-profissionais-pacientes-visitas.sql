@@ -41,35 +41,35 @@ SELECT * FROM TAB_PACIENTE;
 --DELETE FROM TAB_VISITA;
 --DBCC CHECKIDENT ('TAB_VISITA', RESEED, 0)
 
-INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
-VALUES (1,1,CONVERT(DATETIME,'10/06/2016',103),'2','Mensal');
+INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade,des_obs)
+VALUES (1,1,CONVERT(DATETIME,'10/06/2016',103),'1','','O paciente apresentou melhoras em relação a sua comunicação com os profissionais da saúde.');
 
 INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
-VALUES (1,2,CONVERT(DATETIME,'10/06/2016',103),'2','Semanal');
+VALUES (1,2,CONVERT(DATETIME,'10/06/2016',103),'2','');
 
 INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
-VALUES (2,1,CONVERT(DATETIME,'12/06/2016',103),'2','Mensal');
+VALUES (2,1,CONVERT(DATETIME,'12/06/2016',103),'2','');
 
 INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
-VALUES (2,2,CONVERT(DATETIME,'12/06/2016',103),'2','Semanal');
+VALUES (2,2,CONVERT(DATETIME,'12/06/2016',103),'2','');
 
 INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
-VALUES (3,1,CONVERT(DATETIME,'15/06/2016',103),'2','Mensal');
+VALUES (3,1,CONVERT(DATETIME,'15/06/2016',103),'2','');
 
 INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
-VALUES (3,2,CONVERT(DATETIME,'15/06/2016',103),'2','Semanal');
+VALUES (3,2,CONVERT(DATETIME,'15/06/2016',103),'2','');
 
 INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
-VALUES (4,1,CONVERT(DATETIME,'16/06/2016',103),'2','Mensal');
+VALUES (4,1,CONVERT(DATETIME,'16/06/2016',103),'2','');
 
 INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
-VALUES (4,3,CONVERT(DATETIME,'16/06/2016',103),'2','Semanal');
+VALUES (4,3,CONVERT(DATETIME,'16/06/2016',103),'2','');
 
 INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
-VALUES (5,1,CONVERT(DATETIME,'20/06/2016',103),'2','Mensal');
+VALUES (5,1,CONVERT(DATETIME,'20/06/2016',103),'2','');
 
 INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
-VALUES (5,3,CONVERT(DATETIME,'20/06/2016',103),'2','Mensal');
+VALUES (5,3,CONVERT(DATETIME,'20/06/2016',103),'2','');
 
 SELECT cod_visita, cod_paciente,cod_profissional, dat_visita, des_status,des_obs  FROM TAB_VISITA;
 
