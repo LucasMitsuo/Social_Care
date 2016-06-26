@@ -393,6 +393,34 @@
 
                 }
 
+                //Dados relacionados à visita
+                var procedimentos = elem.attr("data-txtProcedimentos");
+                var periodicidade = elem.attr("data-txtPeriodicidade");
+                var observacao = elem.attr("data-txtObs");
+
+                dadosProntuario.periodicidade = $(periodicidade).val();
+                dadosProntuario.lstProcedimento = $(procedimentos).val();
+                dadosProntuario.txtObs = $(observacao).val();
+
+                //Dados relacionados a saída
+                var dataSaida = elem.attr("#data-saidaData");
+                var motivoSaida = elem.attr("#data-comboMotivo");
+
+                dadosProntuario.saidaData = $(dataSaida).val();
+                dadosProntuario.saidaMotivo = $(motivoSaida).val();
+
+                if (dadosProntuario.saidaData != "" && dadosProntuario.saidaMotivo != "") {
+                    dadosProntuario.saida = true;
+                }
+
+                $("input:radio[name=saidaDescricao]").each(function () {
+                    if ($(this).is(":checked")) {
+                        dadosProntuario.saidaDescricao = $(this).val();
+                    }
+                });
+
+                //if para ver se alguma descricao foi escolhida, sençao pega o outros !!
+
                 $.ajax({
                     url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
                     type: "PUT",

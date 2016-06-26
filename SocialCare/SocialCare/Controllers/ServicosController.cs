@@ -400,8 +400,6 @@ namespace SocialCare.Controllers
                 #region Saída
                 var saida = paciente.TAB_SAIDA.Count() > 0 ? true : false;
 
-                dadosFormulario.saida = true;
-
                 //Verifica se o paciente já tinha uma saída no BD e se foi alterado no formulário
                 if (saida && dadosFormulario.saida)
                 {
