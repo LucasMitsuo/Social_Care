@@ -615,47 +615,54 @@ namespace SocialCare.Controllers
         [Route("api/visitas/export")]
         public HttpResponseMessage Exportar (string param1, string param2)
         {
-            _SocialCare sc = new _SocialCare();
-            var sb = new System.Text.StringBuilder();
-            sb.Append("\xfeff");
-
-            string str = string.Empty;
-            var visitas = sc.ObterVisitas(param1, param2);
-
-            if(visitas.Count() <= 0)
+            try
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, "Não há visitas nesse intervalo de datas");
-            }
+                _SocialCare sc = new _SocialCare();
+                var sb = new System.Text.StringBuilder();
+                sb.Append("\xfeff");
 
-            var colunas = new string[] { "Data da Visita", "Código do Paciente", "Nome do Paciente", "Nome do Profissional", "Procedimentos","Observação" };
-            foreach(var col in colunas)
-            {
-                sb.Append(str + col);
-                str = ";";
-            }
+                string str = string.Empty;
+                var visitas = sc.ObterVisitas(param1, param2);
 
-            sb.Append("\n");
-            foreach(var v in visitas)
-            {
-                sb.Append(v.dat_visita.ToShortDateString());
-                sb.Append(";" + v.TAB_PACIENTE.cod_paciente);
-                sb.Append(";" + v.TAB_PACIENTE.nom_paciente);
-                sb.Append(";" + v.TAB_PROFISSIONAL.nom_profissional);
-                sb.Append(";" + v.Procedimentos);
-                sb.Append(";" + v.des_obs);
+                if(visitas.Count() <= 0)
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound, "Não há visitas nesse intervalo de datas");
+                }
+
+                var colunas = new string[] { "Data da Visita", "Código do Paciente", "Nome do Paciente", "Nome do Profissional", "Procedimentos","Observação" };
+                foreach(var col in colunas)
+                {
+                    sb.Append(str + col);
+                    str = ";";
+                }
+
                 sb.Append("\n");
+                foreach(var v in visitas)
+                {
+                    sb.Append(v.dat_visita.ToShortDateString());
+                    sb.Append(";" + v.TAB_PACIENTE.cod_paciente);
+                    sb.Append(";" + v.TAB_PACIENTE.nom_paciente);
+                    sb.Append(";" + v.TAB_PROFISSIONAL.nom_profissional);
+                    sb.Append(";" + v.Procedimentos);
+                    sb.Append(";" + v.des_obs);
+                    sb.Append("\n");
+                }
+
+                sb.Append("\n");
+                sb.Append("Visitas de " + param1 + " até " + param2);
+
+                var result = new HttpResponseMessage(HttpStatusCode.OK);
+                result.Content = new StringContent(sb.ToString());
+                result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.ms-excel");
+                result.Content.Headers.ContentDisposition.FileName = "Visitas " + param1 + "_" + param2 + ".xls";
+
+                return result;
             }
-
-            sb.Append("\n");
-            sb.Append("Visitas de " + param1 + " até " + param2);
-
-            var result = new HttpResponseMessage(HttpStatusCode.OK);
-            result.Content = new StringContent(sb.ToString());
-            result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-            result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.ms-excel");
-            result.Content.Headers.ContentDisposition.FileName = "Visitas " + param1 + "_" + param2 + ".xls";
-
-            return result;
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
 
         [HttpGet]

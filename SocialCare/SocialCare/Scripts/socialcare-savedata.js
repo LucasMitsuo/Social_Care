@@ -2,12 +2,46 @@
     EnviaDadosNovoProntuario();
     EnviaDadosEditaProntuario();
 
-
     function EnviaDadosNovoProntuario() {
+
         var restoreData = localStorage.getItem("dadosNovoProntuario");
-        if (restoreData != null) {
+        console.log(restoreData);
+        var idPaciente = localStorage.getItem("idPaciente");
+        console.log(idPaciente);
+        //Verifica se há dados armazenados no localStorage
+        if (restoreData != null && restoreData != "null") {
             console.log("NOVO PRONTUÁRIO: TEM DADOS A SEREM ATUALIZADOS");
             console.log(JSON.parse(restoreData));
+
+            //Verifica se tem internet
+            $.ajax({
+                url: "http://thaysboschi-001-site1.itempurl.com/api/checknetwork",
+                async: false,
+                type: "GET",
+                datatype: "json",
+                success: function (data) {
+
+                    $.ajax({
+                        url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
+                        type: "POST",
+                        dataType: "json",
+                        data: JSON.parse(restoreData),
+                        success: function (data) {
+                            //Limpa o localStorage
+                            localStorage.setItem("dadosNovoProntuario", null);
+                            localStorage.setItem("idPaciente", null);
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            //Não faz nada ....
+
+                        }
+                    });
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                   //Não faz nada ....
+                }
+            });
+
         }
         else {
             console.log("NOVO PRONTUÁRIO: NÃO TEM DADOS A SEREM ATUALIZADOS");
@@ -207,60 +241,56 @@
                     dadosProntuario.estagio_UP = $(estagio).val();
                     dadosProntuario.data_UP = $(dataUP).val();
 
-                    console.log($(estagio).val());
-                    console.log($(dataUP).val());
                 }
 
+                //Envia um request para a rota IsConnected para verificar se há conexão com a internet
                 $.ajax({
                     url: "http://thaysboschi-001-site1.itempurl.com/api/checknetwork",
                     async: false,
                     type: "GET",
                     datatype: "json",
                     success: function (data) {
-                        localStorage.setItem("IsConnected", data);
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        console.log("ERRO");
-                    }
-                })
 
-                var isConnected = localStorage.getItem("IsConnected");
-                console.log(isConnected);
-                
-                if (isConnected != null) {
-                    console.log("TEM INTERNET");
-                }
-                else {
-                    console.log("NÃO TEM INTERNET");
-                }
+                        $.ajax({
+                            url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
+                            type: "POST",
+                            dataType: "json",
+                            data: dadosProntuario,
+                            success: function (data) {
+                                //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
+                                var url = "http://localhost:32110/profissionais/" + idProfissional + "/visitas";
+                                $.get(url, null, function (response) {
+                                    $("#body-site").html(response);
+                                });
 
-                $.ajax({
-                    url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
-                    type: "POST",
-                    dataType: "json",
-                    data: dadosProntuario,
-                    success: function (data) {
-                        //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
-                        var url = "http://localhost:32110/profissionais/" + idProfissional + "/visitas";
-                        $.get(url, null, function (response) {
-                            $("#body-site").html(response);
+                                alert("O prontuário foi criado com sucesso !!");
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
+
+                                localStorage.setItem("dadosNovoProntuario", JSON.stringify(dadosProntuario));
+                                localStorage.setItem("idPaciente", idPaciente);
+
+                                //REALIZAR ESSE CÓDIGO ABAIXO ONDE FOR RECUPERAR OS DADOS DO LOCALSTORAGE
+                                //var objeto = localStorage.getItem("dadosNovoProntuario");
+                                //console.log(JSON.parse(objeto));
+
+                            }
                         });
 
-                        alert("O prontuário foi criado com sucesso !!");
                     },
+                    //Se não houver conexão com a internet, salva os dados no LocalStorage
                     error: function (xhr, textStatus, errorThrown) {
+
                         alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
 
                         localStorage.setItem("dadosNovoProntuario", JSON.stringify(dadosProntuario));
+                        localStorage.setItem("idPaciente", idPaciente);
 
-                        //REALIZAR ESSE CÓDIGO ABAIXO ONDE FOR RECUPERAR OS DADOS DO LOCALSTORAGE
-                        //var objeto = localStorage.getItem("dadosNovoProntuario");
-                        //console.log(JSON.parse(objeto));
 
+                        console.log("ERRO");
                     }
                 });
-
-
 
             }
         });        

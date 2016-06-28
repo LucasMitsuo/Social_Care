@@ -18,10 +18,10 @@
                 type: "GET",
                 success: function (data) {
                     window.open(url);
-                    console.log("DEU CERTO");
+                    console.log("Relatório exportado com sucesso !");
                 },
                 error: function (xhr, textStatus, errorThrown) {
-                    console.log("DEU ERRO");
+                    console.log("Erro ao exportar o relatório");
                     alert("Não foram encontradas visitas nesse intervalo de datas.");
                 }
             });
