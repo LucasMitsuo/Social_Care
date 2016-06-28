@@ -622,6 +622,11 @@ namespace SocialCare.Controllers
             string str = string.Empty;
             var visitas = sc.ObterVisitas(param1, param2);
 
+            if(visitas.Count() <= 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Não há visitas nesse intervalo de datas");
+            }
+
             var colunas = new string[] { "Data da Visita", "Código do Paciente", "Nome do Paciente", "Nome do Profissional", "Procedimentos","Observação" };
             foreach(var col in colunas)
             {
@@ -640,6 +645,9 @@ namespace SocialCare.Controllers
                 sb.Append(";" + v.des_obs);
                 sb.Append("\n");
             }
+
+            sb.Append("\n");
+            sb.Append("Visitas de " + param1 + " até " + param2);
 
             var result = new HttpResponseMessage(HttpStatusCode.OK);
             result.Content = new StringContent(sb.ToString());

@@ -34,6 +34,10 @@ namespace SocialCare.Models
                 {
                     result += item.TAB_PROCEDIMENTO.nom_procedimento + " - " + item.TAB_PROCEDIMENTO.obs_procedimento + ",";
                 }
+                if(result.Length > 0)
+                { 
+                    result = result.Remove(result.LastIndexOf(","),1);
+                }
                 return result;
             }
         }
