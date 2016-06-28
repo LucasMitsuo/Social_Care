@@ -27,7 +27,7 @@ namespace SocialCare.ViewModels
         public bool mat_Aspirador { get; set; }
         public bool mat_Inalador { get; set; }
         public bool mat_Colchao { get; set; }
-        public bool mat_Conc02 { get; set; }
+        public bool mat_ConcO2 { get; set; }
         public bool mat_torpTransp { get; set; }
         public bool mat_Oximetro { get; set; }
         public bool mat_CPAP { get; set; }

@@ -11,6 +11,10 @@ namespace SocialCare.Models
     public partial class TAB_VISITA
     {
         SocialCareEntities db = new SocialCareEntities();
+
+        /// <summary>
+        /// Propriedade que representa os procedimentos e a observação da visita
+        /// </summary>
         public string ProcedimentoObs
         {
             get
@@ -25,6 +29,9 @@ namespace SocialCare.Models
             }
         }
 
+        /// <summary>
+        /// Propriedade que representa os procedimentos da visita
+        /// </summary>
         public string Procedimentos
         {
             get

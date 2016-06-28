@@ -72,9 +72,15 @@ namespace SocialCare.Models
         /// <returns></returns>
         public IQueryable<TAB_VISITA> ObterVisitas(string dataInicial,string dataFinal)
         {
-            DateTime _dataInicial = Convert.ToDateTime(dataInicial);
-            DateTime _dataFinal = Convert.ToDateTime(dataFinal);
-            var lstVisitas = db.TAB_VISITA.Where(model => model.dat_visita >= _dataInicial && model.dat_visita <= _dataFinal);
+            var _dataInicial = @dataInicial;
+            var _dataFinal = @dataFinal;
+
+            DateTime date1 = DateTime.ParseExact(_dataInicial, @"dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime date2 = DateTime.ParseExact(_dataFinal,@"dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+
+             //DateTime _dataInicial = Convert.ToDateTime(dataInicial);
+             //DateTime _dataFinal = Convert.ToDateTime(dataFinal);
+             var lstVisitas = db.TAB_VISITA.Where(model => model.dat_visita >= date1 && model.dat_visita <= date2);
 
             return lstVisitas;
         }

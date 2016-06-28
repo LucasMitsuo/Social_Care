@@ -201,15 +201,15 @@ namespace SocialCare.Controllers
 
                     }
 
-                    if (dadosFormulario.mat_Conc02)
+                    if (dadosFormulario.mat_ConcO2)
                     {
-                        if (!materiais.Contains("Conc_02"))
+                        if (!materiais.Contains("Conc_O2"))
                         {
-                            formulario.AdicionaMaterial("Conc_02");
+                            formulario.AdicionaMaterial("Conc_O2");
                         }
                         else
                         {
-                            materiais = materiais.Replace("Conc_02;", "");
+                            materiais = materiais.Replace("Conc_O2;", "");
                         }
 
                     }
@@ -333,7 +333,7 @@ namespace SocialCare.Controllers
                         }
                         else
                         {
-                            obsEnfermeira = obsEnfermeira.Replace("VesicalInterm;", "");
+                            obsEnfermeira = obsEnfermeira.Replace("SVesicalInterm;", "");
                         }
                     }
 
@@ -534,7 +534,7 @@ namespace SocialCare.Controllers
                         formulario.AdicionaMaterial("Colchão");
                     }
 
-                    if (dadosProntuario.mat_Conc02)
+                    if (dadosProntuario.mat_ConcO2)
                     {
                         formulario.AdicionaMaterial("Conc_O2");
                     }
@@ -639,7 +639,7 @@ namespace SocialCare.Controllers
                 sb.Append("\n");
                 foreach(var v in visitas)
                 {
-                    sb.Append(v.dat_visita.ToShortDateString());
+                    sb.Append(v.dat_visita.ToString("dd/MM/yyyy"));
                     sb.Append(";" + v.TAB_PACIENTE.cod_paciente);
                     sb.Append(";" + v.TAB_PACIENTE.nom_paciente);
                     sb.Append(";" + v.TAB_PROFISSIONAL.nom_profissional);

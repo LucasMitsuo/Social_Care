@@ -27,13 +27,14 @@
                         dataType: "json",
                         data: JSON.parse(restoreData),
                         success: function (data) {
+                            console.log("Dados do novo prontuario sincronizados com sucesso !");
                             //Limpa o localStorage
                             localStorage.setItem("dadosNovoProntuario", null);
                             localStorage.setItem("idPaciente", null);
                         },
                         error: function (xhr, textStatus, errorThrown) {
                             //Não faz nada ....
-
+                            console.log("Parece que ainda não há internet. Os dados continuarão salvos.")
                         }
                     });
                 },
@@ -50,8 +51,46 @@
 
     function EnviaDadosEditaProntuario() {
         var restoreData = localStorage.getItem("dadosProntuario");
-        if (restoreData != null) {
+        console.log(restoreData);
+        var idPaciente = localStorage.getItem("idPaciente");
+        console.log(idPaciente);
+        //Verifica se há dados armazenados no localStorage
+        if (restoreData != null && restoreData != "null") {
             console.log("PRONTUÁRIO: TEM DADOS A SEREM ATUALIZADOS");
+            console.log(JSON.parse(restoreData));
+
+
+            //Verifica se tem internet
+            $.ajax({
+                url: "http://thaysboschi-001-site1.itempurl.com/api/checknetwork",
+                async: false,
+                type: "GET",
+                datatype: "json",
+                success: function (data) {
+
+                    $.ajax({
+                        url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
+                        type: "PUT",
+                        dataType: "json",
+                        data: JSON.parse(restoreData),
+                        success: function (data) {
+                            console.log("Dados do prontuario sincronizados com sucesso !");
+                            //Limpa o localStorage
+                            localStorage.setItem("dadosProntuario", null);
+                            localStorage.setItem("idPaciente", null);
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            //Não faz nada ....
+                            console.log("Parece que ainda não há internet. Os dados continuarão salvos.")
+                        }
+                    });
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    //Não faz nada ....
+                }
+            });
+
+
         }
         else {
             console.log("PRONTUÁRIO: NÃO TEM DADOS A SEREM ATUALIZADOS");
@@ -87,7 +126,7 @@
                 var chkMatAspirador = elem.attr("data-chkmatAspirador");
                 var chkMatInalador = elem.attr("data-chkmatInalador");
                 var chkMatColchao = elem.attr("data-chkmatColchao");
-                var chkMatConc02 = elem.attr("data-chkmatConc02");
+                var chkMatConcO2 = elem.attr("data-chkmatConcO2");
                 var chkMatTorpTransp = elem.attr("data-chkmatTorpTransp");
                 var chkMatOximetro = elem.attr("data-chkmatOximetro");
                 var chkMatCpap = elem.attr("data-chkmatCpap");
@@ -148,11 +187,11 @@
                     dadosProntuario.mat_Colchao = false;
                 }
 
-                if ($(chkMatConc02).is(":checked")) {
-                    dadosProntuario.mat_Conc02 = true;
+                if ($(chkMatConcO2).is(":checked")) {
+                    dadosProntuario.mat_ConcO2 = true;
                 }
                 else {
-                    dadosProntuario.mat_Conc02 = false;
+                    dadosProntuario.mat_ConcO2 = false;
                 }
 
                 if ($(chkMatTorpTransp).is(":checked")) {
@@ -271,10 +310,6 @@
                                 localStorage.setItem("dadosNovoProntuario", JSON.stringify(dadosProntuario));
                                 localStorage.setItem("idPaciente", idPaciente);
 
-                                //REALIZAR ESSE CÓDIGO ABAIXO ONDE FOR RECUPERAR OS DADOS DO LOCALSTORAGE
-                                //var objeto = localStorage.getItem("dadosNovoProntuario");
-                                //console.log(JSON.parse(objeto));
-
                             }
                         });
 
@@ -324,7 +359,7 @@
                 var chkMatAspirador = elem.attr("data-chkmatAspirador");
                 var chkMatInalador = elem.attr("data-chkmatInalador");
                 var chkMatColchao = elem.attr("data-chkmatColchao");
-                var chkMatConcO2 = elem.attr("data-chkmatConc02");
+                var chkMatConcO2 = elem.attr("data-chkmatConcO2");
                 var chkMatTorpTransp = elem.attr("data-chkmatTorpTransp");
                 var chkMatOximetro = elem.attr("data-chkmatOximetro");
                 var chkMatCpap = elem.attr("data-chkmatCpap");
@@ -499,7 +534,6 @@
                 console.log($(motivoSaida).val());
 
                 if (dadosProntuario.saidaData != "" && dadosProntuario.saidaMotivo != "") {
-                    console.log("TEM SAIDA");
                     dadosProntuario.saida = true;
                 }
 
@@ -518,32 +552,57 @@
                     }
                 }
 
+                //Envia um request para a rota IsConnected para verificar se há conexão com a internet
                 $.ajax({
-                    url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
-                    type: "PUT",
+                    url: "http://thaysboschi-001-site1.itempurl.com/api/checknetwork",
+                    async: false,
+                    type: "GET",
                     dataType: "json",
-                    data: dadosProntuario,
                     success: function (data) {
-                        console.log("Deu certo");
-                        //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
-                        var url = "http://localhost:32110/profissionais/" + idProfissional + "/visitas";
-                        $.get(url, null, function (response) {
-                            $("#body-site").html(response);
+
+                        $.ajax({
+                            url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
+                            type: "PUT",
+                            dataType: "json",
+                            data: dadosProntuario,
+                            success: function (data) {
+                                console.log("Deu certo");
+                                //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
+                                var url = "http://localhost:32110/profissionais/" + idProfissional + "/visitas";
+                                $.get(url, null, function (response) {
+                                    $("#body-site").html(response);
+                                });
+
+                                alert("O prontuário foi atualizado com sucesso !!");
+                            },
+                            error: function (xhr, textStatus, errorThrown) {
+                                alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
+
+                                localStorage.setItem("dadosProntuario", JSON.stringify(dadosProntuario));
+                                localStorage.setItem("idPaciente", idPaciente);
+
+                            }
                         });
 
-                        alert("O prontuário foi atualizado com sucesso !!");
+
                     },
+                    //Se não houver conexão com a internet, salva os dados no LocalStorage
                     error: function (xhr, textStatus, errorThrown) {
                         alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
 
                         localStorage.setItem("dadosProntuario", JSON.stringify(dadosProntuario));
-
-                        //REALIZAR ESSE CÓDIGO ABAIXO ONDE FOR RECUPERAR OS DADOS DO LOCALSTORAGE
-                        //var objeto = localStorage.getItem("dadosNovoProntuario");
-                        //console.log(JSON.parse(objeto));
-
+                        localStorage.setItem("idPaciente", idPaciente);
+                        console.log("Ocorreu um erro na hora de salvar os dados");
                     }
                 });
+
+                
+
+
+
+
+
+
             }
         });
     }
