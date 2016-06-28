@@ -234,31 +234,31 @@
                     console.log("NÃO TEM INTERNET");
                 }
 
-                //$.ajax({
-                //    url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
-                //    type: "POST",
-                //    dataType: "json",
-                //    data: dadosProntuario,
-                //    success: function (data) {
-                //        //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
-                //        var url = "http://localhost:32110/profissionais/" + idProfissional + "/visitas";
-                //        $.get(url, null, function (response) {
-                //            $("#body-site").html(response);
-                //        });
+                $.ajax({
+                    url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
+                    type: "POST",
+                    dataType: "json",
+                    data: dadosProntuario,
+                    success: function (data) {
+                        //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
+                        var url = "http://localhost:32110/profissionais/" + idProfissional + "/visitas";
+                        $.get(url, null, function (response) {
+                            $("#body-site").html(response);
+                        });
 
-                //        alert("O prontuário foi criado com sucesso !!");
-                //    },
-                //    error: function (xhr, textStatus, errorThrown) {
-                //        alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
+                        alert("O prontuário foi criado com sucesso !!");
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
 
-                //        localStorage.setItem("dadosNovoProntuario", JSON.stringify(dadosProntuario));
+                        localStorage.setItem("dadosNovoProntuario", JSON.stringify(dadosProntuario));
 
-                //        //REALIZAR ESSE CÓDIGO ABAIXO ONDE FOR RECUPERAR OS DADOS DO LOCALSTORAGE
-                //        //var objeto = localStorage.getItem("dadosNovoProntuario");
-                //        //console.log(JSON.parse(objeto));
+                        //REALIZAR ESSE CÓDIGO ABAIXO ONDE FOR RECUPERAR OS DADOS DO LOCALSTORAGE
+                        //var objeto = localStorage.getItem("dadosNovoProntuario");
+                        //console.log(JSON.parse(objeto));
 
-                //    }
-                //});
+                    }
+                });
 
 
 

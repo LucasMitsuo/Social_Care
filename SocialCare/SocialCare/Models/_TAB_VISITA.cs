@@ -25,6 +25,19 @@ namespace SocialCare.Models
             }
         }
 
+        public string Procedimentos
+        {
+            get
+            {
+                string result = "";
+                foreach (var item in this.TAB_VISITA_PROC)
+                {
+                    result += item.TAB_PROCEDIMENTO.nom_procedimento + " - " + item.TAB_PROCEDIMENTO.obs_procedimento + ",";
+                }
+                return result;
+            }
+        }
+
         /// <summary>
         /// Cadastra Procedimento 
         /// </summary>
