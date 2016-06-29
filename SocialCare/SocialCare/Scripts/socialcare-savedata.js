@@ -293,15 +293,15 @@
                     type: "GET",
                     datatype: "json",
                     success: function (data) {
-
+                        var appAddress = $("#body-site").attr("data-appAddress");
                         $.ajax({
-                            url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
+                            url: appAddress+"api/pacientes/" + idPaciente + "/prontuario",
                             type: "POST",
                             dataType: "json",
                             data: dadosProntuario,
                             success: function (data) {
                                 //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
-                                var url = "http://localhost:32110/profissionais/" + idProfissional + "/visitas";
+                                var url = appAddress+"profissionais/" + idProfissional + "/visitas";
                                 $.get(url, null, function (response) {
                                     $("#body-site").html(response);
                                 });
@@ -563,16 +563,16 @@
                     type: "GET",
                     dataType: "json",
                     success: function (data) {
-
+                        var appAddress = $("#body-site").attr("data-appAddress");
                         $.ajax({
-                            url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
+                            url: appAddress +"api/pacientes/" + idPaciente + "/prontuario",
                             type: "PUT",
                             dataType: "json",
                             data: dadosProntuario,
                             success: function (data) {
                                 console.log("Deu certo");
                                 //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
-                                var url = "http://localhost:32110/profissionais/" + idProfissional + "/visitas";
+                                var url = appAddress+"profissionais/" + idProfissional + "/visitas";
                                 $.get(url, null, function (response) {
                                     $("#body-site").html(response);
                                 });

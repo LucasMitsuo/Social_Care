@@ -144,7 +144,11 @@ namespace SocialCare.Controllers
                 model.estagio_UP = upPaciente.des_estagio;
                 model.data_UP = upPaciente.dat_up.Value;
             }
-            model.data_UP = null;
+            else
+            {
+                model.data_UP = null;
+            }
+            
 
             List<object> colEstagios = new List<object>();
 
