@@ -33,7 +33,7 @@
                         <td>
                             @if (paciente.PossuiFormulario)
                             {
-                                @Html.ActionLink("Visualizar", "", "", new { @class = "btn btn-primary" })
+                                @Html.ActionLink("Visualizar", "Visualizar", "Formulario",new { identifier = paciente.cod_paciente, idProntuario = paciente.TAB_FORM.FirstOrDefault().cod_form}, new { @class = "btn btn-primary" })
                                 @Html.ActionLink("Iniciar", "Novo", "Formulario",new { identfier = paciente.cod_paciente}, new { @class = "btn btn-default", style = "margin-left:10px", disabled = true, title = "Prontuário já iniciado" })
                             }
                             else

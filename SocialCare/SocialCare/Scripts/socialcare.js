@@ -27,10 +27,12 @@
     //Chama funções necessárias no carregamento da página
     cidEngine();
     procedimentoEngine();
+    cidEngineVisualizar();
     UPClick();
     SelecionaMotivo();
 
     $("#btnSalvarVisita").click(function () {
+
         var procedimentos = $("#target-input-proc").val();
         var observacao = $("#txtObs").val().trim();
         var periodicidade = $("#txtPeriodicidade").val();
@@ -39,17 +41,24 @@
         var dataVisita = $("#label-data-visita").text();
         var dataVisitaCustom = dataVisita.substring(17, dataVisita.length);
 
-        $("#novo-registro-visita").find('td.td-data').text(dataVisitaCustom);
+        if (periodicidade.length <= 0 || procedimentos.length <= 0) {
+            alert("Atenção !!\n\nObrigatório informar a periodicidade e os procedimentos.");
+            return false;
+        }
+        else{
 
-        $("#novo-registro-visita").find('td.td-nome').text(cargoCustom);
+            $("#novo-registro-visita").find('td.td-data').text(dataVisitaCustom);
 
-        $("#novo-registro-visita").find('td.td-periodo').text(periodicidade);
+            $("#novo-registro-visita").find('td.td-nome').text(cargoCustom);
 
-        $("#novo-registro-visita").find('td.td-anotacoes').text(procedimentos + '\n' + observacao)
+            $("#novo-registro-visita").find('td.td-periodo').text(periodicidade);
 
-        $("#novo-registro-visita").removeClass("hidden");
+            $("#novo-registro-visita").find('td.td-anotacoes').text(procedimentos + '\n' + observacao)
 
-        $("#btnAdicionarVisita").text("Editar Visita");
+            $("#novo-registro-visita").removeClass("hidden");
+
+            $("#btnAdicionarVisita").text("Editar Visita");
+        }
     });
 
     $("#btnLimpaCampos").click(function () {
@@ -98,6 +107,9 @@
 
 
     function UPClick() {
+        var isbtnVisualiza = $("#visualiza-prontuario");
+
+        if(isbtnVisualiza.length <= 0){
 
         if ($("#rdoSIM").is(":checked")) {          
             $("#rdoPRE").removeProp("disabled");
@@ -143,6 +155,8 @@
                 $("#txtData").val("");
             }
         });
+
+        }
     };
 
     //Função que busca todos os CIDS e armazena no localStorage
@@ -277,6 +291,33 @@
                     });
                 });
             }
+        }
+    }
+
+    function cidEngineVisualizar() {
+        var elem = $("#rp-cids-view");
+        if (elem.length > 0) {
+            var targetInput = $("#" + elem.attr("data-target-input"));
+
+            if (targetInput.length > 0) {
+                var str_cids = targetInput.val();
+
+                if (str_cids != "") {
+                    var array_cids = targetInput.val().split(";");
+                    for (var i = 0; i < array_cids.length; i++) {
+                        var texto = array_cids[i];
+                        if (texto != "" && texto != " ") {
+                            elem.append("<p class='tag-item'>" + texto + "</p>");
+                        }
+                    }
+                }
+
+                var targetInsert = $("#rp-cids-views input");
+
+                var regex = /[.,\/#!$%\^&\*;:{}=\_`~()+º"!¨§]/ig;
+
+            }
+
         }
     }
 
