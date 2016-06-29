@@ -417,9 +417,11 @@ namespace SocialCare.Controllers
                                 }
                             }
                         }
+
+                        visita.AlteraVisita(dadosFormulario.periodicidade, dadosFormulario.txtObs);
                     }
 
-                    visita.AlteraVisita(dadosFormulario.periodicidade, dadosFormulario.txtObs);
+                    
 
                     #endregion
 

@@ -10,6 +10,11 @@ namespace SocialCare.Models
     public partial class TAB_FORM
     {
         SocialCareEntities db = new SocialCareEntities();
+
+        /// <summary>
+        /// Adiciona um novo material
+        /// </summary>
+        /// <param name="nomeMaterial">Nome do Material</param>
         public void AdicionaMaterial(string nomeMaterial)
         {
             var material = db.TAB__MATERIAL.Where(model => model.nom_material.Equals(nomeMaterial)).FirstOrDefault();
@@ -24,6 +29,10 @@ namespace SocialCare.Models
             db.SaveChanges();
         }
 
+        /// <summary>
+        /// Exclui um material
+        /// </summary>
+        /// <param name="nomeMaterial">Nome do material</param>
         public void ExcluiMaterial(string nomeMaterial)
         {
             var material = db.TAB__MATERIAL.Where(model => model.nom_material.Equals(nomeMaterial)).FirstOrDefault();
@@ -31,7 +40,11 @@ namespace SocialCare.Models
             db.TAB_FORM_MAT.Remove(material.TAB_FORM_MAT.Where(model => model.cod_form == this.cod_form).FirstOrDefault());
             db.SaveChanges();
         }
-
+        
+        /// <summary>
+        /// Adiciona um CID 10
+        /// </summary>
+        /// <param name="codCid10">Código do CID10</param>
         public void AdicionaCID10 (String codCid10)
         {
             var cid10 = db.TAB_CID.Where(model => model.cod_cid10 == codCid10).FirstOrDefault();
@@ -48,6 +61,10 @@ namespace SocialCare.Models
 
         }
 
+        /// <summary>
+        /// Exclui um CID10
+        /// </summary>
+        /// <param name="codCid10">Código do CID10</param>
         public void ExcluiCID10 (string codCid10)
         {
             var cid10 = db.TAB_CID.Where(model => model.cod_cid10 == codCid10).FirstOrDefault();
@@ -56,6 +73,10 @@ namespace SocialCare.Models
             
         }
 
+        /// <summary>
+        /// Adiciona um Procedimento Enfermeira
+        /// </summary>
+        /// <param name="nomeProcEnf">Nome do procedimento Enfermeira</param>
         public void AdicionaObsEnfermeira (string nomeProcEnf)
         {
             var obsEnfermeira = db.TAB_PROC_ENF.Where(model => model.nom_proc_enf.Equals(nomeProcEnf)).FirstOrDefault();
@@ -71,6 +92,10 @@ namespace SocialCare.Models
 
         }
         
+        /// <summary>
+        /// Exclui um procedimento enfermeira
+        /// </summary>
+        /// <param name="nomeProcEnf">Nome do procedimento enfermeira</param>
         public void ExcluiObsEnfermeira (string nomeProcEnf)
         {
             var obsEnfermeira = db.TAB_PROC_ENF.Where(model => model.nom_proc_enf.Equals(nomeProcEnf)).FirstOrDefault();
