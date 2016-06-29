@@ -1,5 +1,6 @@
 ﻿@{
     var usuarioAtual = Session["usuario"] as TAB_PROFISSIONAL;
+    var appAddress = WebConfigurationManager.AppSettings["AppAddress"];
 }
 <!DOCTYPE html>
 <html>
@@ -126,7 +127,7 @@
            
         </div>
     </div>
-    <div class="container body-content" id="body-site">
+    <div class="container body-content" id="body-site" data-appAddress="@appAddress">
         @RenderBody()
         <hr />
         <footer>

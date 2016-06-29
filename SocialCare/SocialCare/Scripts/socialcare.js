@@ -161,8 +161,14 @@
 
     //Função que busca todos os CIDS e armazena no localStorage
     function GetCids() {
+
+        var appAddress = $("#body-site").attr("data-appAddress");
+        var url = appAddress + "api/cid10";
+
+        console.log(url);
+
         $.ajax({
-            url: "http://localhost:32110/api/cid10",
+            url: url,
             dataType: "json",
             cache: true,
             success: function (data) {
@@ -176,8 +182,14 @@
     }
 
     function GetProcs() {
+
+        var appAddress = $("#body-site").attr("data-appAddress");
+        var url = appAddress + "api/procedimentos";
+
+        console.log(url);
+
         $.ajax({
-            url: "http://localhost:32110/api/procedimentos",
+            url: url,
             dataType: "json",
             cache: true,
             success: function (data) {

@@ -3,13 +3,13 @@
     ViewBag.Title = "Visualizar";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var endereco = Model.Paciente.des_end + ", " + Model.Paciente.num_end;
+    var address = WebConfigurationManager.AppSettings["AppAddress"];
 }
 
 
 @Html.HiddenFor(model => model.idPaciente, new { id = "idPaciente" })
 @Html.HiddenFor(model => model.idProfissional, new { id = "idProfissional" })
 @Html.HiddenFor(model => model.idFormulario)
-
 <h2 style="color:#428bca;"><span class="glyphicon glyphicon-list-alt"></span>  Formulário de Acompanhamento Domiciliar</h2>
 <div class="panel panel-info" id="visualiza-prontuario" data-target-input-cids="#target-input-cids" data-chkmatCama="#chk-mat-Cama" data-chkmatCadRodas="#chk-mat-cadRodas"
      data-chkmatCadBanho="#chk-mat-cadBanho" data-chkmatAspirador="#chk-mat-aspirador" data-chkmatInalador="#chk-mat-inalador" data-chkmatColchao="#chk-mat-colchao"

@@ -3,7 +3,8 @@
     ViewBag.Title = "Novo Prontuário";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var endereco = Model.Paciente.des_end + ", " + Model.Paciente.num_end;
-
+    var appAddress = WebConfigurationManager.AppSettings["AppAddress"];
+    var url = appAddress + "api/cid10/{0}";
 }
 
 @Html.HiddenFor(model => model.idPaciente,new { id = "idPaciente"})
@@ -37,7 +38,7 @@
             <h4 style="color:#428bca;">CID 10</h4>
             <small class="col-md-12">Digite o cid ou sua descrição no campo abaixo e clique no botão para adicionar na lista</small>
 
-            <div id="rp-cids" class="col-md-12" data-target-input="target-input-cids" data-url="http://localhost:32110/api/cid10/{0}">
+            <div id="rp-cids" class="col-md-12" data-target-input="target-input-cids" data-url="@url">
                 <input id="target-insert" type="text" style="min-width:100%;" placeholder="Entre com o CID ou a descrição" class="form-control" />
             </div>
 

@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
 
     var btnExport = $("#btnExport");
+    var appAddress = btnExport.attr("data-appAddress");
 
     if (btnExport.length > 0) {
         btnExport.click(function () {
@@ -8,14 +9,30 @@
             var dataInicial = $("#txtDataInicial").val();
             var dataFinal = $("#txtDataFinal").val();
 
-            var url = "http://localhost:32110/api/visitas/export?param1=" + dataInicial + "&param2=" + dataFinal;
+            var url = appAddress + "api/visitas/export?param1=" + dataInicial + "&param2=" + dataFinal;
+            console.log(url);
 
+            //Tratamento da data Inicial
+            var dataInicialDay = dataInicial.substring(0, 2);
+            var dataInicialMonth = dataInicial.substring(3, 5);
 
-            dataInicial = new Date(dataInicial);
-            dataFinal = new Date(dataFinal);
+            dataInicial = dataInicial.replace(dataInicialDay, dataInicialMonth);
+            dataInicial = dataInicial.replace("/" + dataInicialMonth, "/" + dataInicialDay);
 
             console.log(dataInicial);
-            console.log(dataFinal);
+
+            //Tratamento da data Final
+            var dataFinalDay = dataFinal.substring(0, 2);
+            var dataFinalMonth = dataFinal.substring(3, 5);
+
+            dataFinal = dataFinal.replace(dataFinalDay, dataFinalMonth);
+            dataFinal = dataFinal.replace("/" + dataFinalMonth, "/" + dataFinalDay);
+
+            console.log(dataFinal)
+
+            //Converte as datas para Date
+            dataInicial = new Date(dataInicial);
+            dataFinal = new Date(dataFinal);
 
             //Verifica se a dataFinal é maior que a inicial
             if (dataFinal < dataInicial) {

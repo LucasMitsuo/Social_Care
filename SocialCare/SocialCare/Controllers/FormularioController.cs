@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Mvc;
 
 namespace SocialCare.Controllers
@@ -13,6 +14,7 @@ namespace SocialCare.Controllers
         [Route("profissionais/{idprofissional}/pacientes/{identifier}/prontuario")]
         public ActionResult Detalhes(int identifier,int idprofissional)
         {
+            var nois = WebConfigurationManager.AppSettings["PFUserName"];
             _SocialCare sc = new _SocialCare();
             FormularioViewModel model = new FormularioViewModel();
 
@@ -142,6 +144,7 @@ namespace SocialCare.Controllers
                 model.estagio_UP = upPaciente.des_estagio;
                 model.data_UP = upPaciente.dat_up.Value;
             }
+            model.data_UP = null;
 
             List<object> colEstagios = new List<object>();
 

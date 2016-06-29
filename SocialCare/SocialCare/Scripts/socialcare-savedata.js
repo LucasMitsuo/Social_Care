@@ -4,6 +4,8 @@
 
     function EnviaDadosNovoProntuario() {
 
+        var appAddress = $("#body-site").attr("data-appAddress");
+
         var restoreData = localStorage.getItem("dadosNovoProntuario");
         console.log(restoreData);
         var idPaciente = localStorage.getItem("idPaciente");
@@ -22,7 +24,7 @@
                 success: function (data) {
 
                     $.ajax({
-                        url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
+                        url:  appAddress+"api/pacientes/" + idPaciente + "/prontuario",
                         type: "POST",
                         dataType: "json",
                         data: JSON.parse(restoreData),
@@ -50,6 +52,8 @@
     }
 
     function EnviaDadosEditaProntuario() {
+        var appAddress = $("#body-site").attr("data-appAddress");
+
         var restoreData = localStorage.getItem("dadosProntuario");
         console.log(restoreData);
         var idPaciente = localStorage.getItem("idPaciente");
@@ -69,7 +73,7 @@
                 success: function (data) {
 
                     $.ajax({
-                        url: "http://localhost:32110/api/pacientes/" + idPaciente + "/prontuario",
+                        url: appAddress+"api/pacientes/" + idPaciente + "/prontuario",
                         type: "PUT",
                         dataType: "json",
                         data: JSON.parse(restoreData),

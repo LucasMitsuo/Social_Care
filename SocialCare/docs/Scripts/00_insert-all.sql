@@ -9808,6 +9808,9 @@ VALUES ('Sérgio Roberto','sergio','123456','Fisioterapeuta');
 INSERT INTO TAB_PROFISSIONAL (nom_profissional,des_login,des_senha,des_cargo) 
 VALUES ('Carlos Alberto','carlos','123456','Médico');
 
+INSERT INTO TAB_PROFISSIONAL (nom_profissional,des_login,des_senha,des_cargo) 
+VALUES ('Márcia Ito','marciaito','123456','Enfermeira');
+
 -- ======================================== PACIENTES
 --DELETE FROM TAB_PACIENTE;
 --DBCC CHECKIDENT ('TAB_PACIENTE', RESEED, 0)
@@ -9861,6 +9864,17 @@ VALUES (5,1,CONVERT(DATETIME,'20/06/2016',103),'2','');
 
 INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
 VALUES (5,3,CONVERT(DATETIME,'20/06/2016',103),'2','');
+
+INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
+VALUES (1,4,CONVERT(DATETIME,'20/03/2016',103),'2','');
+INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
+VALUES (2,4,CONVERT(DATETIME,'18/05/2016',103),'2','');
+INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
+VALUES (3,4,CONVERT(DATETIME,'19/11/2016',103),'2','');
+INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
+VALUES (4,4,CONVERT(DATETIME,'09/01/2016',103),'2','');
+INSERT INTO TAB_VISITA (cod_paciente,cod_profissional,dat_visita,des_status,des_periodicidade)
+VALUES (5,4,CONVERT(DATETIME,'29/06/2016',103),'2','');
 
 -- SELECT cod_visita, cod_paciente,cod_profissional, dat_visita, des_status,des_obs  FROM TAB_VISITA;
 

@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Lista";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var appAddress = WebConfigurationManager.AppSettings["AppAddress"];
 }
 <div class="row">
     <div class="col-md-9">
@@ -73,7 +74,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btnExport" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Baixar</button>
+                    <button type="button" id="btnExport" data-appAddress="@appAddress" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span> Baixar</button>
                 </div>
             </div>
         </div>
