@@ -289,13 +289,7 @@
                     dadosProntuario.data_UP = $(dataUP).val();
 
                 }
-                //var hoje = new Date();
-                //var mesAtual = hoje.getMonth() + 1;
-                
-                //hoje = hoje.getDate() + "/" + mesAtual + "/" + hoje.getUTCFullYear();
-                //console.log(hoje);
-                //var _DataUP = new Date(dadosProntuario.data_UP);
-                //console.log(_DataUP);
+
 
                 if (dadosProntuario.UP && dadosProntuario.momento_UP == "" || dadosProntuario.estagio_UP == "" || dadosProntuario.data_UP == "") {
                     alert("Atenção !!\n\nSe o paciente possui úlcera por presssão, preencha todos os campos.");
@@ -519,12 +513,16 @@
                     dadosProntuario.UP = true;
 
                     //Verifica se o momento é PRÉ ou PÓS
-                    var momento = elem.attr("data-rdoPRE");
-                    if ($(momento).is(":checked")) {
+                    var rdoPRE = elem.attr("data-rdoPRE");
+                    var rdoPOS = elem.attr("data-rdoPOS");
+                    if ($(rdoPRE).is(":checked")) {
                         dadosProntuario.momento_UP = "PRÉ";
                     }
-                    else {
+                    else if ($(rdoPOS).is(":checked")) {
                         dadosProntuario.momento_UP = "PÓS";
+                    }
+                    else {
+                        dadosProntuario.momento_UP = "";
                     }
 
                     var estagio = elem.attr("data-comboEstagio");
@@ -572,56 +570,56 @@
                     }
                 }
 
-                //Envia um request para a rota IsConnected para verificar se há conexão com a internet
-                $.ajax({
-                    url: "http://thaysboschi-001-site1.itempurl.com/api/checknetwork",
-                    async: false,
-                    type: "GET",
-                    dataType: "json",
-                    success: function (data) {
-                        var appAddress = $("#body-site").attr("data-appAddress");
-                        $.ajax({
-                            url: appAddress +"api/pacientes/" + idPaciente + "/prontuario",
-                            type: "PUT",
-                            dataType: "json",
-                            data: dadosProntuario,
-                            success: function (data) {
-                                console.log("Deu certo");
-                                //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
-                                var url = appAddress+"profissionais/" + idProfissional + "/visitas";
-                                $.get(url, null, function (response) {
-                                    $("#body-site").html(response);
-                                });
 
-                                alert("O prontuário foi atualizado com sucesso !!");
-                            },
-                            error: function (xhr, textStatus, errorThrown) {
-                                alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
+                if (dadosProntuario.UP && dadosProntuario.momento_UP == "" || dadosProntuario.estagio_UP == "" || dadosProntuario.data_UP == "") {
+                    alert("Atenção !!\n\nSe o paciente possui úlcera por presssão, preencha todos os campos.");
+                } else {
 
-                                localStorage.setItem("dadosProntuario", JSON.stringify(dadosProntuario));
-                                localStorage.setItem("idPaciente", idPaciente);
+                    //Envia um request para a rota IsConnected para verificar se há conexão com a internet
+                    $.ajax({
+                        url: "http://thaysboschi-001-site1.itempurl.com/api/checknetwork",
+                        async: false,
+                        type: "GET",
+                        dataType: "json",
+                        success: function (data) {
+                            var appAddress = $("#body-site").attr("data-appAddress");
+                            $.ajax({
+                                url: appAddress + "api/pacientes/" + idPaciente + "/prontuario",
+                                type: "PUT",
+                                dataType: "json",
+                                data: dadosProntuario,
+                                success: function (data) {
+                                    console.log("Deu certo");
+                                    //Se os dados forem salvos com sucesso, redireciona para a lista de visitas
+                                    var url = appAddress + "profissionais/" + idProfissional + "/visitas";
+                                    $.get(url, null, function (response) {
+                                        $("#body-site").html(response);
+                                    });
 
-                            }
-                        });
+                                    alert("O prontuário foi atualizado com sucesso !!");
+                                },
+                                error: function (xhr, textStatus, errorThrown) {
+                                    alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
 
+                                    localStorage.setItem("dadosProntuario", JSON.stringify(dadosProntuario));
+                                    localStorage.setItem("idPaciente", idPaciente);
 
-                    },
-                    //Se não houver conexão com a internet, salva os dados no LocalStorage
-                    error: function (xhr, textStatus, errorThrown) {
-                        alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
-
-                        localStorage.setItem("dadosProntuario", JSON.stringify(dadosProntuario));
-                        localStorage.setItem("idPaciente", idPaciente);
-                        console.log("Ocorreu um erro na hora de salvar os dados");
-                    }
-                });
-
-                
+                                }
+                            });
 
 
+                        },
+                        //Se não houver conexão com a internet, salva os dados no LocalStorage
+                        error: function (xhr, textStatus, errorThrown) {
+                            alert("Oops !! Parece que ocorreu um erro interno ou sua conexão com a internet caiu.\nOs dados do formulário foram salvos e serão atualizados quando a conexão se reestabelecer.");
 
+                            localStorage.setItem("dadosProntuario", JSON.stringify(dadosProntuario));
+                            localStorage.setItem("idPaciente", idPaciente);
+                            console.log("Ocorreu um erro na hora de salvar os dados");
+                        }
+                    });
 
-
+                }
 
             }
         });
